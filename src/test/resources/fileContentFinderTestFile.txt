@@ -1,0 +1,21 @@
+This is a test file for the FileContentFinder class in the com.cp.common.util package of the cp-common API and framework.
+
+This is a test. This is only a test.  If this had been an actual emergency, then this test would have been followed
+by the angst to figure out what the hell is wrong with the FileContentFinder class.  The monkeys who coded such a mess
+would not understand why such a simple program could be such a pain in the @ss.  It would be necessary to then piss
+and moan for a good twenty minutes at the computer which is only logically inclined to follow out stupid little
+instructions despite our ignorance.  After coming to our senses, only then do we realize that our comparison is wrong 
+and that we wasted a bunch of time because we were careless and prone to error, after all, we are only human.
+
+Never leave a human to do a machines job!
+
+What more garbage can I fill this file with.  Later on, I definitely need to replace this crap with something worthy
+of Mordore.
+
+Give me back my precious; fealthy stickin Hobbitzies, they stole my precious.
+
+Hobbitzies keep bad chips, stupid fat hobbitz.
+
+All we have to do is decide what to do with the time that is given to us.
+
+Well, thats all folks...

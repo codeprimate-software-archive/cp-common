@@ -1,0 +1,2 @@
+Deprecating cvslog.message file and using cvs.log file instead.
+

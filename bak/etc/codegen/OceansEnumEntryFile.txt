@@ -1,0 +1,5 @@
+Arctic Ocean,ARC
+Atlantic Ocean,ATL
+Indian Ocean,IND
+Pacific Ocean,PAC
+Southern Ocean,SOU

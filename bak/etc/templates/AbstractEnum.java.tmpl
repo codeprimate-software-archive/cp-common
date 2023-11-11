@@ -1,0 +1,145 @@
+/*
+ * <ENUM_CLASS_NAME>.java (c) <CREATED_DATE>
+ *
+ * Copyright (c) 2003, Code Primate
+ * All Rights Reserved
+ * @author John J. Blum
+ * @version <VERSION_DATE>
+ * @see com.cp.common.enums.AbstractEnum
+ */
+
+package <PACKAGE_NAME>;
+
+import com.cp.common.lang.ObjectUtil;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+public class <ENUM_CLASS_NAME> extends com.cp.common.enums.AbstractEnum {
+
+  private static final Set<<ENUM_CLASS_NAME>> <ENUMERATION_SET> = new HashSet<<ENUM_CLASS_NAME>>(5);
+
+  <ENUMERATED_TYPES>
+
+  private static <ENUM_CLASS_NAME>Factory FACTORY;
+
+  private static final String FACTORY_PROPERTY_KEY = "cp-common.<PACKAGE_NAME>.<ENUM_CLASS_NAME>.factory";
+
+  /**
+   * Creates an instance of the <ENUM_CLASS_NAME> enumerated-type class.
+   * @param id the unique identifier for the <ENUM_CLASS_NAME> enumerated-type.
+   * @param code a String value for looking up enumerated-types of the <ENUM_CLASS_NAME> classification.
+   * @param description descriptive information concerning the <ENUM_CLASS_NAME> enumerated-type.
+   */
+  protected <ENUM_CLASS_NAME>(final Integer id, final String code, final String description) {
+    super(id, code, description);
+    <ENUMERATION_SET>.add(this);
+  }
+
+  /**
+   * Creates an instance of the <ENUM_CLASS_NAME> enumerated-type class.
+   * @param id the unique identifier for the <ENUM_CLASS_NAME> enumerated-type.
+   * @param code a String value for looking up enumerated-types of the <ENUM_CLASS_NAME> classification.
+   * @param description descriptive information concerning the <ENUM_CLASS_NAME> enumerated-type.
+   * @param externalCode the external code for the <ENUM_CLASS_NAME> enumerated-type.
+   */
+  protected <ENUM_CLASS_NAME>(final Integer id, final String code, final String description, final String externalCode) {
+    super(id, code, description, externalCode);
+    <ENUMERATION_SET>.add(this);
+  }
+
+  /**
+   * Returns the instance of the <ENUM_CLASS_NAME>Factory class to create instances of <ENUM_CLASS_NAME> enumerated-types.
+   * @return an instance of the <ENUM_CLASS_NAME>Factory class for creating <ENUM_CLASS_NAME> enumerated-type instances.
+   */
+  protected static <ENUM_CLASS_NAME>Factory get<ENUM_CLASS_NAME>Factory() {
+    if (ObjectUtil.isNull(FACTORY)) {
+      synchronized (<ENUM_CLASS_NAME>.class) {
+        if (ObjectUtil.isNull(FACTORY)) {
+          FACTORY = getFactory(FACTORY_PROPERTY_KEY);
+        }
+      }
+    }
+    return FACTORY;
+  }
+
+  /**
+   * Returns an enumerated-type instance of this enum classification for the specified code.
+   * @param code the String code lookup value for the specified enumerated-type.
+   * @return the enumerated-type for the specified code.
+   * @throws java.lang.IllegalArgumentException if code is not a valid enumerated-type code.
+   */
+  public static <ENUM_CLASS_NAME> getByCode(final String code) {
+    return getInstance(<ENUMERATION_SET>, new CodeLookupStrategy(code));
+  }
+
+  /**
+   * Returns an enumerated-type instance of this enum classification for the specified description.
+   * @param description the String description lookup value for the specified enumerated-type.
+   * @return the enumerated-type for the specified description.
+   * @throws java.lang.IllegalArgumentException if description is not a valid enumerated-type description.
+   */
+  public static <ENUM_CLASS_NAME> getByDescription(final String description) {
+    return getInstance(<ENUMERATION_SET>, new DescriptionLookupStrategy(description));
+  }
+
+  /**
+   * Returns an enumerated-type instance of this enum classification for the specified external code.
+   * @param externalCode the String external code lookup value for the specified enumerated-type.
+   * @return the enumerated-type for the specified external code.
+   * @throws java.lang.IllegalArgumentException if external code is not a valid enumerated-type external code.
+   */
+  public static <ENUM_CLASS_NAME> getByExternalCode(final String externalCode) {
+    return getInstance(<ENUMERATION_SET>, new ExternalCodeLookupStrategy(externalCode));
+  }
+
+  /**
+   * Returns an enumerated-type instance of this enum classification for the specified unique identifier.
+   * @param id an Integer value id uniquely identifying the enumerated-type.
+   * @return the enumerated-type for the specified ID.
+   * @throws java.lang.IllegalArgumentException if ID does not identify an enumerated-type for this enum
+   * classification.
+   */
+  public static <ENUM_CLASS_NAME> getById(final Integer id) {
+    return getInstance(<ENUMERATION_SET>, new IdLookupStrategy(id));
+  }
+
+  /**
+   * Returns the Set of enumerated types defined by this enum classification.
+   * @return a Set of enumerated types for this enum classification.
+   */
+  public static Set<<ENUM_CLASS_NAME>> values() {
+    return Collections.unmodifiableSet(<ENUMERATION_SET>);
+  }
+
+  protected interface <ENUM_CLASS_NAME>Factory extends EnumFactory<<ENUM_CLASS_NAME>> {
+
+    public <ENUM_CLASS_NAME> createInstance(String code, String description);
+
+    public <ENUM_CLASS_NAME> createInstance(String code, String description, String externalCode);
+
+  }
+
+  static final class Default<ENUM_CLASS_NAME>Factory implements <ENUM_CLASS_NAME>Factory {
+
+    private int sequence = 0;
+
+    // Note, need a default constructor to explicitly specify public access modifier, making it accessible
+    // for Java reflection & introspection.
+    public Default<ENUM_CLASS_NAME>Factory() {
+    }
+
+    public <ENUM_CLASS_NAME> createInstance(final String code, final String description) {
+      return new <ENUM_CLASS_NAME>(getNextSequence(), code, description);
+    }
+
+    public <ENUM_CLASS_NAME> createInstance(final String code, final String description, final String externalCode) {
+      return new <ENUM_CLASS_NAME>(getNextSequence(), code, description, externalCode);
+    }
+
+    private Integer getNextSequence() {
+      return sequence++;
+    }
+  }
+
+}

@@ -1,0 +1,2543 @@
+
+RCS file: /src-ctrl/cvsroot/cp-common/cvs.log,v
+Working file: cvs.log
+head: 1.288
+branch:
+locks: strict
+access list:
+keyword substitution: kv
+total revisions: 288;	selected revisions: 288
+description:
+----------------------------
+revision 1.288
+date: 2010/05/25 20:05:27;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the cp-common API/Framework by removing the MutableConstants interface in the com.cp.common.lang package and all references to the interface in the API/Framework.
+----------------------------
+revision 1.287
+date: 2009/12/21 09:00:01;  author: jblum;  state: Exp;  lines: +2 -1
+Refactored the cp-common project updating the JAR files in the lib directory.
+----------------------------
+revision 1.286
+date: 2009/12/03 05:56:32;  author: jblum;  state: Exp;  lines: +1 -6
+Refactored the com.cp.common.beans.AbstractBean class fixing a bug in the construction of the Bean class.  Changed the parameterized constructor to call the default constructor to initialize the Beans state and listeners.
+----------------------------
+revision 1.285
+date: 2009/09/06 23:27:59;  author: jblum;  state: Exp;  lines: +6 -1
+Created the AbstractDataSource class in the com.cp.common.sql package which implements the DataSource interface in the javax.sql package and implements the getLoginTimeout, setLoginTimeout, getLogWriter and setLogWriter metods of the DataSource interface.
+
+Created the DataSourceAdaptor class in the com.cp.common.sql package extending the AbstractDataSource class and delegating all DataSource interface operations to an underlying DataSource object.  Created an associated DataSourceAdaptorTest test case class to test the features and functionality of the class.
+
+Created the DriverManagerDataSource class in the com.cp.common.sql package extending the AbstractDataSource class and implementing the DataSource interface in terms of the JDBC java.sql.DriverManager class.  Created an associated DriverManagerDataSourceTest test case class to test the features and functionality of the class.
+----------------------------
+revision 1.284
+date: 2009/09/06 18:47:20;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the BusinessServiceAdaptor class in the com.cp.common.biz package having the abstract class extend the com.cp.common.util.event.EventSource class.
+----------------------------
+revision 1.283
+date: 2009/09/06 18:28:43;  author: jblum;  state: Exp;  lines: +1 -12
+Created the BusinessServiceAdapter class in the com.cp.common.biz package to provide default unsupported operation implementations of the BusinessService interface methods.
+----------------------------
+revision 1.282
+date: 2009/09/06 06:27:34;  author: jblum;  state: Exp;  lines: +8 -4
+Refactored the EventSource class in the com.cp.common.util.event package changing the addListener and removeListener methods to return boolean values.  Re-implemented the notifyListeners method using the enhanced for each loop.  Simplified the argument validation using the Assertion facility in the com.cp.common.lang package.
+
+Added an associated EventSourceTest test case class to test the features and functionality of the EventSource class.
+
+Refactored the EventQueue class in the com.cp.common.util.event package changing the internal data structure of the Queue from Set to Queue.  Simplified the argument validation using the Assertion factility in the com.cp.common.lang package.  Added additional constructor taking a maximum size numeric value for the queue.  Deprecated the class in favor of java.util.concurent platform classes.
+
+Added an associated EventQueueTest test case class to test the features and functionality of the EventQueue class.
+
+Refactored the EventHandler interface in the com.cp.common.util.event package adding comments.
+
+Refactored the AbstractBusinessHandler abstract class to extend the EventSource class.
+----------------------------
+revision 1.281
+date: 2009/08/30 08:44:50;  author: jblum;  state: Exp;  lines: +4 -11
+Fixed a defect in the AbstractDataModel class of the com.cp.common.util package.  Specifically fixed an issue of notifying ChangeListeners in the fireChangeEvent method.
+
+In addition, added another new notifyListeners method to the AbstractDataModel class accepting a property name, old value, new value and StateChangeCallbackHandler arguments.
+
+Futhermore, added a processChange method delegating to the notifyListeners method but capturing and handling the PropertyVetoException by wrapping the exception and re-throwing a ConstraintViolationException instance.
+
+Added a test case method (testAddNotifyChangeListeners) to test the bug discovered in the fireChangeEvent method of the AbstractDataModel class to the AbstractDataModelTest test case class.
+----------------------------
+revision 1.280
+date: 2009/08/29 08:10:14;  author: jblum;  state: Exp;  lines: +14 -1
+Refactored the BooleanUtil class in the com.cp.common.lang package modifying the comments of the class.  In addition, refactored the comments of the associate BooleanUtilTest class.
+
+Refactored the CharacterUtil class in the com.cp.common.lang package renaming the getCharValue method to charValue as well as adding additional and modifying the comments of the class.  In addition, refactored the associated CharacterUtilTest.
+
+Refactored the NumberUtil class in the com.cp.common.lang package adding additional functionality to parse String's containing numerical values and converting them to Bytes, Shorts, Integers, Longs, Floats and Doubles.  In addition, added functionality to get a Number value from a String containing a number value by specifying the target Number subclass instance.  Further, added mtehods to determine whether a String containg a numerica value represented a Binary, Decimal, Octal or Hexidecimal value.
+
+Added additional test cases to the NumberUtilTest class in the com.cp.common.lang package testing the new features and functionality of the class.
+
+Refactored the ObjectUtil class of the com.cp.common.lang package modifying the class's comments.
+
+Refactored the StringUtil class of the com.cp.common.lang package modifying all null and not null checks to use the ObjectUtil class.
+
+Refactored both the ArrayUtil and CollectionUtil classes of the com.cp.common.util package modifying logger statements and comments.
+----------------------------
+revision 1.279
+date: 2009/08/25 05:32:39;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the AbstractDataModel class in the com.cp.common.util package adding an overloaded fireChangeEvent accepting a ChangeEvent object thus allowing the caller to provide their own implementation.
+----------------------------
+revision 1.278
+date: 2009/08/25 05:22:14;  author: jblum;  state: Exp;  lines: +1 -4
+Refactored the AbstractDataModel class in the com.cp.common.util package allowing subclasses to determine the ChangeEvent implementation type when notifying ChangeListeners.
+----------------------------
+revision 1.277
+date: 2009/08/24 23:05:42;  author: jblum;  state: Exp;  lines: +3 -2
+Refactored the BeanUtil class in the com.cp.common.beans.util package adding additional functionality to obtain a Bean objects readable and writable properties in addition to all properties whether accessible or not.
+
+Added additional test case methods to the BeanUtilTest test case class to test the new features and functionalty (getAllProperties(:Bean), getReadableProperties(:Bean) and getWritableProperties(:Bean)) of the BeanUtil class.
+
+Created a MockDescribableObject in the com.cp.common.test.mock package for the com.cp.common.lang.Describable interface.
+----------------------------
+revision 1.276
+date: 2009/08/13 20:10:03;  author: jblum;  state: Exp;  lines: +2 -6
+Refactored the BusinessHandler interface and associated classes in the com.cp.common.biz package.  Renamed the BusinessHandler interface to BusinessService.  Renamed the AbstractBusinessHandler class and associated test case class respectively to AbstractBusinessService.
+
+Added the process method to the BusinessService interface and provided a default implementation in the AbstractBusinessService class.
+----------------------------
+revision 1.275
+date: 2009/08/13 19:49:40;  author: jblum;  state: Exp;  lines: +7 -1
+Refactored the FileFilterComposition class in the com.cp.common.io package renaming the class to ComposableFileFilter for consistency across the cp-common API/Framework.  Renamed the associated test case class to ComposableFileFilterTest also.
+
+Refactored the FileFinder class in the com.cp.common.util package.
+
+Refactored the TextFormatComposition class in the com.cp.common.swing.text package renaming the class to ComposableTextFormat for consistency across the cp-common API/Framework.  Renamed the associated test case class to ComposableTextFormatTest.
+
+Refactored the JFormattedTextFieldAcceptanceTest in the com.cp.common.test.acceptance package.
+----------------------------
+revision 1.274
+date: 2009/08/11 06:21:50;  author: jblum;  state: Exp;  lines: +1 -27
+Refactored the JSplashWindow class, TimeUnit and TimeUnitTest classes, the ImageUtil class and the JABoutDialog class Swing component.
+----------------------------
+revision 1.273
+date: 2009/08/09 00:25:02;  author: jblum;  state: Exp;  lines: +27 -1
+Created the FontStyleTest test case class in the com.cp.common.awt package to test the features and functionality of the com.cp.common.awt.FontStyle enumerated type.
+
+Refactored the BooleanUtil class in the com.cp.common.lang package adding a new getBooleanValue method accepting an integer value parameter converting any non-zero integer value into true and a zero integer value into false.  Added an appropriate test case method in the BooleanUtilTest class.
+
+Refactored the MathUtil class in the com.cp.common.lang package moving the isEven, isOdd, isPrime and isWhole methods to the com.cp.common.lang.NumberUtil class.  In addition, created the fibonacciSequence method to return the fibonacci sequence of numbers up to a specified integer value.  Added appropriate test case methods in the MathUtil class.
+
+Refactored the NumberUtil class in the com.cp.common.lang package adding the isEven, isOdd, isPrime and isWhole methods from the com.cp.common.lang.MathUtil class.  In addition added the following additional methods for relational comparisons of double and integer number values...
+
+isEqual
+isGreaterThanAndLessThan
+isGreaterThanAndLessThanEqualTo
+isGreaterThanEqualToAndLessThan
+isGreaterThanEqualToAndLessThanEqualTo
+isLessThanOrGreaterThan
+isLessThanOrGreaterThanEqualTo
+isLessThanEqualToOrGreaterThan
+isLessThanEqualtoOrGreaterThanEqualTo
+
+Furthermore, changed the names of the getXXXValue methods to xxxValue methods for the byte, short, int, long, float and double values.
+
+Refactored the CollectionUtil class in the com.cp.common.util package adding the findAllBy and findBy finder methods.  Added appropriate test case coverage to the CollectionUtilTest class.  In addition, renamed the getCombinations method to combinations.
+
+Refactored the ArrayUtil class in the com.cp.common.util package adding the findAllBy and findBy finder methods.  Added appropriate test case coverage to the ArrayUtilTest class.
+
+Created the DefaultFilter class in the com.cp.common.util package allowing the user to create a default Filter implementation always returning an expected boolean outcome for the accept method.  Created an associated DefaultFilterTest test case class to test the features and functionality of the DefaultFilter class.
+----------------------------
+revision 1.272
+date: 2009/08/08 04:43:18;  author: jblum;  state: Exp;  lines: +1 -15
+Created the FontStyle enumerated type class in the com.cp.common.awt package to enumerat AWT Font class constants for font styles (bold, italic and plain).
+----------------------------
+revision 1.271
+date: 2009/07/30 03:46:14;  author: jblum;  state: Exp;  lines: +14 -2
+Created the Describable interface in the com.cp.common.lang package to mark implementing classes that provide either or both a brief synopsis (summary) or detailed description (overview) of the implementing object.
+
+Refactored the Rule interface in the com.cp.common.biz.rules package to extend the Describable, Identifiable, Resettable and Visitable interfaces in the com.cp.common.lang package.
+
+Refactored the AbstractRule class in the com.cp.common.biz.rules package providing properies getter and setters for the description, synsopsis and id properties as declared/defined in the Describable and Identifiable interfaces respectively.
+
+Added associated test case methods for the accept and reset methods of the Resettable and Visitable interfaces to the AbstractRuleTest test case class.  Also added additional test case methods to provide more thorough test coverage of the features and functionality of the AbstractRule class.
+
+Refactored the ComposableRule class in the com.cp.common.biz.rules package to override the accept method and delegate the visitation by the Visitor to both the left and right rules in addition to the ComposableRule itself.
+
+Added an assocaited testAccept method test case to the ComposableRuleTest test case class to test the functionality and correct behavior of the ComposableRule's accept method.
+
+Refactored the BatchContext interface in the com.cp.common.batch package having it extend the Spring Framework ApplicationContextAware class to have the Spring ApplicationContext injected into the BatchContext in a Spring-managed environment.
+
+Refactored the BatchContext interface in the com.cp.common.batch package adding comments and having the interface extend the com.cp.common.lang.Initializable interface.
+----------------------------
+revision 1.270
+date: 2009/07/29 07:37:36;  author: jblum;  state: Exp;  lines: +2 -12
+Added the com.cp.common.batch package along with a couple of interfaces for a batch processing API and Framework to the cp-common API/Framework.
+
+Finished the initial features and functionality for business rule processing features and functionality for the cp-common API/Framework by defining interfaces and classes/components in the com.cp.common.biz.rules and supporting packages, which implement business rule evaluation and processing for business logic encapsulated in the BusinessHandlers and Service components.
+----------------------------
+revision 1.269
+date: 2009/07/28 08:25:36;  author: jblum;  state: Exp;  lines: +13 -1
+Refactored the ArrayUtil class in the com.cp.common.util package adding the enumeration method, which returns an Enumeration implementation backed by an Object array.  Also added the getIndexOf method to return the index of an element in an Object array.  Finally added the getIterable method to return an Iterable implementation backed by an Object array.
+
+In addition, added generic typeing to the iterator method.  Added additional test case methods in the ArrayUtilTest class to test the features and functionality of the ArrayUtil class.
+
+Created the ArrayEnumeration class implementing the Enumeration interface in the com.cp.common.util package.  This class allows the user to traverse an array of Objects using the Enumeration interface.
+
+Refactored the ArrayIterator and ArrayIteratorTest class in the com.cp.common.util package adding additional test case methods testing the interface and functionality of the ArrayIterator class.
+
+Refactored the CollectionUtil class in the com.cp.common.util package adding the getIterable methods for both the Enumeration and Iterator interfaces as well as added an enumeration method to create an Enumeration instance from an Iterator object.  Added additional test case methods to the CollectionUtilTest class.
+
+Refactored the EnumerationToIterator and EnumerationToIteratorTest classes in the com.cp.common.util package adding additional test case methods to fully test the interface and functionality of the EnumerationToIterator class.
+
+Refactored the IteratorToEnumeration and IteratorToEnumerationTest classes in the com.cp.common.util package adding additional test case methods to fully test the interface and functionality of the IteratorToEnumeration class.
+----------------------------
+revision 1.268
+date: 2009/07/27 07:37:55;  author: jblum;  state: Exp;  lines: +1 -12
+Refactored the StringUtil class in the com.cp.common.lang package adding the charAt method to handle null String values.  Added an associated test case method in the StringUtilTest test case class.
+----------------------------
+revision 1.267
+date: 2009/07/14 07:06:38;  author: jblum;  state: Exp;  lines: +10 -3
+Refactored the BooleanUtil class in the com.cp.common.lang package performing syntax cleanup.
+
+Refactored the RelationalOpertor class in the com.cp.common.lang package adding new operations for less than or greater than, less than or greater than equal to, less than equal to or greater than, and less than equal to or greater than equal to.  Added additional test case methods in the RelationalOperatorTest test case class for the added functionality.
+
+Renamed the ResetIdVisitor class and associated test case class to IdentifiableVisitor and IdentifiableVisitorTest respectively.
+
+Renamed the RecordObjectGraphVisitor and associated test case class to StackedObjectGraphVisitor and StackedObjectGraphVisitorTest respectively.
+
+Created the DestroyableVisitor class to visit an object graph calling the destroy method on any Visitable object implementing the Destroyable interface.
+
+Created the InitializableVisitor class to visit an object graph calling the initialize method on any Visitable object implementing the Initializable interface.
+----------------------------
+revision 1.266
+date: 2009/06/22 05:08:52;  author: jblum;  state: Exp;  lines: +4 -3
+Finished refactoring the classes and components of the com.cp.common.junit package.  Renamed the CPTestCase class to ExtTestCase.  Renamed the CPTestCaseTest class to ExtTestCaseTest.  Removed the MockCPTestCase class and added an inner class-member (static) class, MockExtTestCase, to the ExtTestCaseTest class.
+
+Created the ExtTestCaseAcceptanceTest class in the com.cp.common.test.acceptance package to manually test the features and functionality of the ExtTestCase class.
+
+Refactored the suite method in the ExtTestCase class to have protected access, accept a Class object parameter and allow the test.name System property to refer to 1 or more test case methods of the test case subclass (of ExtTestCase).
+----------------------------
+revision 1.265
+date: 2009/06/12 20:10:05;  author: jblum;  state: Exp;  lines: +3 -2
+Finished refactoring the classes and components in the com.cp.common.io package.
+
+Refactored the DateUtil class in the com.cp.common.util package adding additional methods, getTomorrow, getYesterday, isBetween, isOn, isOutside and isPresent.  Added test cases for the new functionality in the DateUtilTest class.
+
+Refactored the CommonTestCase class in the com.cp.common.test package adding a class-member constant for the temporary directory designated by the Java IO temporary directory System property.
+----------------------------
+revision 1.264
+date: 2009/06/11 06:48:14;  author: jblum;  state: Exp;  lines: +4 -1
+Refactored the FileUtil class, cleaning the source code as well as added the getFilename method.  Refactored the associated FileUtilTest class adding additional test cases.
+
+Refactored the IoUtil class and associated IoUtilTest test case class.  Utilized jMock in the IoUtilTest test case class to mock the test object implementing the Closeable interface.
+----------------------------
+revision 1.263
+date: 2009/06/08 08:37:01;  author: jblum;  state: Exp;  lines: +1 -2
+Refactoring of the com.cp.common.io package and related classes.
+----------------------------
+revision 1.262
+date: 2009/05/30 06:21:45;  author: jblum;  state: Exp;  lines: +1 -2
+Refactored the classe and components in the com.cp.common.awt package.  Refactored the source code as well as added unit tests where appropriate.
+----------------------------
+revision 1.261
+date: 2009/05/27 22:13:11;  author: jblum;  state: Exp;  lines: +2 -13
+Refactored the StringUtil class in the com.cp.common.lang package adding the substring method to handle null and empty String values.  Provided two method signatures taking a String value and a begin index as well as an end index if applicable.
+
+Added appropriate test coverage in the StringUtilTest class.
+----------------------------
+revision 1.260
+date: 2009/05/06 07:31:03;  author: jblum;  state: Exp;  lines: +9 -4
+Refactored the ObjectUtil class in the com.cp.common.lang package adding the isAnyNull method to determine if any Object reference in an array of Objects is null.  Added a corresponding test caase method in the ObjectUtilTest class.
+
+Refactored the DateUtil class in the com.cp.common.util package adding the getCalendarMonth method for getting the Calendar month constant from the normalized or numeric Calendar month.  In addition, added the getCalendarMonthDescription method for getting the name of the Calendar month from the Calendar month constant.
+
+Also added isAfter, isOnOrAfter, isBefore and isOnOrBefore methods to the DateUtil class for determining the relational value of a specified Calendar date and given relative Calendar date.
+
+Added appropriate test case methods to the DateUtilTest class.
+
+Created the Month enum for representing and enumerating months of the Calendar year.
+
+Created the Weekday enum for representing and enumerating the weekdays within a Calendar week.
+
+Finally, create the Timespan class in the com.cp.common.util package to represent a span of time that has both a begin and end date/time value.
+----------------------------
+revision 1.259
+date: 2009/03/22 06:35:52;  author: jblum;  state: Exp;  lines: +6 -3
+Refactored the DateUtil class in the com.cp.common.util package.
+
+Specifically, renamed the getAgeInDays, getAgeInMonths and getAgeInYears to getDiffInDays, getDiffInMonths and getDiffInYears respectively.  Provided new implementations of the getDiff methods to simplify and make the functionality more robust.
+
+Added the getEarlierDate, getEarliestDate, getLaterDate, getLatestDate, getMonthDescription, getNormalizedMonthDescription, getNumberOfDaysInMonth, isFutureDate, isPastDate and a new copy method.
+
+Renamed the getNumericMonth method to getNormalizedMonth.
+----------------------------
+revision 1.258
+date: 2009/01/02 20:18:54;  author: jblum;  state: Exp;  lines: +3 -26
+Removed the spring.jar file from the lib directory as a dependency and added the individual spring JAR files having the dependencies on Spring (spring-core.jar, spring-beans.jar and spring-context.jar) file.
+
+Refactored the XmlBeanFactoryTest class removing the testGetBeanObjectForExistingBean test case.
+
+Started refactoring the AbstractBeanBuilderVisitorTest test case class.
+----------------------------
+revision 1.257
+date: 2008/12/23 09:21:48;  author: jblum;  state: Exp;  lines: +23 -6
+Added additional test case methods to the XmlBeanFactoryTest test suite to test the functionality of the XmlBeanFactory.  Specifically, added the following test case methods...
+
+testInvokeDestroyMethod
+testInvokeDestroyMethodForNonExistingMethod
+testInvokeDestroyMethodWithNoMethodSpecified
+testInvokeInitMethod
+testInvokeInitMethodForNonExistingMethod
+testInvokeInitMethodWithNoMethodSpecified
+testIsMethodOf
+testIsMethodOfWithNullObject
+testIsNotMethodOf
+testGetAliases
+testGetBeanObjectForExistingBean
+testGetBeanObjectForNonExistingNonSingletonBean
+testGetBeanObjectForNonExistingSingletonBean
+testGetScope
+testGetType
+testGetTypeWithUnfoundClassType
+testContainsBean
+
+
+Refactored the XmlBeanFactory class modifying the invokeDestroyMethod and invokeInitMethod methods to check that the specified init/destroy method specified in the BeanDeclaration is indeed a public method of the target bean Object.
+
+Refactored the XmlBeanFactory class to implement the com.cp.common.lang.Destroyable interface.
+
+Refactored the XmlBeanFactory class changing references to the AbstractBeanBuilderVisitor class to the BeanBuilderVisitor interface.
+
+Refactored the XmlBeanFactory class synchronizing the getBeanObject method.
+----------------------------
+revision 1.256
+date: 2008/12/17 23:00:04;  author: jblum;  state: Exp;  lines: +9 -3
+Created the com.cp.common.biz and com.cp.common.dao packages.  The biz package contains classes and components for implementing business logic and rules while the dao package contains classes and abstractions for Data Access Objects.
+
+Created the FossilDao interface to model the basic CRUD persistence operations (Create, Retrieve, Update and Delete) on a single Bean object.  Created the AbstractFossilDao abstract class implementing the FossilDao interface and implementing the find method in terms of the load method.
+
+Created the ExtendedFossilDao interface extending the FossilDao interface to model the CRUD persistence operations (Create, Retrieve, Update and Delete) on Collections of Bean objects.  Created the AbstractExtendedFossilDao abstract class extending the AbstractFossilDao and implementing the ExtendedFossilDao interface which implements the loadAll, removeAll and saveAll methods in terms of the load, remove and save methods respectively.
+
+Created the DataAccessException as a base class for all RuntimeExceptions that occur during persistence operations.
+
+Created the BusinessHandler interface to model basis business operational behavior, namely retrieving, storing and removing information from a data source.
+
+Created the AbstractBusinessHandler abstract class implementing the BusinessHandler interface by delegating directly to a composed DAO object.
+----------------------------
+revision 1.255
+date: 2008/12/07 09:24:23;  author: jblum;  state: Exp;  lines: +4 -2
+Refactored the classes and components of the com.cp.common.sql package.  Created test case classes for the AbstractConnectionFactory, DriverManagerConnectionFactory and JndiObjectConnectionFactory classes.
+
+Created a test case class for the JdbcUtil class.
+
+Refactored and implemented the remaining test case methods in the ResultSetUtil class testing the features and functionality of the ResultSetUtil class.
+----------------------------
+revision 1.254
+date: 2008/12/06 08:17:08;  author: jblum;  state: Exp;  lines: +2 -5
+Removed the MockArray, MockBlob, MockClob, MockConnection, MockRef and MockStruct classes from the com.cp.common.sql package.
+
+Moved all classes in the com.cp.common.jdbc package to the com.cp.common.sql package and removed the com.cp.common.jdbc package.
+----------------------------
+revision 1.253
+date: 2008/12/04 09:58:31;  author: jblum;  state: Exp;  lines: +6 -1
+Created the SystemConfig class implementing the com.cp.common.context.config.Config interface using the java.lang.System class to read property values from environment variables.  Created an associated test case class to test the functionality and features of the SystemConfig class.
+
+Refactored the PropertiesConfig and MapConfig classes as well as their associated test case classes, adding more test cases.
+
+Added many test cases to the XmlBeanFactoryTest test case class to mock and test the functionality and features of the XmlBeanFactory class.
+----------------------------
+revision 1.252
+date: 2008/11/14 09:19:12;  author: jblum;  state: Exp;  lines: +1 -1
+Removed AllXXXPackageTests test suite classes from the cp-common API & Framework and added the individual test case classes to the cp-common AllUnitTests test suite.
+----------------------------
+revision 1.251
+date: 2008/11/14 09:11:00;  author: jblum;  state: Exp;  lines: +1 -9
+Refactored the com.cp.common.test.manual package of functional test classes, moving all classes to the com.cp.common.test.acceptance package and renaming the classes by removing the work Manual and appending AcceptanceTest to the name.
+----------------------------
+revision 1.250
+date: 2008/11/14 08:34:05;  author: jblum;  state: Exp;  lines: +5 -6
+Performed a code review of the BeanFactory interface in the com.cp.common.beans.factory package.
+
+Performed a code review of the PropertyBeanFactory class in the com.cp.common.beans.factory package.  In addition, created the PropertyBeanFactoryTest test case class to test the functionality and features of the PropertyBeanFactory.
+
+Performed a code review and refactored the SpringBeanFactory class in the com.cp.common.beans.factory package.  In addition, created the SpringBeanFactoryTest test case class along with a mock Spring application context to test the features and functionality of the SpringBeanFactory class.  The test case class was written as an integration test to test the SpringBeanFactory in the deployment of a Spring context using the IoC lightweight container.
+
+Created an associated test case class for the XmlBeanFactory class in the com.cp.common.beans.factory package.
+
+Commented out unimplemented test cases in the DefaultBeanBuilderVisitorTest test case class and added it along with the AbstractBeanBuilderVisitorTest class to the AllUnitTests test suite.
+----------------------------
+revision 1.249
+date: 2008/11/10 10:31:13;  author: jblum;  state: Exp;  lines: +6 -7
+Finished the code review and refactoring of the BeanUtil class in the com.cp.common.beans.util package.  In addition, finished reviewing and adding test cases in the BeanUtilTest test case class to test the features and functionality of the BeanUtil class.
+
+Created the ExceptionUtil class in the com.cp.common.lang package to manage and manipulate Throwable objects and Exceptions.
+
+Created the DefaultRenderer class in the com.cp.common.log4j package to handle default renderering based on the toString method of an Object when a renderer for the object's Class type is not declared.
+
+Refactored the MockBeanImpl, MockPrimitiveObjectImpl and MockValueObjectImpl classes in the com.cp.common.test.mock package.
+
+Refactored the com.cp.common.log4j.NullRenderer class making the class final (non-extendable) and adding a constant INSTANCE class member variable.  Refactored the AbstractObjectRenderer class to refer to the NullRenderer through it's INSTANCE variable.
+----------------------------
+revision 1.248
+date: 2008/10/11 03:13:35;  author: jblum;  state: Exp;  lines: +10 -2
+Performed a code review and refactoring on the remaining classes and components in the com.cp.common.beans.util.converters package.  Specifically, reviewed and refactored the following classes...
+
+NumberConverter and associated test case class.
+ProcessConverter and associated test case class.
+StringConverter and associated test case class.
+UserConverter and associated test case class.
+
+
+Also refactored the NullToDefaultValueConverterTest test case class changing the override of setUp to tearDown.
+
+In addition added @Override Annotations to the equals, hashCode and toString methods of the DefaultProcess and DefaultUser classes.
+----------------------------
+revision 1.247
+date: 2008/10/09 21:56:41;  author: jblum;  state: Exp;  lines: +2 -14
+Refactored the ArrayUtil.toString method changing the signature of the var-args parameter to an explicit Object array (Object[]) to remove the compiler warnings during the build process.
+
+Refactored the AbstractBeanHistory class and associated test case class in the com.cp.common.beans package removing compiler warnings for ambiguous var-arg method calls.
+----------------------------
+revision 1.246
+date: 2008/10/09 10:54:41;  author: jblum;  state: Exp;  lines: +12 -8
+Performed a complete code review and refactoring of the classes and components in the com.cp.common.beans.util package as well as the the com.cp.common.beans.util.converters package.  Specifically reviewed and refactored the following classes...
+
+ConvertUtil and associated test case class in the com.cp.common.beans.util package.
+AbstractConverter and associated test case class.
+BooleanConverter and associated test case class.
+CalendarConverter and associated test case class.
+EnumConverter and associated test case class.
+IdentifiableConverter and associated test case class.
+
+In addition, added the NullToDefaultValueConverter class to handle conversion of null values to default Object values based on the target Class type.  Added the associated test case class to test the functionality and features of the NullToDefaultValueConverter class.
+
+Refactored the com.cp.common.test.mock.MockBeanImpl class adding @Override Annotations to the equals and hashCode methods.
+
+Added indexOf and lastIndexOf methods to the StringUtil class to handle null String values.
+----------------------------
+revision 1.245
+date: 2008/09/30 06:06:57;  author: jblum;  state: Exp;  lines: +9 -4
+Performed a complete code review and refactoring of the classes and components in the com.cp.common.beans.support package.  Specifically reviewed and refactored the following classes...
+
+AbstractPropertyChangeManager and associated test case class.
+CommitVisitor and associated test case class.
+RollbackVisitor and associated test case class.
+RequiredVisitor and associated test case class.
+DefaultPropertyChangeManager and associated test case class.
+RollbackPropertyChangeManager and associated test case class.
+
+Finally, reviewed and refactored the CommonSupportTestCase class.
+----------------------------
+revision 1.244
+date: 2008/09/26 11:51:17;  author: jblum;  state: Exp;  lines: +5 -3
+Performed code review and refactoring of classes and components in the com.cp.common.beans.event package.  Specifically reviewed and refactored the following classes...
+
+RollbackVetoableChangeListener and associated test case class.
+SetDefaultValuePropertyChangeListener and associated test case class.
+
+Completed all code reviews and refactorings of the com.cp.common.beans.event package.
+----------------------------
+revision 1.243
+date: 2008/09/25 07:36:28;  author: jblum;  state: Exp;  lines: +2 -4
+Performed a code review and refactoring of the classes and components in the com.cp.common.beans.event package.  Specifically reviewed and refactored the following classes...
+
+RequiredFieldVetoableChangeListener and associated test case class.
+RequiredVetoableChangeListener and associated test case class.
+----------------------------
+revision 1.242
+date: 2008/09/23 07:55:56;  author: jblum;  state: Exp;  lines: +3 -6
+Performed a code review and refactoring of the classes and components in the com.cp.common.beans.event package.  Specifically reviewed and refactored the following classes...
+
+LoggingPropertyChangeListener and associated test caes class.
+ObjectImmutableVetoableChangeListener and associated test case class.
+ReadOnlyVetoableChangeListener and associated test case class.
+----------------------------
+revision 1.241
+date: 2008/09/16 08:06:19;  author: jblum;  state: Exp;  lines: +6 -11
+Performed a code review and refactoring of the classes and components in the com.cp.common.beans.event package.  Specifically reviewed and refactored the following classes...
+
+DateOutOfBoundsVetoableChangeListener and associated test case class.
+LengthOutOfBoundsVetoableChangeListener and associated test case class.
+NumberOutOfBoundsVetoableChangeListener and associated test case class.
+
+Renamed the MockObject test class in the com.cp.common.test.mock package to MockPrimitiveObject.
+
+Refactored the CommonBeanTestCase class.
+----------------------------
+revision 1.240
+date: 2008/09/14 01:32:59;  author: jblum;  state: Exp;  lines: +12 -3
+Performed a code review and refactoring of classes and components in the com.cp.common.beans.event package.  Specifically, reviewed and refactored...
+
+AbstratListener and assocaited test case class
+AbstractPropertyChangeListener and associated test case class
+AbstractVetoableChangeListener and associated test case class
+BoundedDateVetoableChangeListener and associated test case class
+BoundedLengthVetoableChangeListener and associated test case class
+BoundedNumberVetoableChangeListener and associated test case class
+
+
+Refactored the com.cp.common.beans.AbstractBean class registering the VetoableChangeListener, BoundedLengthVetoableChangeListener.
+
+Added @Override Annotations to the equals and hashCode methods in the inner Bean classes of the CommonBeanTestCase class.
+----------------------------
+revision 1.239
+date: 2008/09/03 16:50:40;  author: jblum;  state: Exp;  lines: +5 -1
+Finished refactoring the classes and components in the com.cp.common.beans.definition packages and supporting package.  Added a test case class for the AbstractBeanDefinitionParser class.  Added additional toString methods in the BeanDefinitionsUtil class for other bean definitions classes.  In addition, added associated test case methods for the additional toString methods in the BeanDefinitionsUtilTest test case class.  Performed a completed code review and refactoring of the XmlBeanDeclarationParser class and it's associated test case class (adding additional test case methods).
+
+Performed a complete code review and refactoring of the com.cp.common.beans.definition.Scope class and associated test case class.
+
+Added additional functionality to the TestUtil class.
+----------------------------
+revision 1.238
+date: 2008/08/21 08:14:56;  author: jblum;  state: Exp;  lines: +1 -1
+Continued code review and refactoring of the com.cp.common.beans package.  Specifically reviewed and refactored classes in the com.cp.common.beans.definition package, modifying the InvocationArgument, Parameterizable and ReferenceObject interfaces and associated classes.
+----------------------------
+revision 1.237
+date: 2008/08/07 07:29:39;  author: jblum;  state: Exp;  lines: +1 -5
+Performed code review and refactoring of the classes and components in the com.cp.common.beans.definition package.
+----------------------------
+revision 1.236
+date: 2008/07/28 05:34:48;  author: jblum;  state: Exp;  lines: +3 -5
+Refactored the AbstractBean class in the com.cp.common.beans package.
+
+Refactored the AbstractBeanHistory class and associated test case class, AbstractBeanHistoryTest class, in the com.cp.common.beans package.
+
+Created the BoundedLength Annotation in the com.cp.common.beans.annotation package.
+----------------------------
+revision 1.235
+date: 2008/07/27 23:02:58;  author: jblum;  state: Exp;  lines: +6 -2
+Refactored the com.cp.common.lang.Assert class adding additional assertions for not empty arrays and empty arrays.  Renamed the existing isInstanceOf method to isAssignableFrom and added a new isInstanceOf method.
+
+Refactored the com.cp.common.test.TestUtil class performing various syntax modifications.
+
+Refactored the associated AssertTest test case class modifying all existing test case methods to be more robust and added additional test case methods for the new assertions methods in the Assert class.
+
+Refactored the AbstractConverter class for extensibility and updated the FileFinderTest class.
+----------------------------
+revision 1.234
+date: 2008/06/18 05:22:55;  author: jblum;  state: Exp;  lines: +2 -6
+Refactored the com.cp.common.lang.MathUtil class adding the isEven, isOdd, isPrimeNumber and isWholeNumber methods to compute as their name suggests.  In addition refactored several other MathUtil methods.
+
+Refactored the com.cp.common.lang.StringUtil class adding the length method checking for null before determining the lengthe of a String value.
+----------------------------
+revision 1.233
+date: 2008/05/24 08:43:31;  author: jblum;  state: Exp;  lines: +8 -1
+Refactored the com.cp.common.beans.factory.support.AbstractBeanBuilderVisitor class to implement the BeanBuilderVistior interface.  Created the associated test case class, AbstractBeanBuilderVisitorTest class, to test the features and functionality of the AbstractBeanBuilderVisitor.
+
+Performed various refactorings of the com.cp.common.beans.factory.support.DefaultBeanBuilderVisitor class.
+
+Performed several refactorings of the com.cp.common.beans.definition.AbstractBeanDefinition class.
+----------------------------
+revision 1.232
+date: 2008/05/24 08:31:08;  author: jblum;  state: Exp;  lines: +1 -9
+Created test case classes for the AbstractListenerDefinition, AbstractPropertyDefinition, and the AbstractReferenceObject classes in the com.cp.common.beans.definition package to test the features and functionality of the individual classes respectively.
+----------------------------
+revision 1.231
+date: 2008/05/24 08:25:17;  author: jblum;  state: Exp;  lines: +4 -6
+Refactored the com.cp.common.beans.factory.XmlBeanFactory's getBeanObject method to cache declared Singleton beans that have been lazy initialized.
+
+Created the SpringBeanFactory class in the com.cp.common.beans.factory package implementing the BeanFactory interface by using the Spring application context and bean factories to instantiate bean instances.
+
+Creted the BeanBuilderVisitor interface to model the Builder creational design pattern and provide an abstraction for implementing classes.
+
+Created the ScopeTest test case class in the com.cp.common.beans.definition package to test the features and functionality of the Scope enum.
+----------------------------
+revision 1.230
+date: 2008/05/24 08:14:13;  author: jblum;  state: Exp;  lines: +5 -10
+Updated the log4j JAR file to version 1.2.15 from 1.2.13.
+
+Created the etc/build/ subdirectory under the cp-common project directory.  Created the build.properties file in an effort to port the cp-common project over to the cp Ant build system.
+
+Refactored the com.cp.common.util.CollectionUtil class adding the copy method accepting a Stack object parameter.  This method will copy the contents of source Stack to a new Stack.  Added an associated test case method in the CollectionUtilTest test case class.
+
+Refactored the com.cp.common.test.mock.MockVisitableObject class adding constructors accepting an ID as well as a reference to a containing MockVisitableObject in order to chain MockVisitableObjects together.
+
+Created the RecordObjectGraphVisitor class implementing the Visitor pattern to walk an object graph recording the object reference of the objects visited in the order that the objects were visited.  Created an associated test case class to test the functionality and features of the RecordObjectGraphVisitor class.
+----------------------------
+revision 1.229
+date: 2008/05/03 06:47:47;  author: jblum;  state: Exp;  lines: +16 -1
+Refactored the classes and components in the com.cp.common.beans.definition package.
+
+Created the Parameterizable interface and AbstractParameterHandler class as well as a DefaultAbstractParameterHandler class.  The Parameterizable interface is a model for implementing classes that accept constructor arguments or method parameters upon invocation.  The abstract and default parameter handler implementations handle collections of invocation arguments for constructor or method calls on the implementing classes.
+
+Created the ReferenceObject interface to model constructors or method invocations that expect an argument of some bean defined/declared in a beans configuration file.  Created the AbstractReferenceObject and DefaultReferenceObject implementations.
+
+Added the Parameterizable and ReferenceObject factory methods to the BeanDefinitionsFactory class.
+
+Refactored the BeanDeclaration and ListenerDeclaration interfaces to extend (implement) the Parameterizable interface and delegate all behavior and operations to the appropriate DefaultParameterHandler class.
+
+Refactored the InvocationArgument interface to have a refId property enabling invocation arguments and constructor/method parameters to accept a bean defined/declared in a bean definitions configuration file as an argument.
+
+Refactored the DefaultXmlBeanDeclarationParser to now parse refId attributes on constructor-arg and property elements.
+
+Refactored the com.cp.common.test.TestUtil class calling EasyMock.replay on the mock empty Itertor object returned by the getMockEmptyIterator static method.
+----------------------------
+revision 1.228
+date: 2008/05/01 05:49:17;  author: jblum;  state: Exp;  lines: +1 -12
+Refactored the 'CommonXxxTests' test case class in the com.cp.common.beans package and subpackages renaming them to 'CommonXxxTestCase'.
+----------------------------
+revision 1.227
+date: 2008/05/01 05:45:08;  author: jblum;  state: Exp;  lines: +9 -9
+Created mock objects for the following interfaces in the com.cp.common.lang package...
+
+MockAuditableObject for the Auditable interface.
+MockCopyableObject for the Copyable interface.
+MockDestroyableObject for the Destroyable interface.
+MockInitializableObject for the Initializable interface.
+MockResettableObject for the Reseettable interface.
+MockSearchableObject for the Searchable interface.
+MockSortableObject for the Sortable interface.
+
+These mock objects are abstract class meant for subclassing for use in test cases.  All methods in tfrom their respective interface throw UnsupportedOperationExceptions and are meant to simply testing efforts involving objects implementing these interfaces.
+----------------------------
+revision 1.226
+date: 2008/04/22 08:04:35;  author: jblum;  state: Exp;  lines: +7 -5
+Removed the easymock.jar file from the lib/ directory and re-added the easymock-2.3.jar file including the verion number.
+
+Refactored the cp-common project Ant build system files (batch file, shell script and XML build script file) to run on the new version of Cygwin.
+
+Refactored the ObjectUtil class in the com.cp.common.lang package introducing the invokeInstanceMethod as well as invokeStaticMethod utility methods.  In addition, used the Strategy design pattern to choose which method invocation type should be perfomed inside of a template invokeMethod method of the ObjectUtil class.
+
+Refactored classes in the com.cp.common.test.mock package.  Added an interface to the MockValueObject class and renamed the class to MockValueObjectImpl.
+
+Refactored the XmlBeanFactory class to delegate the invocation of the init and destroy methods of a Bean class to the ObjectUtil class.
+
+Refactored and changed the implementation of the DefaultBeanBuilderVisitor class based on the new and revised implementation of the ObjectUtil class.
+----------------------------
+revision 1.225
+date: 2008/03/19 08:27:43;  author: jblum;  state: Exp;  lines: +6 -5
+Created the AbstractBeanBuilderVisitorTest test case class to test the features and functionality of the AbstractBeanBuilderVisitor class used by BeanFactory classes to construct instances of Beans.
+
+Refactored the AbstractListenerDeclaration and AbstractPropertyDefinition classes declaring the class declaration as abstract.
+
+Refactored the ListenerDeclaration interface to add convenience methods to determine whether a specified ListenerDeclaration is a prototype or singleton as well as get the Class type of the Listener delcared by the declaration.
+
+Refactored the TestUtil class moving the class to the com.cp.common.test.util package.
+
+Created the MockValueObject class in the com.cp.common.test.mock package to be used by the ObjectUtilTest class to test the invokeMethod method.
+----------------------------
+revision 1.224
+date: 2008/03/09 08:04:01;  author: jblum;  state: Exp;  lines: +6 -2
+Refactored the com.cp.common.beans.AbstractBean class adding the @Override Annotation to the toString method.
+
+Refactored the com.cp.common.lang.ObjectUtil class adding the invokeMethod method providing the ability to invoke a method on a specified object.  Added assocated test case methods to test the invokeMethod in the ObjectUtilTest test case class.
+
+Created the MockValue class in the com.cp.common.test.mock package.
+
+Added two convenience methods to the BeanDeclaration interface: getConstructorArgumentTypes and getConstructorArgumentValues.
+
+Implemented the DefaultBeanDeclarationHandler class in the DefaultBeanBuilderVisitor class.
+----------------------------
+revision 1.223
+date: 2008/03/08 09:07:53;  author: jblum;  state: Exp;  lines: +2 -14
+Refactored the Converter API & Framework in the cp-common Java Class Library to support null values specified as either an explicit null or as a "null" String value, such as when specified in a property or XML file.
+
+Created the AbstractConverter class in the com.cp.common.beans.util.converters package for which all cp-common Converter implementations will extend.  Created an associated test case class to test the functionality of the AbstractConverter class.
+----------------------------
+revision 1.222
+date: 2008/03/07 10:49:53;  author: jblum;  state: Exp;  lines: +12 -5
+Refactored the com.cp.common.beans.AbstractBean class declaring the logger as transient.
+
+Refactored the com.cp.common.beans.util.ConvertUtil class's convert method to use the new variable arguments getDefaultValue method of ObjectUtil.
+
+Refactored the com.cp.common.beans.util.converters.CalendarConverter class to all users to specify custom date format patterns used to convert Object values to Calendar objects.
+
+Created the InvocationArgument interface in the com.cp.common.beans.defintion package to represent call parameters to method or constructor invocations.  Created an associated implementing AbstractInvocationArgument class and DefaultInvocationArgument class.
+
+Refactored the BeanDeclaration interface with the ability and functionality to add and remove constructor arguments to a and from a List of InvocationArguments as well as get the List of constructor arguments as a List or by index.
+
+Refactored the AbstractBeanDefinition, AbstractListenerDefinition and AbstractPropertyDefinition classes specifying the @Override Annotation on the equals, hashCode and toString methods.
+
+Refactored the BeanDefinitionsFactory class to create an instance of the InvocationArgument interface.
+
+Refactored the DefaultXmlBeanDeclarationParser class to parse constructor arguments for bean declarations in the XML file and add them to the BeanDeclaration instance.
+
+Refactored the mock-beans.xml file adding a constructor argument to the household bean declaration.
+----------------------------
+revision 1.221
+date: 2008/02/16 10:35:38;  author: jblum;  state: Exp;  lines: +5 -4
+Refactored the com.cp.common.io.FileUtil class changing the logging to use Apache commons-logging API & Framework, modified the methods to use the new Assert facility class and cleaned the the class comments.
+
+Created the IoUtil class and associated test case class in the com.cp.common.io package which includes the close(:Closeable) method handling the IOException and wrapping it into a SystemException.
+
+Created the RelationalOperator class as well as an associated test case class in the com.cp.common.lang package.  The RelationalOperator class models relational operators (such as equal to, greater than, less than, etc), however, applied to Comparable objects.
+
+Created the ClassRenderer class and associated test case class in the com.cp.common.log4j package to log complex objects in terms of their implementing class type.
+
+Refactored the com.cp.common.util.ArrayUtil class adding the getElementAt method to get an element of an array at the specified index, even if the potential array is null or empty.
+----------------------------
+revision 1.220
+date: 2008/02/11 10:04:06;  author: jblum;  state: Exp;  lines: +4 -10
+Refactored the com.cp.common.beans.AbstractBeanHistoryTest test case class adding additional test case methods and refactoring existing test case methods.
+
+Fixed the BeanRendererTest test case class's testToString test case method to output information about the BeanHistory object of a Bean.
+
+Fixed the BeanUtilTest test case class's testToString and testGetPropertyValues test case methods to output information about the BeanHistory object of a Bean.
+
+Refactored the AbstractObjectRenderer class in the com.cp.common.log4j package to declare a logger to be used by subclasses.
+----------------------------
+revision 1.219
+date: 2008/02/07 10:20:53;  author: jblum;  state: Exp;  lines: +11 -4
+Refactored the com.cp.common.lang.Identifiable interface modifying the parameterized type to be a subclass of Comparable of the parameterized type.
+
+Refactored the DefaultBean class to delcare it's unique identifier of type Long.
+
+Created the AbstractBeanHistory class and associated test case class in the com.cp.common.beans package to model an abstraction of a container of a collection of beans contained by a single bean reference.
+
+Refactored the com.cp.common.beans.AbstractBean class to contain a reference to it's containing BeanHistory object.
+
+Refactored the com.cp.common.lang.LogicalOperator class to define 3 properties distinguishing a logical operator as a unary, binary or ternary operator.
+
+Refactored the com.cp.common.util.ComposableFilter class simplying the interface to two static compose methods where one of the two compose methods accepts a variable argument Filter object array.  In addition, added comments to the class.
+
+Created the InvertedFilter class in the com.cp.common.util package to wrap another Filter instance and negate the acceptance result.
+----------------------------
+revision 1.218
+date: 2008/01/26 23:50:40;  author: jblum;  state: Exp;  lines: +4 -11
+Created the Filter interface in the com.cp.common.util package.  The Filter interface is used by classes and methods to filter a collection of objects satisfying criteria as specified by the filter.
+
+Created the ComposableFilter class in the com.cp.common.util package as well to compose a series of filters to be applied toa collection of objects.
+
+Created the LogicalOperator class in the com.cp.common.lang package to represent logical join operations such as AND, OR and NOT.
+
+Refactored the com.cp.common.lang.UtilityMethods class added addition behavior to the is utility, specifically adding the True and False methods.
+----------------------------
+revision 1.217
+date: 2008/01/18 09:53:11;  author: jblum;  state: Exp;  lines: +14 -1
+Refactored the com.cp.common.lang.UtilityMethods class adding support and behavior for equality and relational testing of objects in the narrative form, using is notation.
+
+Refactored the com.cp.common.util.ComparableComparator class changing the constructor to public as well as making more specific use of generics by changing the class declaration to <T extends Comprable<T>> so that only Comparable objects of the same type may be relationally compared.
+
+Refactored associated classes due to the changes of the ComparableComparator class including AbstractRecord, RecordComparator, SortAction and AbstractEnum.
+
+Created the SetDefaultValuePropertyChangeListener class in the com.cp.common.beans.event package which will set a default value on a property set to null.
+
+Refactored the com.cp.common.beans.AbstractBean class to register the new listener providing default behavior on properties of bean objects.
+
+Refactored the BeanDeclaration interface adding the lazyInit property including getter and setter methods.  In addition, refactored the associated DefaultXmlBeanDeclarationParser class to account for the new beans element lazy-init attribute.
+
+Fixed a bug in the TestUtil.assertNotEquals method.
+----------------------------
+revision 1.216
+date: 2008/01/10 10:58:12;  author: jblum;  state: Exp;  lines: +1 -13
+Refactored the com.cp.common.beans.definition API & Framework classes and components.  Specifically, delineated between definitions and declarations.
+----------------------------
+revision 1.215
+date: 2008/01/08 10:52:32;  author: jblum;  state: Exp;  lines: +9 -3
+Refactored the com.cp.common.util.CollectionUtil class adding Generics to the setDifference, setIntersection and setUnion methods.
+
+Added the ParsingException RuntimeException class to the com.cp.common.util package.
+
+Refactored the com.cp.common.test.TestUtil class adding the getMockEmptyIterator method.  This method returns a mock Iterator implementation using the EasyMock API.
+
+Refactored the class and components in the com.cp.common.beans.definition package.  Added test case class for the BeanDefinitionsFactory class and the DefaultXmlBeanDeclarationParser class.
+
+Finished implementing the ProperyBeanFactory and XmlBeanFactory classes in the com.cp.common.beans.factory package.
+
+Added the dom4j api for parsing XML documents.
+
+Added the EasyMock api for mocking objects during unit tests.
+----------------------------
+revision 1.214
+date: 2007/12/19 09:06:09;  author: jblum;  state: Exp;  lines: +3 -5
+Refactored the com.cp.common.context.config.Config interface addin the contains(propertyName:String) method to determine whether the called Config object contains the specified property by name.  Implemented the contains method in the AbstractConfig class.
+
+In addition, overrode the contains method in the MapConfig and PropertiesConfig implementations.  Added associated test case method in their respective test case classes.
+
+Created the com.cp.common.beans.factory package.  Created the BeanFactory interface, the AbstractBeanFactory abstract class, and the PropertyBeanFactory class implementation based on a configuration file, such as a properties file.  In addition, created the BeanNotFoundExeption class extending RuntimeException.
+----------------------------
+revision 1.213
+date: 2007/12/19 03:09:09;  author: jblum;  state: Exp;  lines: +6 -3
+Refactored the com.cp.common.util.ArrayUtil class changing the the signature of the toString(:String[]) method to toString(:Object[]).  In addition, also enhanced the method by performing a null check before converting the elements of the array into a String.
+
+Refactored the com.cp.common.context.config.Config interface adding an @param tag for the getPropertyValue method.
+
+Refactored the com.cp.common.lang.ObjectUtil class generisizing the getInstance methods.
+
+Created the MockObject interface and MockObjectImpl class implementing the MockObject interface in the com.cp.common.test.mock package.
+
+Created the AbstractObjectFactory class and associated test case class in the com.cp.common.lang.factory package.
+----------------------------
+revision 1.212
+date: 2007/12/18 23:19:05;  author: jblum;  state: Exp;  lines: +5 -2
+Refactored the com.cp.common.lang.StringUtil class adding the parseDelimiterSeparatedValues method.  In addition, refactored the parseCommonSeparatedValues method to be implemented by delegating to the parseDelimiterSeparatedValues method.  The new parseDelimiterSeparatedValues method allows a caller to parse a String delimited by any character, such as comma, colon, space, tab, etc.
+
+Refactored the ArrayUtil class adding the toString(:String[]) method to convert an array of String values in to a String.
+
+Created the com.cp.common.beans.definition package of classes and components to model bean, listener and property definitions in a configuration file.
+----------------------------
+revision 1.211
+date: 2007/12/15 11:16:07;  author: jblum;  state: Exp;  lines: +2 -17
+Created the VisitableCollection interface and AbstractVistiableCollection class with both a List and Set implementation to contain a collection of Visitable objects.
+
+Created an associated test case class, AbstractVisitableCollectionTest, as well as MockVisitableObject and MockVisitor to test the new VisitableCollection abstraction.
+----------------------------
+revision 1.210
+date: 2007/12/13 09:31:09;  author: jblum;  state: Exp;  lines: +16 -2
+Refactored the cp-common API and Framework moving a significant number of Visitor implementations in the com.cp.common.beans.support package to the com.cp.common.lang.support package.
+
+Moved the following classes to the com.cp.common.lang.support package...
+
+AuditableVisitor and test class
+ExtendedAuditableVisitor and test class
+IsModifiedVisitor and test class
+IsNewVisitor and test class
+MutableVisitor and test class
+ObjectGraphVisitor and test class
+ResetIdVisitor and test class
+ResetVisitor and test class
+
+Created the AllLangTests test suite class.  Created the AllLangSupportTests test suite class.  Refactored the com.cp.common.lang.AllLangPackageTests test suite class to include the lang an lang.support test suites.
+
+Created an AllEnumsPackageTests test suite class for the com.cp.common.enums package.
+
+Refactored additional classes affected by the move.
+----------------------------
+revision 1.209
+date: 2007/12/13 08:00:57;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.lang.Auditable interface adding the isModified(propertyName:String) method.  This method allows the caller to determine whether a specified property of an object implementing the Auditable interface (such as Bean objects) has been modified.
+
+Refactored the AbstractBean classe to implement the new Auditable.isModifed(:String) method and created an associated test case method in the AbstractBeanTest class.
+----------------------------
+revision 1.208
+date: 2007/12/02 23:35:17;  author: jblum;  state: Exp;  lines: +2 -7
+Refactored the DateUtil class adding a @return JavaDoc tag to the truncate method.
+
+Created the ObjectGraphVisitor class in the com.cp.common.beans.support package which walks and object hierarchy of composed objects and constructs an object graph.  Created an associated test case class, ObjectGraphVisitorTest, to test the functionality of the Visitor.
+----------------------------
+revision 1.207
+date: 2007/10/19 04:59:17;  author: jblum;  state: Exp;  lines: +6 -4
+Created the com.cp.common.security package for the security API and Framework.
+
+Created the com.cp.common.jdbc package to contain classes and components augmenting the Java Platform JDBC API.  Created the ConnectionFactory interface and AbstractConnectionFactory abstract class for constructing connections.  Implemented the DriverManagerConnectionFactory as well as the JndiObjectConnectionFactory concrete implementations for obtaining JDBC DB connections.
+
+Created the JdbcUtil utility class containing methods to operate on JDBC classes.
+
+Moved the ResultSetUtil and associated test case class to the com.cp.common.jdbc package.
+
+Repurposed the com.cp.common.sql package to contain mock JDBC classes of the JDBC API.
+----------------------------
+revision 1.206
+date: 2007/10/12 06:45:52;  author: jblum;  state: Exp;  lines: +7 -2
+Created the com.cp.common.context package containing the config package or configuration API and Framework fo classes and components.  These classes and components will be used to load and obtain configuration information in a type-safe manner by obtaining property values of the appropriate type.
+
+Added the mock-config.properties file to the etc/config/ directory for unit tests.
+
+Added the Spring.jar file to the project lib directory (libraries).
+
+Added the getCalendar method accepting a date/time value in as a String to be converted into a Calendar object to the DateUtil class.  Added an appropriate test case method to the DateUtilTest test case class.
+----------------------------
+revision 1.205
+date: 2007/09/23 23:13:30;  author: jblum;  state: Exp;  lines: +2 -1
+Refactored the com.cp.common.lang.StringUtil class reimplmenting some of the class's static methods to levarge the new JDK 5 features such as the enhanced for loop.  Also, added some additional methods: getCharactersOnly, isAlphanumeric and getCharactersOnly.
+
+Refactored the StringUtilTest test case class adding test methods for the new StringUtil methods.
+----------------------------
+revision 1.204
+date: 2007/09/16 18:07:09;  author: jblum;  state: Exp;  lines: +1 -5
+Refactored the com.cp.common.beans.event.RollbackVetoableChangeListener class and associated test case class.
+----------------------------
+revision 1.203
+date: 2007/09/16 17:55:07;  author: jblum;  state: Exp;  lines: +3 -11
+Refactored the com.cp.common.bean.event.AbstractListener class adding the isAnnotationPresent method.
+
+Refactored the RequiredFieldVetoableChangeListener and RequiredVetoableChangeListener classes as well as their associated test case classes.
+
+Fixed a bug in the com.cp.common.text.FormatUtil class.
+----------------------------
+revision 1.202
+date: 2007/09/15 23:43:57;  author: jblum;  state: Exp;  lines: +13 -1
+Refactored the com.cp.common.lang.ObjectUtil class adding a getDefaultValues method accepting a variable argument array of default values.  Wrote an associated test case method in the ObjectUtilTest test case class.
+
+Refactored the StringUtil class's isEmpty method switching the order of the comparison between the Strig value parameter and the empty String.
+
+Refactored the FormatUtil class and added the following methods: format(:Boolean), format(:Boolean, trueValue:String, falseValue:String), formatPhoneNumber(:String), and formatPhoneNumber(phoneNumber:String, pattern:String).
+
+Added associated test case methods in the FormatUtilTest test case class.
+
+Created the IllegalFormatException in the com.cp.common.text package extending java.lang.RuntimeException.
+
+Created the ValidationUtil class in the com.cp.common.util package and moved the isValidSsn method from the FormatUtil class to the ValidationUtil class.  Created an associated test case method in the ValidationUtilTest test case class.
+----------------------------
+revision 1.201
+date: 2007/08/21 07:25:21;  author: jblum;  state: Exp;  lines: +1 -3
+Refactored the com.cp.common.lang.MathUtil class adding the max, min and pythagoreanTheorem methods.  Added associated tests in the MathUtilTest test case class.
+----------------------------
+revision 1.200
+date: 2007/08/21 06:12:10;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.util.CollectionUtil class adding the getCombinations method to find and return all unique combinations of a list of elements.
+
+Added an associated test case method to the CollectionUtilTest class.
+----------------------------
+revision 1.199
+date: 2007/08/18 08:06:19;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.lang.MathUtil class adding the multiply and sum methods.  Added test case methods to test multiply and sum in the MathUtilTest test case class.
+
+Created the UtilityMethods utility class in the com.cp.common.lang package to provide common operations such as "copy from object to object" by using the static import facility in Java.  These operations are meant to be more human readable.
+----------------------------
+revision 1.198
+date: 2007/08/14 08:26:01;  author: jblum;  state: Exp;  lines: +2 -4
+Implemented the testGetBeanInfo and testGetPropertyDescriptor methods in the com.cp.common.beans.util.BeanUtilTest test case class.
+
+Created the AllBeansPackageTest test suite class to include all test suites in the com.cp.common.beans package of the cp-common API and Framework (Java Class Library).
+----------------------------
+revision 1.197
+date: 2007/08/14 08:02:48;  author: jblum;  state: Exp;  lines: +3 -3
+Refactored the com.cp.common.beans.event.ObjectImmutableVetoableChangeListener class and its associated test case class.
+
+Refactored the com.cp.common.beans.event.ReadOnlyVetoableChangeListener class and its associated test case class.
+
+Refactored the com.cp.common.beans.AbstractBeanTest class's testMutable method.
+----------------------------
+revision 1.196
+date: 2007/08/13 02:43:26;  author: jblum;  state: Exp;  lines: +3 -5
+Completed refactoring the com.cp.common.beans.event.DateOutOfBoundsVetoableChangeListener class and associated test case class.  Added additional test case methods to test the funtionality of the listener class.
+
+Completed refactoring the com.cp.common.beans.event.NumberOutOfBoundsVetoableChangeListener class and associated test case class.  Added additional test case methods to test the functionality of the listener class.
+
+Created the IllegalUseOfListenerException runtime exception class when a listener class is used for the wrong type of property.
+----------------------------
+revision 1.195
+date: 2007/08/10 09:40:00;  author: jblum;  state: Exp;  lines: +4 -4
+Refactored the com.cp.common.beans.event.AbstractPropertyChangeListener and com.cp.common.beans.event.AbstrcatVetoableChangeListener classes fixing the IllegalArgumentException with using a null source for the PropertyChangeEvent object in the testHandle methods.
+
+
+Refactored the com.cp.common.beans.event.BoundedDateVetoableChangeListener event class and the associated test case class.
+
+Refactored the com.cp.common.beans.event.BoundedNumberVetoableChangeListener event class and the associated test case class.
+----------------------------
+revision 1.194
+date: 2007/08/07 09:20:52;  author: jblum;  state: Exp;  lines: +7 -1
+Refactored the com.cp.common.beans.event.AbstractListener class functionality and support logic for listener implementations.  Added additional test case methods for the instantiation of the AbstractListener class as well as refactored existing test case methods with more extensive coverage.
+
+Created the AbstractPropertyChangeListenerTest test case class to test the functionality of the AbstractPropertyChangeListener class.
+
+Created the AbstractVetoableChangeListenerTest test case class to test the functionality of the AbstractVetoableChangeListener class.
+
+Created the AllBeansEventTests test suite class to contain all test case classes in the com.cp.common.beans.event package.
+----------------------------
+revision 1.193
+date: 2007/07/31 06:30:43;  author: jblum;  state: Exp;  lines: +1 -4
+Refactored the com.cp.common.lang.BooleanUtil class adding the following methods: isAllFalse, isAllTrue, isAnyFalse, isAnyTrue, isExclusivelyFalse, isExclusivelyTrue.  Refactored the associated test case class BooleanUtilTest to test the functionality of the new methods.
+----------------------------
+revision 1.192
+date: 2007/07/24 18:42:58;  author: jblum;  state: Exp;  lines: +2 -10
+Created the CommitVisitor class to traverse an object graphic containing Bean object to call commit on each one of them in the com.cp.common.beans.support package.  Created an associated test case class to test the functionality and features of the Visitor.
+
+Created the RollbackVisitor class to traverse an object graphic containing Bean objects to call rollback on each one of them in the com.cp.common.beans.support package.  Created an associated test case class to test the functionality and features of the Visitor.
+----------------------------
+revision 1.191
+date: 2007/06/30 23:50:04;  author: jblum;  state: Exp;  lines: +10 -3
+Created the com.codeprimate.beans.DefaultBean implementation of the AbstractBean class in cp-common.
+
+Created a new tool class, com.codeprimate.tools.bin.Echo class, echoing input from the user.  Hooked up class/tool through the cp-common build system.
+
+Refactored the cp-common-build.xml (cp-common build system) to pass an arbitrary number of command-line arguments to the run target.
+
+Refactored the cp-common-build.sh file to capture the command-line arguments to class being run by the run target of the build system.
+
+Created the ExtendedAuditableVisitor class in the com.cp.common.beans.support package to set process audit information on Auditable objects (beans).  Created an associated test case class to test the functionality of the ExtendedAuditableVisitor class.
+
+
+Refactored both the CommonSupportTests and CommonBeanTest classes.
+----------------------------
+revision 1.190
+date: 2007/06/26 07:54:44;  author: jblum;  state: Exp;  lines: +5 -2
+Refactored the AuditableVisitor class in the com.cp.common.beans.support package.  Refactored the associated AuditableVisitorTest test case class.  Added the testSetAuditableProperties method and testInstantiateAuditableVisitor test case methods.
+
+Refactored the CommonSupportTests class adding the Household bean.
+
+Refactored the CommonBeanTest class adding protected methods to instantiate a Person and Consumer as well as a User and Process objects.
+----------------------------
+revision 1.189
+date: 2007/06/24 21:53:45;  author: jblum;  state: Exp;  lines: +2 -5
+Refactored the com.cp.common.beans.support.IsModifiedVisitor class and associated test case class.
+Refactored the com.cp.common.beans.support.IsNewVisitor class and associated test case class.
+----------------------------
+revision 1.188
+date: 2007/06/22 08:19:04;  author: jblum;  state: Exp;  lines: +3 -6
+Refactored the commmon-logging.lcf file renaming it to common-logging.properties.  Refactored the log4j.lcf file renaming it to log4j.properties.
+
+Added a logging configuration file for JDK logging.
+
+Refactored the cp-common build system to deploy the new JDK logging configuration file and the renmae commons-logging and log4j configuration files.
+----------------------------
+revision 1.187
+date: 2007/06/22 07:59:43;  author: jblum;  state: Exp;  lines: +8 -1
+Refactored the com.cp.common.beans.support.ResetVisitor and associated test case class.
+
+Refactored the com.cp.common.beans.support.ResetIdVisitor and associated test case class.
+
+Refactored the com.cp.common.beans.support.RequiredVisitor and associated test case class.
+
+Refactored the com.cp.common.beans.support.MutableVisitor and associated test case class.
+
+Refactored the MockMutableObject class moving it to the com.cp.common.test.mock package.  Refactored the MutableUtilTest test case class.
+----------------------------
+revision 1.186
+date: 2007/06/20 09:25:00;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the CommonListenerTests class in the com.cp.common.beans.event package renaming the class to CommonEventTests.
+----------------------------
+revision 1.185
+date: 2007/06/20 09:19:50;  author: jblum;  state: Exp;  lines: +1 -3
+Refactored the UnitTestLoggingConfigurator class renaming it to LoggingConfigurer and moving the class to the com.cp.common.log4j package.
+----------------------------
+revision 1.184
+date: 2007/06/20 09:02:24;  author: jblum;  state: Exp;  lines: +2 -18
+Refactored the AbstractEnumCodeGenerator class to be able to specify package name from the command-line.  Updated the AbstractEnumCodeGeneratorTest class as well as the AbstractEnum.java.tmpl template file to support the code geneator changes.
+
+Refactored the MockEnum class moving it from the com.cp.common.enums package to the com.cp.common.test.mock package.
+----------------------------
+revision 1.183
+date: 2007/06/19 09:38:14;  author: jblum;  state: Exp;  lines: +17 -3
+Refactored the AbstractBean class in the com.cp.common.beans package.  Fixed bug in the notifyListeners method which prevented a state change to the bean when event dispatching was disabled.  Refactored the toString method adding output for the PropertyChangeManager implementation used by the AbstractBean subclass.  Registered the BoundedDateVetoableChangeListener event class in the AbstractBean.
+
+Fixed a test case method in the AbstractBeanTest.
+
+Refactored the CommonBeanTests test suite class adding an assertion for the lastModifiedProperties of a Bean.
+
+Refactored the BeanUtil class of the com.cp.common.beans.util package adding the getPropertyChangeEvent method to construct a PropertyChangeEvent.  Added an associated test case method in the BeanUtilTest class.
+
+Refactored the CommonSupportTests test suite class extending the CommonBeanTests class.  Refactored the Address, Person and PhoneNumber beans to leverage the features and functionality of the AbstractBean class.  Refactored the Person bean class in particular to extend the Person bean class in the CommonBeanTests test suite class.
+
+Created the AbstractPropertyChangeManager class to maintain a reference to the Bean managed by the PropertyChangeManager implementation.
+
+Refactored the DefaultPropertyChangeManager class adding bean reference checks on the stateful methods of the PropertyChangeManager asserting the bean argument is the same as the managed bean.  Implemented all test case methods in the DefaultPropertyChangeManagerTest class.
+
+Refactored the RollbackPropertyChangeManager class adding bean reference checks on the stateful methods of the PropertyChangeManager asserting the bean argument is the same as the managed bean.  Implemented all test case methods of the RollbackPropertyChangeMangaerTest class.
+
+Created the AllBeansSupportTest test suite class.
+
+Created the MockBean interface and MockBeanImpl class in the com.cp.common.test.mock package which implements the Bean interface and AbstractBean class respectively.
+----------------------------
+revision 1.182
+date: 2007/06/13 08:08:35;  author: jblum;  state: Exp;  lines: +3 -3
+Created the BoundedDate Annotation in the com.cp.common.beans.annotation package.
+
+Created the BoundedDateVetoableChangeListener class and associated test case class in the com.cp.common.beans.event package.  This listener class constrains Calendar type properties with the BoundedDate Annotation.
+
+Created the DateOutOfBoundsVetoableChangeListener class and associated test case class in the com.cp.common.beans.event package.  This listener class is used in contexts where Annotations are not available (such as pre-JDK 5).
+----------------------------
+revision 1.181
+date: 2007/06/12 04:40:35;  author: jblum;  state: Exp;  lines: +3 -9
+Fixed the com.cp.common.beans.event.LoggingPropertyChangeListenerTest test case class.  Changed the logging for the CommonListenerTest$PersonImpl class in the LCF file to write to a WriterAppender using an in-memory writer (StringWriter) configured by the test case class.
+
+Refactored the CommonListenerTest$PersonImpl class to leverage the features of the AbstractBean class, such as removing the subclass's isNew method, overridding the logLevel property and delegating ID property changes to the id property of AbstractBean.
+
+Refactored the com.cp.common.beans.event.LoggingPropertyChangeListener class to contain a System.out call logging the logging level and bean level.
+----------------------------
+revision 1.180
+date: 2007/06/11 03:33:45;  author: jblum;  state: Exp;  lines: +8 -4
+Finished the test case methods in the ConvertUtilTest test case class of the com.cp.common.beans.util package.
+
+Implemented Converts for the Process and User interfaces in the com.cp.common.beans package.  Created associated test case classes to test the functionality of the Converters.
+
+Created the AllBeansUtilTests test suite class for the com.cp.common.beans.util package.
+
+Created the AllBeansTests test suite class for the com.cp.common.beans package.
+
+Refactored the DefaultProcess class to contain a copy constructor for a Process object.
+
+Refactored the DefaultUser class to contain a copy constructor for a User object.
+----------------------------
+revision 1.179
+date: 2007/06/09 23:29:22;  author: jblum;  state: Exp;  lines: +7 -1
+Refactored the AbstractBean in the com.cp.common.beans package changing the logging to be a protected constant instance variable based on the subeclass type to provide logging capabilities to subclasses of the AbstractBean class.
+
+Refactored both the BeanUtil and ConvertUtil classes in the com.cp.common.beans.util package making them final classes (non-extendable).
+
+Refactored all Converter classes in the com.cp.common.beans.util.converters package changing the logging to be protected constant instance variable based on the subclass type to provide logging capabilities to subclasses of the Converter classes.
+
+Renamed the BeanInspectionException class to BeanIntrospectionException class.
+----------------------------
+revision 1.178
+date: 2007/06/03 06:45:09;  author: jblum;  state: Exp;  lines: +1 -5
+Refactored all Enum classes in the com.cp.common.enums package to declare the static values method to return a Set containing the particular Enum type, using Generics.
+----------------------------
+revision 1.177
+date: 2007/06/03 06:33:38;  author: jblum;  state: Exp;  lines: +4 -2
+Finished the com.cp.common.beans.util.converters package of classes and components.  These classes are used by the ConvertUtil class to provide basic conversion of Object values to specified types using a registered Apache Commons BeanUtils Converter class.
+
+Refactored the BeanUtil.setPropertyValue method; showing the converted value and type of property win the FailedToWritePropertyException.
+
+Refactored the ConvertUtil class fixing bugs.
+----------------------------
+revision 1.176
+date: 2007/05/26 22:10:19;  author: jblum;  state: Exp;  lines: +2 -4
+Fixed several bugs with the AbstractBean.copy method; fixed issue with setting unwritable properties (UnwritablePropertyException) as well as setting required properties to null (ConstraintViolationException).
+
+Refactored the CommonBeanTest test case class commenting out the PersonImpl class's copy method.
+----------------------------
+revision 1.175
+date: 2007/05/19 07:31:40;  author: jblum;  state: Exp;  lines: +3 -10
+Refactored the com.cp.common.beans.AbstractBean class to include a constructor taking the ID as a parameter.
+
+Refactored the com.cp.common.enums.Enum interface removing the Identifiable extension and adding a public getId method.  Refactored the corresponding AbstractEnum class making the setId method private.
+
+Refactored the CommonBeanTest class changing the inner class PeronImpl's constructor accepting an ID parameter to delegate to the super class's (AbstractBean) consstructor.
+----------------------------
+revision 1.174
+date: 2007/05/16 04:56:20;  author: jblum;  state: Exp;  lines: +9 -4
+Added the testToString test case method to the com.cp.common.beans.AbstractBeanTest class.
+
+Implemented all test case methods in the com.cp.common.beans.util.BeanUtilTest class except testGetBeanInfo and testGetPropertyDescriptor.
+
+Refactored the com.cp.common.beans.CommonBeanTest class adding assertion methods for auditable properties.  In addition, commented out the toString methods on the Person and Consumer implementation classes.
+
+Refactored the UnwritablePropertyException class correcting a spelling error.
+
+Renamed com.cp.common.beans.util.InspectionException to BeanInspectionException.  Updated the AbstractListener and RequiredVisitor classes.
+----------------------------
+revision 1.173
+date: 2007/05/08 07:04:11;  author: jblum;  state: Exp;  lines: +4 -10
+Refactored the com.cp.common.beans.AbstractBean class, reimplementing code, fixing bugs and fixing the overall design of the class.
+
+Finished the AbstractBeanTest test case class testing the functionality and features of the AbstractBean class.  In addition, finished refactoring the CommonBeanTest class.
+
+Created the Initializable and Destroyable interfaces representing object lifecyle methods in the com.cp.common.lang package.
+
+Optimized imports in the com.cp.common.beans.support.RequiredVisitor class and the com.cp.common.beans.event.RequiredVetoableChangeListener classes.
+----------------------------
+revision 1.172
+date: 2007/04/29 00:14:48;  author: jblum;  state: Exp;  lines: +12 -2
+Refactored the com.cp.common.lang.Identifiable interface renaming the type variable to T instead of I.  In addition, recommented the getId and setId methods.
+
+Refactored the com.cp.common.beans.Bean interface renaming the type variable to the Identifiable interface from I to T.  In addition, refactored the AbstractBean class renaming tht type variable to the Bean interface from I to T.  In addition, refactored the getId and setId methods using the newly named T type variable.
+
+Refactored the com.cp.common.enums.AbstractEnum class by adding the sequence property.  In addition,added Comparator inner classes for the code, description, externalCode, id and sequence properties.
+
+Fixed bug in the BeanUtil.toString method.
+
+
+Refactored the com.cp.common.StringUtil class adding the trim() method to handle null String values.  Changed the implementation of the getNullIfEmpty method to use the new trim method.  Added appropriate tests in the StringUtilTest test case class.
+
+Refactored the com.cp.common.io.RegexFileFilterTest class performing code clean-up.  In addition, fixed the testRegexFileFiltet test.
+----------------------------
+revision 1.171
+date: 2007/03/09 08:59:27;  author: jblum;  state: Exp;  lines: +2 -15
+Refactored the Enum types in the com.cp.common.enums package.
+
+Added the class member constant set additions in the constructors of each Enum type.  Removed the static initializer adding the values of the Enum to the enum's static final Set.
+----------------------------
+revision 1.170
+date: 2007/03/04 01:10:03;  author: jblum;  state: Exp;  lines: +13 -4
+Refactored the com.cp.common.beans.Bean interface adding the DEFAULT_DATE_FORMAT_PATTERN class member constant and removing it from AbstractBean.  Changed the signature of the getModifiedProperties method to return a Set<String> type.
+
+Code reviewed the AbstractBean class; adding additional comments, implemnented the copy method using the com.cp.common.beans.beans.beans.beans.beans.beans.beans.beans.beans.util.BeanUtil class, implemented a toString method using the com.cp.common.beans.util.BeanUtil class.  Provided a protected getLogLevel method to be overridden by subclasses to adjust the log level for logging purposes using the com.cp.common.beans.event.LoggingPropertyChangeListener class.  Other refactorings.
+
+Created the BeanInstantiationException class used by the copy method to catch the reflection checked Exceptions.
+
+Created the CommonBeanTest for test case classes in the com.cp.common.beans package.
+
+Added the com.cp.common.beans.util package.  Created the BeanUtil class containing utility methods to introspect Bean classes.  Created the ConvertUtil class to handle conversions between Object values on Beans.
+
+Created the FailedToReadPropertyException, FailedToWritePropertyException, UnreadablePropertyException and UnwrittablePropertyException classes.
+
+Moved the InsepectionException and NoSuchPropertyException classes under the com.cp.common.beans.util package.
+
+Refactored the com.codeprimate.util.AbstractCache by optimizing imports.
+----------------------------
+revision 1.169
+date: 2007/02/27 06:58:27;  author: jblum;  state: Exp;  lines: +6 -2
+Refactored the cp-common API & Framework (Java Class Library) Enum package of classes and components.
+
+Refactored the com.cp.common.enums.AbstractEnum class to implement only the Enum interface.  Refactored the Enum interface to implement both com.cp.common.lang.Identifiable and java.io.Serializable.
+
+Performed other refactorings to the AbstractEnum class removing logging, changing the logger to use the Apache Commons Logging API, used the Assert facility and made code, description and externalCode properties of the Enum Required using the com.cp.common.beans.annotation.Required annotation.
+
+Refactored each implementing Enum to provide a values method, removed logging and reformatted the code.
+----------------------------
+revision 1.168
+date: 2007/02/18 07:17:11;  author: jblum;  state: Exp;  lines: +2 -5
+Created the ProcessRenderer class in the com.cp.common.log4j package to render com.cp.common.beans.Process objects.  Created an associated test class, ProcessRendererTest, to test the functionality of the renderer.
+
+Refactored the BeanRenderer, CalendarRenderer and UserRenderer classes as well as their associated tests.
+----------------------------
+revision 1.167
+date: 2007/02/07 08:58:52;  author: jblum;  state: Exp;  lines: +4 -4
+Refactored com.cp.common.swing API & Framework classes and components.
+
+Renamed the CalendarModel, DateModel and TimeModel classes as well as their associated test classes to DefaultCalendarModel, DefaultDateModel and DefaultTimeModel respectively.
+
+Renamed the ICalendarModel interface to CalendarModel and changed the interface declaration to extends JDateField.DataModel as well as com.cp.common.util.DataModel.
+----------------------------
+revision 1.166
+date: 2007/02/06 07:45:04;  author: jblum;  state: Exp;  lines: +4 -3
+Refactored the Enumerator class renaming Enumerator to IteratorToEnumeration.
+Refactored the EnumIterator class renaming EnumIterator to EnumerationToIterator.
+
+Refactored the associated test class names.
+
+Refactored the enumeration and iterator methods of the CollectionUtil class to reference the new classes.
+----------------------------
+revision 1.165
+date: 2007/02/06 07:28:11;  author: jblum;  state: Exp;  lines: +3 -2
+Refactored the cp-common API and Framework (Java Class Library) removing the Equator interface and all implementing classes (CaseInsensitiveStringEquator, CollectionEquator, and DefaultEquator) from the com.cp.common.util package.
+
+Refactored all classes reference Equator classes to now use the ObjectUtil class instead.
+
+Refactored the AccessType class, adding addition permissions to the enumerated type.
+----------------------------
+revision 1.164
+date: 2007/02/06 06:58:44;  author: jblum;  state: Exp;  lines: +4 -1
+Refactored the Equator implementation classes, reimplementing logic and reformatting the code for the DefaultEquator, CaseInsensitiveStringEquator and the CollectioEquator classes.
+
+Added the equalsIgnoreCase method to the StringUtil class in the com.cp.common.util package.  The method compares two String values for equality handling null values as well as ignoring case using a case-insensitive equality comparison.  Created an associated test case method in the StringUtilTest class.
+----------------------------
+revision 1.163
+date: 2007/02/04 03:14:43;  author: jblum;  state: Exp;  lines: +1 -26
+Added the UniqueList class to the com.cp.common.util package as well as an associated test suite, UniqueListTest class.  The UniqueList class is a decorator for List implementations to enforce uniqueness amongst elements in the list.
+----------------------------
+revision 1.162
+date: 2007/02/04 02:48:42;  author: jblum;  state: Exp;  lines: +25 -2
+Refactored the DateUtil class in the com.cp.common.util package.  Added the following methods...
+
+getAgeInDays
+isJanuary
+isFebruary
+isMarch
+isApril
+isMay
+isJune
+isJuly
+isAugust
+isSeptember
+isOctober
+isNovember
+isDecember
+isSunday
+isMonday
+isTuesday
+isWednesday
+isThursday
+isFriday
+isSaturday
+isWeekday
+isWeekend
+
+Added associated test case methods in the DateUtilTest class.
+----------------------------
+revision 1.161
+date: 2007/02/02 05:06:29;  author: jblum;  state: Exp;  lines: +2 -10
+Refactored the RemoveSessionObject class in the com.cp.common.struts package renaming it to RemoveObjectFromSessionAction.
+
+Added the AddObjectToSessionAction class to the com.cp.common.struts package to compliment the RemoveObjectFromSession class.
+----------------------------
+revision 1.160
+date: 2007/01/28 03:44:38;  author: jblum;  state: Exp;  lines: +10 -5
+Refactored the cp-common API & Framework (Java Class Library) Struts Abstract package of classes and components.
+
+Renamed CPAction to AbstractAction.
+Created the AbstractSubmitAction, AbstractViewAction and DefaultAction classes.
+Created the ResetObjectAction class.
+Refactored the RemoveSessionObjectAction class.
+Refactored the CPActionMapping class adding a validatorKey property and renaming the sessionObject property to sessionObjectKey.
+Created the CPActionForm class and an associated test class.
+Added the validation package for presentation validation.
+Created the Validator interface and ValidationException class.
+Refactored the PagingAction, PagingActionForm, SecurityAction, SortAction, and SortActionForm classes.
+----------------------------
+revision 1.159
+date: 2007/01/22 10:10:46;  author: jblum;  state: Exp;  lines: +3 -23
+Refactored the com.cp.common.lang.Auditable interface adding methods to record/track changes by the Process (see com.cp.common.beans.Process).
+
+Refactored the Bean interface, adding the isRollbackCalled and isThrowExceptionOnRollback methods.
+
+Refactored the AbstractBean class, changing the design, properties, behaviors and logistics and the listeners and events on the class.
+----------------------------
+revision 1.158
+date: 2007/01/22 10:02:57;  author: jblum;  state: Exp;  lines: +20 -6
+Refactored the RollbackVetoableChangeListener as a result of the Bean.isThrowExceptonOnSetWithRollback method being renamed to Bean.isThrowExceptionOnRollback.
+
+Refactored the logging output of the LoggingPropertyChangeListener class.  Updated the associated test class (LoggingPropertyChangeListenerTest class).
+
+Created the Process interface to represent processes.  Created the associated DefaultProcess class implementing the Process interface.
+
+Refactored the User interface adding comments to the getUsername method.  Created the associated DefaultUser class implementing the User interface.
+
+Created the BeanUtil utility class containing convenience methods to operated on Beans.  Created the BeanUtilTest test suite class to test the functionality of the BeanUtil class.
+
+Refactored the AuditableVisitorTest class adding an interface to the Household class (Household interface).  Renamed the Household class to HouseholdImpl.
+
+Refactored the IsModifiedVisitorTest class removing assertions in the testVisit method testing Bean rollback.
+
+Refactored the BeanRendererTest class based on new public (exposed) properties of the Bean interface (isRollbackCalled and isThrowExceptionOnRollback).
+
+Refactored the AbstractDataModel class renaming the StateChangeCallback interface to StateChangeCallbackHandler, consistent with the AbstractBean class.
+
+Created the PropertyChangeManager interface in the com.cp.common.beans.support package.  The interface represents implementing classes that manage property changes on a Bean.  Created the DefaultPropertyChangeManager class implementing the PropertyChangeManager interface to record and manage the properties of a Bean that have changed.  The DefaultPropertyChangeManager only records the properties of the Bean by name that have changed.  No other information is stored.  The DefaultPropertyChangeManager is the default implementation of the PropertyChangeManager interface used by AbstractBean.
+
+Created the RollbackPropertyChangeManager which in addition to recording and managing property changes of a Bean, can rollback the Bean's state to the original property values.
+
+
+Refactored the CommonVisitorTest class adding the assertAddress, assertPerson, and assertPhoneNumber methods.
+
+Refactored the CommonListenerTest, BoundedNumberVetoableChangeListenerTest and RequiredVetoableChangeListenerTest classes as a reult of the StateChangeCallback interface in AbstractBean being renamed to StateChangeCallbackHandler.
+----------------------------
+revision 1.157
+date: 2007/01/22 09:40:48;  author: jblum;  state: Exp;  lines: +10 -4
+Refactored the HeapSortTest class renaming the class from HeapSortTest to PrimitiveHeapSortTest.
+
+Refactored the PrimitiveQuickSortTest class renaming the class from ManualQuickSortTest to PrimitiveQuickSortTest to match the filename.
+
+Removed the SyncAuditablePropertiesVisitor and associated test class from the cp-common API & Framework, Java Class Library.  Syncing of a Bean's Auditable properties is the responsibility of the Bean.commit method.
+
+Refactored the MutableVisitor and ResetVisitor classes as well as their associated test classes, moving them from com.cp.common.util package to the com.cp.common.beans.support package, to reside with all other Bean Visitor classes.
+
+Refactored affect classes as a result of moving the MutableVisitor, such as the AbstractRecordTableTest, DefaultRecordTable and DefaultRecordTableTest classes.
+
+Added a toString method to the DateUtil class and created an associated test case method (testToString) in the DateUtilTest test suite class.
+----------------------------
+revision 1.156
+date: 2007/01/03 09:08:30;  author: jblum;  state: Exp;  lines: +6 -1
+Created the RollbackVetoableChangeListener event handler class in the com.cp.common.beans.event package as well as an associated test class.  The RollbackVetoableChangeListener class handles property change events on beans where rollback has been called and the throwExceptionOnSetWithRollback property set by throwing a PropertyVetoException.
+
+Refactored the Bean interface; implemented Resettable interface, added the isRollbackCalled state method, and isThrowsExceptionOnRollback method.  Implemented the reset method and isRollback/isThrowExceptionOnSetWithRollback methods in the AbstractBean.  Modified the behavior and logic of the rollback method.
+
+Broke a few AbstractBeanTest and IsModifiedVisitorTest methods; a todo.
+
+Refactored the BeanRenderTest class to include the rollbackCalled and throwExceptionOnSetWithRollback properties in the log output.
+----------------------------
+revision 1.155
+date: 2007/01/02 10:28:15;  author: jblum;  state: Exp;  lines: +1 -10
+Refactored the CommonVisitorTest class in the com.cp.common.beans.support package to create interfaces for the Person, Address and PhoneNumber beans respectively.  Renamed the Person, Address and PhoneNumber beans to PerosnImpl, AddressImpl and PhoneNumberImpl respectively.  Modified the PersonImpl, AddressImpl and PhoneNumberImpl class declarations specifying Integer as the Identifiable type to the AbstractBean.
+----------------------------
+revision 1.154
+date: 2007/01/02 09:50:25;  author: jblum;  state: Exp;  lines: +9 -2
+Created the BoundedNumberVetoableChangeListener class and associated test class in the com.cp.common.beans.event package.  The BoundedNumberVetoableChangeListener is registered on the AbstractBean and constrains properties based on the BoundedNumber Annotation.  If numerical properties have a BoundedNumber Annotation, then they must satisfy the bounded number constraint.
+
+Created the RequiredVetoableChangeListener class and associated test class in the com.cp.common.beans.event package.  The RequiredVetoableChangeListener is registered on the AbstractBean and constrains properties based on the Required Annotation.  Properties on a bean having a Required Annotation cannot be null when being set.
+
+Renamed the CommonVetoableChangeListenerTest class to CommonListenerTest class.  Modified all Event Listener Test classes in the com.cp.common.beans.event package to extends the CommonListenerTest class.
+
+Renamed the IllegalAnnotationException to a more descriptive name, IllegalUseOfAnnotationException.
+
+Refactored the AbstractBean class in the com.cp.common.beans package.
+
+Refactored the UnitTestLogConfiguration making the configure method itself synchronized rather than syncrhronizing within the method.
+----------------------------
+revision 1.153
+date: 2007/01/01 01:20:23;  author: jblum;  state: Exp;  lines: +2 -7
+Refactored the cp.common API & Framework Exception classes.  Modified all checked Exception and unchecked RuntimeException classes to extend Exception and RuntimeException respectively.  cp-common Exception classes not longer extend ChainedException or ChainedRuntimeException classes.
+
+The ChainedException and ChainedRuntimeException classes of the com.cp.common.util package will  remain in the cp-common API & Framework for use in environments where JDK 5 is not available so that developers can created chained Exception classes for their applications.
+----------------------------
+revision 1.152
+date: 2006/12/31 08:31:27;  author: jblum;  state: Exp;  lines: +6 -4
+Created the ApplicationException class in the com.cp.common.util package.  ApplicationException extends Exception, so it is a checked Exception.  ApplicationException signifies an exceptional condition in program logic or business process such as a violation in business rule processing.
+
+Created the SystemException class in the com.cp.common.util package.  SystemException extends RuntimeException, so it is unchecked.  SystemException signifies an exceptional condition outside of the control of the application, such as an external condition.
+
+Created the Resettable interface in the com.cp.common.lang package to represent Objects which can reset their inner state.
+
+Created the ResetVisitor class in the com.cp.common.util package to visit any Visitable objects which also implement the Resettable interface to call their reset method.  Created an associated test class to test functionality of the ResetVisitor.
+----------------------------
+revision 1.151
+date: 2006/12/27 09:13:24;  author: jblum;  state: Exp;  lines: +4 -5
+Created the AbstrastListener class in the com.cp.common.beans.event package implementing the EventListener interface and providing services to both PropertyChangeListeners and VetoableChangeListeners such as filtering property change events based on registered property notification as well as introspection on the registered bean for creating listeners based on annotations.
+
+Refactored the AbstractVetoableChangeListenerTest class renaming it to AbstractListenerTest to test more general functionality of the event listener support classes.
+
+Refactored the AbstractVetoableChangeListener class to extend the AbstractListener class and move most of the functionality to the parent class.
+
+Created the AbstractPropertyChangeListener class extending the AbstractListener for PropertyChangeListener object implementations.
+----------------------------
+revision 1.150
+date: 2006/12/27 04:38:19;  author: jblum;  state: Exp;  lines: +4 -8
+Created the ComposableVisitor class and associated test class in the com.cp.common.util package for composing multiple Visitors in a chain.
+
+Created the IllegalAnnotationException class, which is a ChainedRuntimeException to notify users that a specified Annotation has been used improperly in code.
+
+Refactored the BoundedNumber Annotation in the com.cp.common.beans.annotation package changing the min and max property types to double.
+
+Refactored the NoSuchPropertyException class of the com.cp.common.beans package switching it to a ChainedRuntimeException.
+----------------------------
+revision 1.149
+date: 2006/12/25 11:33:14;  author: jblum;  state: Exp;  lines: +9 -3
+Added the isNotSame and isSame static methods to the com.cp.common.lang.ObjectUtil utility class for performing identity comparisons.
+
+Refactored the com.cp.common.lang.Assert class to use the ObjectUtil.isNotSame and ObjectUtil.isSame methods in the notSame and same methods respectively.
+
+Implemented the RequiredVisitorTest test case class.
+
+Refactored the AuditableVisitor class using the com.cp.common.lang.Assert facility to validate auditable properties on set.
+
+Renamed the CommonBeanVisitorTest to CommonVisitorTest.
+
+Refactored the CharacterUtil and NumberUtil classes of the com.cp.common.lang package declaring the utility classes as final.
+----------------------------
+revision 1.148
+date: 2006/12/21 11:35:16;  author: jblum;  state: Exp;  lines: +3 -5
+Created the Assert utility class to make certain assertions and throw the appropriate RuntimeException if the assertion fails.  Created an associated test class.
+
+Created the MathUtil class to offer math operations not present in the java.lang.Math class.  Created an associated test class.
+
+Refactored the com.cp.common.lang.ObjectUtil class to use the new Assert class facility.
+----------------------------
+revision 1.147
+date: 2006/11/17 12:55:33;  author: jblum;  state: Exp;  lines: +6 -2
+Created the com.cp.common.enums.Enum interface specifying the behavior of implementing Enum classes in the com.cp.common.enums package.
+
+Created the BeanRenderer and EnumRenderer Log4J ObjectRenderer implementations to render Bean and Enum class objects respectively.  Created associated unit test classes to test the functionality of the Bean and Enum ObjectRenderers.
+
+Refatored the AbstractEnum abstract class to implement the Enum interface.
+
+Modified the log configuration file, log4j.lcf, to specify renderers for the Bean and Enum interfaces respectively.
+----------------------------
+revision 1.146
+date: 2006/10/26 07:55:16;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the Search API & Framework; refactored the AbstractSearcher class to use generics when specifying the implementing SearchFilter.
+
+Refactored the SearchFilter interface, renaming the accept method to matches.
+----------------------------
+revision 1.145
+date: 2006/10/26 07:02:52;  author: jblum;  state: Exp;  lines: +2 -2
+Created test classes for the com.cp.common.awt.event.KeyEventUtil class, and the AbstractObjectRenderer, CalendarRenderer, CollectionRenderer, MapRenderer, NullRenderer and UserRenderer classes of the com.cp.common.log4j package.
+
+Refactored the cp-common AllUnitTests test suite and codeprimate AllUnitTests test suite classes.
+----------------------------
+revision 1.144
+date: 2006/10/24 08:52:43;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the cp-common Java Class Library (API & Framework) cache, record, search and sort classes; moved the cache, record, search and sort classes in the com.cp.common.util and com.codeprimate.util package to the com.cp.common.util.cache, com.cp.common.util.record, com.cp.common.util.search and com.cp.common.util.sort packages respectively.
+
+Refactored all associated classe affected by this refactoring (move), such as the com.cp.common.sql.ResultSetUtil class, the Searchable and Sortable interfaces in the com.cp.common.lang package, the com.cp.common.swing.table.RecordTableModel, and the com.cp.common.struts.sorting.SortAction class.
+----------------------------
+revision 1.143
+date: 2006/10/24 07:29:28;  author: jblum;  state: Exp;  lines: +3 -1
+Refactored the com.cp.common.enums package Enum classes; added a @see Javadoc reference tag to the com.cp.common.enums.AbstractEnum class.
+
+Created the com.cp.common.enums.Oceans enum class.
+----------------------------
+revision 1.142
+date: 2006/10/24 06:35:15;  author: jblum;  state: Exp;  lines: +2 -1
+Refactored the com.cp.common.beans package; moved the CommonBeanVisitorTest, IsModifiedVisitor, IsNewVisitor, and SyncAuditablePropertyVisitor classes and associated tests to the com.cp.common.beans.support package.  Moved the AboutInfo interface and AbstractAboutInfo class to the com.cp.common.util package.
+----------------------------
+revision 1.141
+date: 2006/10/24 05:48:05;  author: jblum;  state: Exp;  lines: +1 -2
+Refactored the cp-common Enum types in the com.cp.common.util.enumx package, moving the Enums to the com.cp.common.enums package.  The enums package, now, is a top level package like the beans package.
+----------------------------
+revision 1.140
+date: 2006/09/26 08:37:25;  author: jblum;  state: Exp;  lines: +1 -1
+Moved all *Test classes in the com.cp.common.util package under the test/ directory to the com.cp.common.util package under the src/ directory.
+----------------------------
+revision 1.139
+date: 2006/09/25 00:06:05;  author: jblum;  state: Exp;  lines: +1 -1
+Moved all *Test classes in the com.cp.common.sql struts swing swing.text and text packages under the test/ diretory to the com.cp.common.sql struts swing swing.text and text packages under the src/ directory respectively.
+----------------------------
+revision 1.138
+date: 2006/09/24 23:46:44;  author: jblum;  state: Exp;  lines: +1 -1
+Moved all *Test classes in the com.cp.common.lang package under the test/ directory to the com.cp.common.lang package under the src/ directory.
+----------------------------
+revision 1.137
+date: 2006/09/24 23:36:02;  author: jblum;  state: Exp;  lines: +1 -1
+Moved all *Test classes in the test/ directory under the com.cp.common.beans io & junit packages to the corresponding directory/package under the src/ directory.
+----------------------------
+revision 1.136
+date: 2006/09/24 23:07:22;  author: jblum;  state: Exp;  lines: +1 -15
+Moved all Manual*Test.java classes under the <project root>/test directory to the com.cp.common.test.manual package.
+----------------------------
+revision 1.135
+date: 2006/08/15 03:24:11;  author: jblum;  state: Exp;  lines: +14 -2
+Refactored the ChainedException and ChainedRuntimeException classes removing the overridden getMessage and printStackTrace() methods and changing the implementation of the printStackTrace methods taking PrintStream and PrintWriter objects respectively, to print the stack trace of both the containing Exception as well as the contained Exception.
+
+Example would be...
+
+com.cp.common.util.ConversionException: Failed to convert property value to Integer.
+    at MyClass.myMethod(com.mycompany.MyClass.java:9)
+    at MyClass.main(com.mycompany.MyClass.java:21)
+Caused by: java.lang.NullPointerException: value is null.
+    at Integer.parseInt(java.lang.Integer.java:2122)
+
+
+Refactored classes and components of the cp-common Java Class Library (API & Framework).  Refactored the AbstractCacheFactory, AbstractRecordFactory, AbstractSearchFactory and AbstractSortFactory classes as well as the implementing classes, CPCacheFactory, CPRecordFactory, CPSearchFactory and CPSortFactory.
+
+Refactored the com.codeprimate.tools.enumgen.AbstractEnumCodeGenerator class.
+----------------------------
+revision 1.134
+date: 2006/08/10 09:13:38;  author: jblum;  state: Exp;  lines: +3 -2
+Created the SortedListModel class implementing the javax.swing.ListModel interface in the com.cp.common.swing package.  The SortedListModel adds custom sorting capabilities to the javax.swing.List's model elements.
+
+Created the SortedListModelTest test case class to test the functionality of the SortedListModel class.
+----------------------------
+revision 1.133
+date: 2006/07/10 02:57:35;  author: jblum;  state: Exp;  lines: +2 -4
+Refactored the com.cp.common.lang.ObjectUtil class adding the getClass(:Object) method.  Created an associated test case method in the ObjectUtilTest test case class to test the functionality of the gtClass method.
+
+Created the com.cp.common.util.ConversionException ChainedRuntimeException class.
+----------------------------
+revision 1.132
+date: 2006/06/26 00:39:36;  author: jblum;  state: Exp;  lines: +4 -1
+Refactored the com.cp.common.sql.ResultSetUtil class, changing the getMapFromResultSetRow method to retrieve column values from a ResultSet by name rather than index.
+
+Refactored the LOCAL_CLASSPATH evnrionment variable in the getNetFile.bat and getNetFile.sh shell scripts, changing the log4j JAR reference.
+----------------------------
+revision 1.131
+date: 2006/04/25 06:45:16;  author: jblum;  state: Exp;  lines: +1 -1
+Implemented the NullRenderer class (a Log4J ObjectRenderer) used by the AbstractObjectRendere class to render null objects.
+----------------------------
+revision 1.130
+date: 2006/04/23 21:43:43;  author: jblum;  state: Exp;  lines: +1 -3
+Refactored the CollectionRenderer and MapRenderer classes of the com.cp.common.log4j package; reformatting the source code.
+----------------------------
+revision 1.129
+date: 2006/04/23 21:25:29;  author: jblum;  state: Exp;  lines: +1 -1
+Implemented the com.cp.common.log4j.UserRenderer class to render User object instances in logger statements.
+
+Refactored the doRender method of the CalendarRenderer class.
+----------------------------
+revision 1.128
+date: 2006/04/23 21:18:49;  author: jblum;  state: Exp;  lines: +3 -1
+Implemented the com.cp.common.log4j.UserObjectRenderer class to render User object instances in logger statements.
+
+Refactored the doRender method of the CalendarRenderer class.
+----------------------------
+revision 1.127
+date: 2006/04/23 21:03:00;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the com.cp.common.log4j.CalendarRenderer class, changing the default date pattern.  Also renamed the dateFormat property of the Renderer to datePattern.
+----------------------------
+revision 1.126
+date: 2006/04/16 00:35:04;  author: jblum;  state: Exp;  lines: +1 -3
+Refactored the cp-common Ant build system, changing the presetdef for the Java compiler (javac) to include debugging information in class files when compiling Java source files.
+----------------------------
+revision 1.125
+date: 2006/03/27 20:48:08;  author: jblum;  state: Exp;  lines: +3 -1
+Refactored the ObjectUtil.getArgumentTypes method, renaming the local variable parameterTypes to argumentTypes and changing the negated call to ArrayUtil.isEmpty to ArrayUtil.isNotEmpty.
+
+Refactored the cp-common API & Framework classes calling and negating the ArrayUtil.isEmpty method to call ArrayUtil.isNotEmpty method instead.
+----------------------------
+revision 1.124
+date: 2006/03/26 08:56:26;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the ConstraintViolationException class moving the class from the com.cp.common.util package to the com.cp.common.beans package.
+----------------------------
+revision 1.123
+date: 2006/03/23 10:27:35;  author: jblum;  state: Exp;  lines: +1 -12
+Implemented a new ChainedRuntimeException class, ConstraintViolationException, to be used by Bean implementation when registering changes on vetoable properties.  If a PropertyVetoException is thrown by a VetoableChangeListener, the Exception is wrapped with the ConstraintViolationException RuntimeException class.
+----------------------------
+revision 1.122
+date: 2006/02/23 07:17:47;  author: jblum;  state: Exp;  lines: +11 -2
+Finished refactoring the com.cp.common.util.PropertyManager class.
+
+Fixed bug with inappropriately throwing a MissingResourceException when a getXXXPropertyValue method was called with a non-null default value of the appropriate type.  Added the getDefaultPropertyValue method to determine the String argument to the getPropertyValue methods from the type convenience methods based on the default property value.
+
+Renamed the DEFAULT_DATE_FORMAT class member constant to DFEAULT_DATE_PATTERN.  Defined an associated property (cp-common.default.date.pattern) for the default date pattern to be obtained from the property configuration, if such a property exists.  Added the getDefaultDatePattern method to obtain the the value of the default date pattern property if defined or return the DEFAULT_DATE_PATTERN constant value instead.
+
+Modified the comments of the PropertyManger methods.
+
+Added the getDatePropertyValue series of methods to the PropertyManager class.
+
+Changed all PropertyManager getXXXPropertyValue methods to throw a ConfigurationException instead of an IOException.
+
+Modified all calls to the PropertyManager class methods expected to handle the IOException (AbstractCacheFactory, AbstractRecordFactory, AbstractSearchFactory, AbstractSortFactory, AbstractEnum, etc).
+----------------------------
+revision 1.121
+date: 2006/02/20 06:32:27;  author: jblum;  state: Exp;  lines: +3 -1
+Refactored the com.cp.common.util.ArrayUtil and com.cp.common.util.CollectionUtil classes adding connvenience a method, isNotEmpty, to determine whether an Object array or Collection is not empty respectively.  An Object array, or Collection, is not empty if the object is not null and contains elements.
+
+Modified the corresponding test classes, ArrayUtilTest and CollectionUtilTest, adding a test case for the isNotEmpty methods.
+----------------------------
+revision 1.120
+date: 2006/02/05 13:03:39;  author: jblum;  state: Exp;  lines: +1 -10
+Moved the contents of the et/content/doc diretory to the etc/test directory.  Modified affected source files to refer to the test files' new location.
+----------------------------
+revision 1.119
+date: 2006/02/05 12:12:51;  author: jblum;  state: Exp;  lines: +10 -1
+Refactored the com.cp.common.util.PropertyManager class.  Added convenience methods to get property values of type Calendar, Character and String (in addition to Boolean, Byte, Short, Integer, Long, Float and Double).
+
+Added an optional parameter to the getXXXPropertyValue methods to fail for missing properties.
+
+Added support for local properties managed and maintained by the PropertyManager class itself.  These local properties serve to override properties from the cp-common properties file.
+
+Created the com.cp.common.util.PropertyManagerTest class to test the functionality and features of the PropertyManager class.
+
+Added the isNotEmpty method to the com.cp.common.lang.StringUtil class.  Added a corresponding test case to in the StringUtilTest class.
+
+Modified all uses of the PropertyManager class method calls in cp-common API & Framework classes (AbstractCacheFactory, AbstractRecordFactory, AbstractSearchFactory, AbstractSortFactory, AbstractEnum).
+----------------------------
+revision 1.118
+date: 2006/02/01 04:03:51;  author: jblum;  state: Exp;  lines: +1 -2
+Refactored the com.cp.common.util.enumx.AbstractEnum class adding a LookupStrategy for the desription property.  Added getByDescription methods to all AbstractEnum implementations.
+----------------------------
+revision 1.117
+date: 2006/01/30 08:04:31;  author: jblum;  state: Exp;  lines: +2 -1
+Refactored the Enum (enumerated-type) API and Framework.  Added the externalCode property to the com.cp.common.util.enumx.AbstractEnum package.  Refactored the getFactory class method of the AbstractEnum class to use the PropertyManager instead of the CPCommonProperties class.  Added a getByExternalCode method to all enumerated-type implementations.  Renamed the existing getInstance methods to getByCode and getById respectively.  Added the createInstance(code:String, description:String, externalCode:String) method to all factories of the enumerated-type implementations.
+
+Fixed a mispellig in the com.cp.common.util.PropertyManager class.
+----------------------------
+revision 1.116
+date: 2006/01/29 09:53:24;  author: jblum;  state: Exp;  lines: +1 -3
+Finished code review and refactoring the MockResultSet and MockResultSetMetaData classes of the com.cp.common.sql package.
+----------------------------
+revision 1.115
+date: 2006/01/29 07:20:19;  author: jblum;  state: Exp;  lines: +2 -3
+Finished the code review and refactoring of the RecordTableResultSet and RecordTableResultSetMetaData classes in the com.cp.common.sql package.
+
+Refactored the logging in the com.cp.common.lang.BooleanUtil class.
+----------------------------
+revision 1.114
+date: 2006/01/25 09:09:45;  author: jblum;  state: Exp;  lines: +3 -2
+Refactored the PropertyChangeListeners and VetoableChangeListener classes of the com.cp.common.beans.event package to final classes, provide public default constructors and one constructor that takes the property name of the property the listener is listening for property change events to, and ensured all handle methods were declared protected.
+
+Modified the AbstractVetoableChangeListener abstract class, the LoggingPropertyChangeListener, NumberOutOfBoundsVetoableChangeListener, ObjectImmutableVetoableChangeListener, ReadOnlyVetoableChangeListener, and RequiredFieldsVetoableChangeListener classes.
+----------------------------
+revision 1.113
+date: 2006/01/25 08:30:54;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.lang.NumberUtil class and added the isGreaterThan, isGreaterThanEqualTo, isLessThan and isLessThanEqualTo methods.
+
+Added corresponding test methods in the com.cp.common.lang.NumberUtilTest class.
+----------------------------
+revision 1.112
+date: 2006/01/21 11:04:42;  author: jblum;  state: Exp;  lines: +2 -2
+Finished the design and implementation of the com.cp.common.sql.RecordTableResultSet and com.cp.common.sql.RecordTableResultSetMetaData classes.
+
+Refactored the com.cp.common.sql.MockResultSet class.
+----------------------------
+revision 1.111
+date: 2006/01/15 07:56:20;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.sql.ResultSetUtil class adding the getRecordTableFromResultSet method which creates an instance of the RecordTable class from a ResultSet object obtained by running a query against a data store.
+
+Added a corresponding test method in the com.cp.common.sql.ResultSetUtilTest class.
+----------------------------
+revision 1.110
+date: 2006/01/13 09:04:54;  author: jblum;  state: Exp;  lines: +2 -1
+Finished refactoring the com.cp.common.sql.MockResultSet class and the com.cp.common.sql.MockResultSetMetaData class.
+
+Created Mock classes for the SQL Array, Blob, Clob, Ref and Stuct SQL types.
+----------------------------
+revision 1.109
+date: 2006/01/08 02:29:41;  author: jblum;  state: Exp;  lines: +1 -4
+Refactored the com.cp.common.util.DataModel interface, removing the keyword abstract from list of modifiers on the getValue and setValue methods.
+----------------------------
+revision 1.108
+date: 2005/12/14 07:09:40;  author: jblum;  state: Exp;  lines: +4 -2
+Implemented the testSetColumnToNonNull and testSetColumnToUnique test case methods of the com.codeprimate.util.DefaultRecordTableTest class.
+
+Refactored the testSortRecordTable test case method of the com.codeprimate.util.DefaultRecordTableTest class.
+
+Finished refactoring and retrofitting the Record API & Framework of the cp-common Java Class Library with generics.
+----------------------------
+revision 1.107
+date: 2005/12/08 09:45:42;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.lang.StringUtil utility class, adding the getEmptyIfNull and getNullIfEmpty methods.  Added test case methods to the StringUtilTest class to test the functionality of the getEmptyIfNull and getNullIfEmpty methods.
+
+Added the assertNullEmpty test method to the com.cp.common.util.TestUtil class.
+----------------------------
+revision 1.106
+date: 2005/12/02 10:36:38;  author: jblum;  state: Exp;  lines: +2 -10
+Implmented several assertNotEquals methods for all the basic primitive types (boolean, byte, char, double, float, int, long, short) as well as Objects in the com.cp.common.util.TestUtil utility class.
+
+Refactored the testColumnIterator and testCopy test case methods of the com.codeprimate.util.DefaultRecordTableTest class.
+----------------------------
+revision 1.105
+date: 2005/11/26 01:46:32;  author: jblum;  state: Exp;  lines: +6 -15
+Finished implementing two test case methods of the com.cp.common.util.AbstractRecordTableTest class: testValidateColumnIndex and testValidateRowIndex.
+
+Refactored the testValidateColumnValue & testValidateColumnValueNullity test case methods of the com.cp.common.util.AbstractRecordTableTest class.
+
+Refactored the testToTabularForRowsAndColumns test case method testing the null checks on row indices and columns in the AbstractRecordTableTest class.
+
+Refactored the com.codeprimate.utilDefaultRecordTable.TableColumn.setNullable method.
+
+Reordered the column validation method in the validateColumn value method, moving the validateColumnValueType method as first validation method in the AbstractRecordTable class.
+
+Refactored the validateColumnValue size method to handle all value types in the AbstractRecordTable class.
+----------------------------
+revision 1.104
+date: 2005/11/22 07:22:40;  author: jblum;  state: Exp;  lines: +16 -5
+Refactored the following test case methods of the com.cp.common.util.AbstractRecordTableTest class:
+testSetCellValue
+testSetCellValueExceptionalFlowIndexOutOfBounds
+testSetCellValueExceptionalFlowInvalidColumnValue
+testToArray
+testToTabular
+testToTabularForColumns
+testToTabularForRows
+
+Refactored the DefaultRecordTable.insertColumn method removing the call to getColumnValue.  The redundant call is called in the TableRecord.addColumn method called by insertColumn.
+
+Added the toTabular(rowIndices:{J) method to the com.cp.common.util.RecordTable interface.  Implemented the toTabular(rowIndices:[J) method in the AbstractRecordTable class.  Implemented the toTabular(rowIndices:[J) method in the SynchronizedRecordTable class of the com.cp.common.util.RecordUtil utility class.
+
+Created the com.cp.common.log4j.CalendarRenderer class to render Calendar objects in a Log4J context.  Configured the renderer in the project log4j configuration file.
+
+Modified an echo statement in the test target of the Ant cp-common project build file.
+----------------------------
+revision 1.103
+date: 2005/11/18 07:53:45;  author: jblum;  state: Exp;  lines: +7 -3
+Refactored the com.cp.common.util.Record interface, changing getValue(fieldIndex:int) and getValue(field:K) methods to generic methods.
+
+Refactored the com.cp.common.util.RecordTable interface, changing the getCellValue(rowIndex:int, columnIndex:int) and getCellValue(rowIndex:int, :Column) methods to generic methods.
+
+Modified the AbstractRecord, RecordAdapter, AbstractRecordTable and DefaultRecordTable classes appropriately.
+
+Modified the RecordUtil class based on the generic method changes.
+
+Implemented/refactored several test methods of the com.cp.common.util.AbstractRecordTableTest class.
+----------------------------
+revision 1.102
+date: 2005/10/09 19:32:03;  author: jblum;  state: Exp;  lines: +3 -4
+Fixed bug in the com.cp.common.util.RecordAdapter class; changed implementation of the containsField method to delegate to the internal Column List data structure for field containment by the Record object.
+
+Fixed some additional test failures in the DefaultRecordTableTest class (testRecordCompatibility).
+
+Refactored a logger statement in the com.cp.common.lang.StringUtil utility class.
+----------------------------
+revision 1.101
+date: 2005/10/08 18:43:23;  author: jblum;  state: Exp;  lines: +3 -7
+Added the toString method to the ObjectUtil class which returns a String representation of the Object parameter argument by calling toString on the Object, or returning null if the Object parameter argument is null.  The ObjectUtil.toString method is consistent with the Object.toString method and consistent with concatenation of null Objects in a String.
+
+Refactored the StringUtil.getStringValue to always return a String (minimally, an empty String) regardless if the Object parameter argument is null or not.  If the Object parameter argument is not null, the method will call the toString method on the Object, otherwise the method will return an empty String.
+
+Refactored all uses of the StringUtil.getStringValue method to use the ObjectUtil.toString method in classes of the cp-common API and Framework, Java Class Library.
+----------------------------
+revision 1.100
+date: 2005/09/18 23:26:35;  author: jblum;  state: Exp;  lines: +6 -5
+Fixed bug (java.lang.NullPointerException) in the com.codeprimate.util.DefaultRecordTable class's rowIterator.remove method concerning the columnValueHashMap and the potentially null HashSet that it can retrieve.
+
+Refactored the com.codeprimate.util.DefaultRecordTableTest class and the corresponding com.cp.common.util.AbstractRecordTableTest class to invoke methods on instances of the Record interface using the Column instance (refactored containsField, getValue and setValue calls, etc.).
+
+Refactored the com.cp.common.util.RecordUtilTest class to invoke Record methods using Column instances.
+
+Created the RecordAdapter interface to adapt Record<String> instances into Record<Column> instances.
+
+Refactored the test.old target in the build system with support for running a single test case.
+----------------------------
+revision 1.99
+date: 2005/09/18 02:34:12;  author: jblum;  state: Exp;  lines: +6 -3
+Refactored the cp-common Record API & Framework classes.  Modified Record classes to make use of generics.
+
+Created the com.cp.common.util.IdentityComparator class to compare Objects by Object identity (memory address).
+
+Refactored the com.cp.common.util.ArrayUtil and com.cp.common.util.CollectionUtil classes.  Modified the Iterator unmodifiableIterator and unmodifiableListIterator methods to be generic methods.  Modified the iterative code in the ArrayUtil.asList methods to use the new looping constructor (new for loop).
+
+Added the getClassName method to the ObjectUtil class and associated test method (testGetClassName) in the ObjectUtilTest class.
+
+Refactored the com.cp.common.util.Searchable and com.cp.common.util.Sortable interfaces to make use of generics.
+----------------------------
+revision 1.98
+date: 2005/08/27 03:49:42;  author: jblum;  state: Exp;  lines: +3 -16
+Refactored the ComparableComparator, SortAscendingComparator and SortDescendingComparator classes to make use of generics when extending the Comparator interface.
+
+Added the ArrayIterator and ArrayIteratorTest classes to the com.cp.common.util package of classes.
+
+Added the iterator method on the ArrayUtil class to construct an Iterator over the elements of an Object array.
+----------------------------
+revision 1.97
+date: 2005/08/25 09:31:37;  author: jblum;  state: Exp;  lines: +14 -7
+Refactored the Sorting API & Framework classes of the cp-common Java class library.
+
+Moved the BubbleSort, HeapSort, MergeSort, SelectionSort, and ShellSort with associated JUnit test class/suites to the core cp-common (com.cp.common.util) package of classes.
+
+Commented and refactored logging in the Sorter implementation classes (BubbleSort, HeapSort, MergeSort, SelectionSort, and ShellSort).
+
+Created a new Sorter implementation, com.codeprimate.util.TreeSort, using the SortedBag (TreeBag) commons-collection class to implement the sort.  Created corresponding test class (TreeSortTest) to test the functionality of the TreeSort sorting algorithm.
+
+Created a shell test class for the IndexedSearch searcher implementation.
+
+Renamed the CPAbstractCache class to com.codeprimate.util.AbstractCache.
+
+Added a new SortType for the Tree Sort algorithm; added factory methods to both the AbstractSortFactory and CPSortFactory classes.
+
+Added all new and modified test classes to the com.cp.common.util.AllUnitTest test suite.
+
+Added an optimization to the cp-common build system.
+
+Updated the TODO text document.
+----------------------------
+revision 1.96
+date: 2005/08/24 07:10:39;  author: jblum;  state: Exp;  lines: +7 -12
+Refactored (major redesigned) the Enum API and Framework of the cp-common Java class library.
+
+Uncovered major design flaw when adding and testing the IsModifiedVisitor, IsNewVisitor and SyncAuditablePropertiesVisitor classes.  The ObjectUtil class, using reflection and introspection, was unable to access the instance inner factory classes of each enumerated-type.  Also, each subclass of the AbstractEnum, or each enumerated-type, was attempting to reset the shared class-level factory member variable, thereby causing a ClassCastException when creating specific enumerated-type instances for the particular Enum.
+
+Modified all Enums, enumerated-types and subclasses of the AbstractEnum, to store reference to their own factory instance, created by the AbstractEnum class's getFactory method, and made all inner classes final class members with public constructors, thus allowing access by Java's reflection and introspection mechanism.
+
+Refactored the TestUtil class.
+
+Refactored the CacheableAdapter class.
+
+Created the AbstractEnumTest class to ensure each enumerated-type could be instantiated.
+
+Moved the com.cp.common.util.enumx.Primate enumerated-type to the com.codeprimate.util.enumx package.
+----------------------------
+revision 1.95
+date: 2005/08/21 22:11:24;  author: jblum;  state: Exp;  lines: +13 -4
+Refactored the cp-common API and Framework (Java class library) build system.
+
+Added JAVA_HOME environment variable check in the cp-common-build.bat and cp-common-build.sh files.
+
+Renmaed the QUICK_TEST_NAME environment variable to TEST_CLASS_NAME, matching the RUN_CLASS_NAME environment variable.
+
+Modified the cp-common-build.xml ANT build script to have a unified test target.  The shell scripts no longer validate the TEST_CLASS_NAME environment variable.  The shell scripts will set the TEST_CLASS_NAME environment variable if the test target is called regardless if there is a second parameter to the build script or not.  The test target will conditionally check and determine if a single unit test class is being run, or if the entire test suite should be run.
+
+Removed the old ref.impl.test and quickTest targets.  Changed the previous test target to test.old.
+
+Renamed the make.dir target to init.
+
+Modified the compile target to set a condition of whether to build a new project JAR file (cp-common.jar) depending on whether any source files changed.
+
+Refactored the property setting, created preset definition on the javac task and imported the ant-contrib ANT tasks into the project.
+
+etc.
+----------------------------
+revision 1.94
+date: 2005/08/19 09:35:33;  author: jblum;  state: Exp;  lines: +5 -4
+Refactored the TestUtil.assertSorted method by renaming local variables.
+
+Refactored the ObjectUtil.getDefaultValue method; modified the getDefaultValue method to be a generic method.
+
+Refactored the AuditableVisitor class; modified the visit method to set modified properties of a bean if the bean's modified properties were previously unset.  Added the hasModifiedInfo method.
+
+Refactored the AbstractBean class; changed the setLastModifiedBy and setLastModifiedDate method's access modifiers to package private, making them accessible to the SyncAuditablePropertiesVisitor class.
+----------------------------
+revision 1.93
+date: 2005/08/19 09:25:58;  author: jblum;  state: Exp;  lines: +7 -1
+Created the IsModifiedVisitor and IsNewVisitor classes to traverse the object graph of a particular bean to determine if the bean has been modified or is new, respectively.
+
+Created the SyncAuditablePropertiesVisitor to synchronize the modified and lastModified properties of a bean class.  This Visitor is useful after a persistence operation (such as a load or a save) to sync the auditable properties of the bean.
+
+Created test classes for each of the new bean Visitor classes.
+
+Created the LoggingPropertyChangeListener class to enable logging for all properties, or registered properties, of a bean class.
+----------------------------
+revision 1.92
+date: 2005/07/22 03:50:50;  author: jblum;  state: Exp;  lines: +1 -7
+Refactored the Copyable interface again, removing the generic method declaration of copy and instead declaring the method as a plain Java method.  With the new covariant return type feature of JDK 5, it is completely unnecessary to declare a generic method as having a generic return type.
+----------------------------
+revision 1.91
+date: 2005/07/22 03:38:18;  author: jblum;  state: Exp;  lines: +5 -3
+Refactored the Copyable interface again, undeclaring the Copyable interface as a generic type, however, did declare the copy method to be a generic method with a generic return type, so long as the parameterized type extends Object (which all classes do by default).
+
+Refactored the Bean interface and the AbstractBean class, removing the type parameter to the Copyable interface.
+
+Refactored the User interface to no longer extend the Bean interface.  The User interface is left to the implementation to decide exactly what a user is.
+
+Modified the AbstractBeanTest and AuditableVisitorTest test classes based on the User interface changes.
+----------------------------
+revision 1.90
+date: 2005/07/22 02:36:02;  author: jblum;  state: Exp;  lines: +3 -3
+Refactored the Copyable interface to use a generic return type on the copy method.
+
+Refactored the Bean interface and AbstactBean abstract class to pass the type parameter for the Copyable interface.
+
+Refactored the User interface to now extend the Bean interface as well as renamed the getUserId method to getUsername for subclass compatibility.
+----------------------------
+revision 1.89
+date: 2005/07/19 03:01:50;  author: jblum;  state: Exp;  lines: +3 -6
+Added the getInstance(:Class, :Class[], :Object[]) method to the ObjectUtil class allowing the caller to specify parameter types to constructors of the target class for object instantiation.  For instance, a class copy constructor might take the the interface that the particular class implements as a parameter rather than the specified type of the class.
+
+Added a length method to the ArrayUtil class to determine the length of various arrays and null arrays.
+
+Added a size method to the CollectionUtil class to determine the size of various collections and null collections.
+----------------------------
+revision 1.88
+date: 2005/07/17 07:26:08;  author: jblum;  state: Exp;  lines: +4 -10
+Created the Identifiable interface used by implementing classes to declare that they are uniquely identifiable using a key of the parameterized type.
+
+Refactored the Bean interface to implement the com.cp.common.lang.Identifiable interface.
+
+Refactored the AbstractBean interface to provide implementations of the methods declared in the com.cp.common.lang.Identifiable interface.
+
+Created the DataModel interface for the com.cp.common.util.AbstractDataModel class.
+----------------------------
+revision 1.87
+date: 2005/07/11 07:36:07;  author: jblum;  state: Exp;  lines: +14 -1
+Refactored the Cache API and Framework.  Cleaned up logger statements.
+
+Created a Bean interface for which the com.cp.common.beans.AbstractBean class implements.
+Refactored the AbstractBean class to implement the com.cp.common.beans.Bean interface and add support for registering and unregistering as well as notify ChangeListeners of change events.  Refactored the AbstractBean class including an internal interface, StateChangeHandler to be used in a call to registerChange or notifyListeners to enforce the correct ordering of property change event notification (call vetoable change listeners first, change state second and finally, notify property and change listeners last).  Cleaned up logger statements.  Modified the semantics surrounding the initialization and modification of the lastModifiedBy and lastModifiedDate properties.
+
+Created the com.cp.common.beans.event.ObjectImmutableVetoableChangeListeners to enforce object immutability when the mutable property is false on any bean implementing the Mutable interface and extending the AbstractBean class.  Created the ObjectImmutableVetoableChangeListenerTest class to verify the logic and behavior of the ObjectImmutableVetoableChangeListener class.
+
+Refactored the NumberOutOfBoundsVetoableChangeListener class; cleaned up logging.
+
+Refactored the AbstractBeanTest, CommonVetoableChangeListenerTest, AuditableVisitorTest classes.
+
+Refactored the DateUtil.copy method to handle nulls.  Refactored the DateUtilTest class.
+
+Added the ObjectImmutableVetoableChangeListenerTest class to the AllUnitTest test suite.
+----------------------------
+revision 1.86
+date: 2005/04/25 06:33:10;  author: jblum;  state: Exp;  lines: +1 -7
+Refactored cp-common classes and components to compile under the new JDK 5.0 (Java 2 Standard Edition 1.5) platform.
+----------------------------
+revision 1.85
+date: 2005/04/18 07:28:45;  author: jblum;  state: Exp;  lines: +7 -1
+Fixed the com.cp.common.beans.AbstractBeanTest.testVetoableAndPropertyChangesListeners test method.
+
+Refactored the cp-common-build.xml file.
+
+Updated the TODO file.
+
+Finished the cp-common API and Framework package.
+----------------------------
+revision 1.84
+date: 2005/04/18 00:01:29;  author: jblum;  state: Exp;  lines: +1 -8
+Refactored and renamed the com.cp.common.io.FileFilterMultiAcceptor class to FileFilterComposition.  Modified the corresponding test (FileFilterMultiAcceptorTest to FileFilterCompositionTest) as well.
+----------------------------
+revision 1.83
+date: 2005/04/17 23:44:45;  author: jblum;  state: Exp;  lines: +4 -7
+Undeprecated methods in the com.cp.common.awt.WindowUtil class.
+
+Removed the com.codeprimate.util.DistributedQuickSort algorithm class.
+
+Refactored the AbstractCacheFactory, AbstractRecordFactory, AbstractSearchFactory and AbstractSortFactory classes to use the PropertyManager instead of using the CPCommonProperties class directly.
+
+Refactored the SortType class, removing the distributed quick sort as a type; removed the static methods to get an instance of the distributed quick sort from the AbstractSortFactory and CPSortFactory classes.
+----------------------------
+revision 1.82
+date: 2005/04/16 21:35:09;  author: jblum;  state: Exp;  lines: +10 -2
+Finished the com.cp.common.swing.CalendarControl component class.
+
+Wrote the com.cp.common.swing.ManualCalendarControlTest class to test the features and functionality of the CalendarControl.
+
+Fixed bug in the CalendarModel.getFirstDayOfMonth method when the dayOfMonth was 7 and the dayOfWeek was Calendar.SATURDAY.
+
+Added TODOs in the TODO.txt for cp-common API and Framework package cleanup.
+
+Added logging to the CalendarUI class.
+
+Added logger statements for all classes and component in the cp-common API and Framework in the log4j.lcf file.
+----------------------------
+revision 1.81
+date: 2005/04/15 07:08:22;  author: jblum;  state: Exp;  lines: +3 -1
+Wrote the com.cp.common.swing.ManualJCalendarTest class to test the features and functionality of the JCalendar Swing UI component class.
+
+Finished the com.cp.common.swing.JCalendar Swing UI component class.
+----------------------------
+revision 1.80
+date: 2005/04/14 08:18:58;  author: jblum;  state: Exp;  lines: +1 -11
+Completed the implementation of the com.cp.common.swing.JCalendar Swing UI component class and dependent classes.
+----------------------------
+revision 1.79
+date: 2005/04/09 21:29:06;  author: jblum;  state: Exp;  lines: +9 -3
+Refactored the GraphicsUtil class to renaming the drawXXX methods to filXXX and adding the draw methods for the corresponding graphics shapes...
+
+drawDoubleLeftArrow
+drawDoubleRightArrow
+drawDownArrow
+drawLeftArrow
+drawRightArrow
+drawUpArrow
+
+Modified the ManualGraphicsUtilTest class to test the functionality of the new drawXXX methods.
+
+Refactored the XDesktopPane and XInternalFrame classes attempting to get the global key handler to work to cycle frame focus on the desktop.
+----------------------------
+revision 1.78
+date: 2005/04/05 07:40:45;  author: jblum;  state: Exp;  lines: +3 -6
+Refactored the asList methods in the com.cp.common.util.ArrayUtil utility class to preserve the order of the primitive type array elements.
+
+Fixed the StringUtilTest class after modifying the ArrayUtil class.
+
+Refactored the com.cp.common.swing.DateModel class to add an unmodifiable List of number of days in the month array.
+----------------------------
+revision 1.77
+date: 2005/04/05 05:00:26;  author: jblum;  state: Exp;  lines: +6 -2
+Created the PropertyManager class to enforce a systematic policy for reading the values of properties.  First, the System is consulted to a particular property value followed by the cp-common.properties file.
+
+Refactored the com.cp.common.util.AbstractDataModel class to include support for registering, unregistering and notifying ChangeListeners of ChangeEvents.
+
+Added the StateChangeHandler interface; used the interface to refactore the notifyListeners method allowing subclasses to insert behavior between the fireVetoableChange and firePropertyChange method calls.
+
+Refactored the NumberOutOfBoundsVetoableChangeListenerTest and AbstractDataModelTest classes as a result of changing the AbstractDataModel class.
+
+Exposed the DateModel.isFebruary method to subclasses.
+----------------------------
+revision 1.76
+date: 2005/03/30 16:27:22;  author: jblum;  state: Exp;  lines: +5 -1
+Continued work and coding on the XDesktopPane Swing UI component trying to figure out the accelerator to navigate next and previous internal frames on the desktop.  Flagged as a TODO.
+
+Refactored the ManualXDesktopPaneTest class to add accelerators to the Next and Previous JMenuItems in the Windows Menu.  No success.
+----------------------------
+revision 1.75
+date: 2005/03/23 08:59:30;  author: jblum;  state: Exp;  lines: +1 -4
+Commented all Desktop classes.
+----------------------------
+revision 1.74
+date: 2005/03/22 10:08:19;  author: jblum;  state: Exp;  lines: +2 -6
+Performed more testing of the Desktop classes and components; fixed bugs with the TileAction class, the SplitAction class, the XDesktopPane.open method, etc.
+
+Refacted the Desktop interface; removed the cascade, split, and tile methods.  Added the getCascadeAction, getSplitAction and getTileAction methods in place of the former methods respectively.
+----------------------------
+revision 1.73
+date: 2005/03/21 02:59:32;  author: jblum;  state: Exp;  lines: +5 -3
+Fixed an ArrayIndexOutOfBoundsException in the CascadeAction and SplitAction classes.  Refactored the CascadeAction class to select the last internal frame in desktop.
+
+Refactored the next, previous methods to use the selected property of the JInternalFrame class to select the next and previous internal frames in sequence respectively.
+
+Removed the overridden setSelectedFrame method from the XDesktopPane class and overrode the activateFrame method of the DesktopManager interface, which calls the setCurrentFrame method with the newly activated internal frame.
+
+Refactored the TileAction class attempting to correct it's behavior.
+----------------------------
+revision 1.72
+date: 2005/03/20 22:41:54;  author: jblum;  state: Exp;  lines: +3 -7
+Created the com.cp.common.swing.ManualXDesktopPaneTest class to test the functionality of the XDesktopPane Swing component class.
+
+Fixed bug in com.cp.common.swing.XDesktopPane class; overrode the getDesktopManager method instead of the setDesktopManager method to prevent an IllegalArgumentException from happening when the BasicDesktopUI class installs the DefaultDesktopManager class when updating the UI.
+
+Created the deiconifyAll and minimizeAll icons.  Modified the iconifyAll and maximizeAll icons.
+----------------------------
+revision 1.71
+date: 2005/03/19 12:10:08;  author: jblum;  state: Exp;  lines: +7 -3
+Refactored the com.cp.common.swing.Desktop class; added another open method to specify layer when adding internal frames.
+
+Implemented the close and open methods of the com.cp.common.swing.XDesktopPane class.
+Added the CycleFrameFocusAction and DesktopInternalFrameListener classes to the com.cp.common.swing.XDesktopPane class.
+Refactored other methods of the XDesktopPane class.
+
+Refactored the com.cp.common.swing.XDesktopManager class.
+
+Implemented the AbstractDesktopAction, CascadeAction, SplitAction and TileAction classes in the com.cp.common.swing package.
+----------------------------
+revision 1.70
+date: 2005/03/01 07:11:08;  author: jblum;  state: Exp;  lines: +6 -1
+Finished the TimeModelTest class to test the functionality of the com.cp.common.swing.TimeModel class.
+
+Finished the DateModelTest class to test the functionality of the com.cp.common.swing.DateModel class.
+
+Added the DateModelTest and TimeModelTest classes to the AllUnitTest test suite.
+----------------------------
+revision 1.69
+date: 2005/02/26 20:59:40;  author: jblum;  state: Exp;  lines: +1 -3
+Finished the com.cp.common.awt.VerticalFlowLayout manager class.  Refactored the ManualVerticalFlowLayoutTest class to include a drop down specifying the alignment strategy used by the VerticalFlowLayout.  Also modified the JLabel components in the Container to have varying sizes.
+----------------------------
+revision 1.68
+date: 2005/02/11 08:30:51;  author: jblum;  state: Exp;  lines: +2 -7
+Finished the com.cp.common.swing.GraphicsUtil class; added the getDisketteIcon, getNewDocumentIcon and getOpenFolderIcon methods to the class.  Also added the getDimension, getScalingFactor and getViewableArea methods to the class.
+
+Refactored the ManualGraphicsUtilTest class to test the new functionality of the GraphicsUtil class.
+----------------------------
+revision 1.67
+date: 2005/02/09 10:23:24;  author: jblum;  state: Exp;  lines: +4 -7
+Refactored and finished the getOpenFolderIcon method in the GraphicsUtil class.
+
+Added the getDimension(:RectangleShape), getScalingFactor(actualSize:Dimension, desiredSize:Dimension) methods to the GraphicsUtil class.
+
+Renamed the maximizeToSquareArea and minimizeToSquareArea methods in the GraphisUtil class to getMaximumSquareArea and getMinimumSquareArea respectively.
+
+Added the getAgeInMonths and getNumericMonth methods to the DateUtil class.  Added test methods in the DateUtilTest class to test the functionality of the new methods in DateUtil.
+----------------------------
+revision 1.66
+date: 2005/02/08 10:49:59;  author: jblum;  state: Exp;  lines: +8 -3
+Implemented the getNewDocumentIcon and getOpenFolderIcon methods in the GraphicsUtil utility class.
+
+Fixed bug in the GraphicsUtil.drawLeftArrow method.
+
+Created the com.cp.common.swing.ManualGraphicsUtilTest class to test the functionality of the GraphicsUtil utility class.
+
+Fixed the GridLayout parameters in the com.cp.common.awt.ManualImageUtilTest class.
+
+Implemented all methods in the XDesktopPane class except cascade, split and tile.
+----------------------------
+revision 1.65
+date: 2005/02/05 09:35:00;  author: jblum;  state: Exp;  lines: +3 -5
+Imported the com.cp.common.swing.GraphicsUtil utility class for creating various directional arrow images for buttons, labels and so on.
+
+Added the Desktop interface to the com.cp.common.swing package.
+
+Added the XInternalFrame class to the com.cp.common.swing package.
+----------------------------
+revision 1.64
+date: 2005/02/03 06:37:04;  author: jblum;  state: Exp;  lines: +7 -1
+Fixed synchronization problem in the ReflectionStatusBar class.  The math used to set the origin in the Left and Right BarModel objects differed.  Used condition state to initialize the origin before the bar switches directions.
+
+Fixed event notification problem in the setColor and setVisible methods of the AbstractStatusBar.BarModel class.
+
+Added comments to the JStatusBar, NetscapeStatusBar and ReflectionStatusBar classes.
+
+Finished the status bar API and Framework.
+----------------------------
+revision 1.63
+date: 2005/02/03 05:31:49;  author: jblum;  state: Exp;  lines: +1 -8
+Added the getAge method to the com.cp.common.util.DateUtil class.  Added a test method for the getAge method in the DateUtilTest class.
+----------------------------
+revision 1.62
+date: 2005/02/02 10:10:55;  author: jblum;  state: Exp;  lines: +4 -9
+Created the com.cp.common.swing.NetscapeStatusBar UI component class, modeled after the Netscape Web Browser status bar.
+
+Created the ManualNetscapeStatusBarTest class to manually test the NetscapeStatus UI component class.
+
+Created the com.cp.common.swing.ReflectionStatusBar UI component class, a Code Primate custom status bar widget.  Created the ManualReflectionStatusBar class to manually test the functionality of the ReflectionStatusBar UI component class.
+
+Refactored the AbstractStatusBar and AbstractTextStatusBar framework classes for implementing status bar UI component classes.
+----------------------------
+revision 1.61
+date: 2005/01/31 06:53:55;  author: jblum;  state: Exp;  lines: +12 -2
+Refactored the com.cp.common.awt.CStatusBar class; added the DEFAULT_TEXT_OVERLAY_COLOR class member property value.
+
+Created the AbstractVetoableChangeListener class, added to the com.cp.common.beans.event package, to contrain Bean properties based on name.  The class was added to satisfy the limitation of certain Beans that do not allow you to associate a VetoeableChangeListener to specific properties.
+
+Added the AbstractVetoableChangeListenerTest class to test the functionality of the AbstractVetoableChangeListener class with the JComponent class.
+
+Created the NumberOutOfBoundsVetoableChangeListener class to constrain numerical property values to a range.  Added the NumberOutOfBoundsVetoableChangeListenerTest class to test the functionality of the NumberOutOfBoundsVetoableChangeListener.
+
+Renamed the original AbstractVetoableChangeListenerTest class to the CommonVetoableChangeListenerTest class.
+
+Retroffited the ReadOnlyVetoableChangeListener and RequiredFieldVetoableChangeListener classes to extend the AbstractVetoableChangeListener class.
+
+Updated the ReadOnlyVetoableChangeListenerTest and RequiredFieldVetoableChangeListenerTest classes to extend the CommonVetoableChangeListenerTest class.
+----------------------------
+revision 1.60
+date: 2005/01/28 11:46:58;  author: jblum;  state: Exp;  lines: +2 -2
+Created the com.cp.common.swing.AbstractStatusBar class for modeling and implementing status bar UI components (widgets).
+
+Extended the AbstractStatusBar class with the AbstractTextStatusBar class for modeling and implementing status bar UI components with both a bar and text component.
+----------------------------
+revision 1.59
+date: 2005/01/26 06:29:55;  author: jblum;  state: Exp;  lines: +2 -6
+Modified the JDirectoryChooser UI component class to use an instance of the XButton for the Select and Cancel buttons.
+
+Modified the size of the Open Directory button in the ManualJDirectoryChooserTest class.
+----------------------------
+revision 1.58
+date: 2005/01/25 11:26:30;  author: jblum;  state: Exp;  lines: +7 -1
+Finished the com.cp.common.swing.JDirectoryChooser UI component class, used for selecting directories in the file system on the localhost.
+
+Created the com.cp.common.swing.ManualJDirectoryChooserTest class to test the functionality of the JDirectoryChooser UI component class.
+
+Modified the build system to copy icons and logos over to the deployment directory (build).
+
+Expoxed the getImage(:URL, :Component) method in the com.cp.common.awt.ImageUtil class.
+----------------------------
+revision 1.57
+date: 2005/01/18 08:55:39;  author: jblum;  state: Exp;  lines: +1 -3
+Added the com.cp.common.swing.XButton class to the cp-common API and Framework.  Created the com.cp.common.swing.ManualXButtonTest class to test the functionality of the XButton.
+----------------------------
+revision 1.56
+date: 2005/01/18 07:36:35;  author: jblum;  state: Exp;  lines: +2 -2
+Refactored the com.cp.common.util.AbstractDataModel class to add and remove PropertyChangeListeners and VetoableChangeListener by property.
+
+Finished the com.cp.common.util.AbstractDataModelTest class.
+----------------------------
+revision 1.55
+date: 2005/01/16 00:20:53;  author: jblum;  state: Exp;  lines: +2 -2
+Created the com.cp.common.util.Timer class to function like a stop watch, tracking elapsed time between operations.
+
+Create the TimerTest class to test the functionality of the Timer class.
+----------------------------
+revision 1.54
+date: 2005/01/15 23:51:00;  author: jblum;  state: Exp;  lines: +3 -1
+Finished the com.cp.common.swing.JTimeField UI component class, representing time.  Added logic to the com.cp.common.swing.TimeModel class to allow the user to type number in the hour and minute time fields as well as toggle the AM/PM indicator.
+
+Optimized imports in the com.cp.common.swing.JDateField UI component class.
+----------------------------
+revision 1.53
+date: 2005/01/15 23:17:07;  author: jblum;  state: Exp;  lines: +1 -5
+Fixed bug in the com.cp.common.util.FileFinder class.  Modified the functionality (files searches) to be more tolerant of paths that are not valid directories.
+----------------------------
+revision 1.52
+date: 2005/01/15 22:50:41;  author: jblum;  state: Exp;  lines: +4 -4
+Refactored the com.codeprimate.util.AllUnitTests test suite class.  Optimized imports.
+
+Fixed the AbstractEnumCodeGeneratorTest.testAbstractEnumCodeGenerator test.
+
+Modified the com.cp.common.util.enumx.MockEnum.java file PROPERTY_KEY String value to reflect the pkackage structure change.
+The enumerated types moved from the enum package under common to util.enumx.
+----------------------------
+revision 1.51
+date: 2005/01/15 22:21:14;  author: jblum;  state: Exp;  lines: +4 -2
+Refactored the CPCommonProperties class for reading the cp-common.properties file.  Added a conditional around the debug statement.
+
+Fixed bug in the DateUtil.copy method.  Modified the Calendar.get method call for HOUR to use HOUR_OF_DAY, which is expected by the Calendar.set method.
+
+Finished the JTimeField UI component class.  Refactored the JDateField UI component class based on modifications and implementation details of the JTimeField class.
+----------------------------
+revision 1.50
+date: 2004/12/31 00:58:33;  author: jblum;  state: Exp;  lines: +4 -1
+Refactored the AbstractDataModel class - moved the class to the com.cp.common.util package.
+
+Added the com.codeprimate.tools.sqlloader package and SQLLoader class to the API and Framework.
+----------------------------
+revision 1.49
+date: 2004/12/27 06:12:27;  author: jblum;  state: Exp;  lines: +1 -1
+Created the ReadOnlyVetoableChangeListener and test class as well as the RequiredFieldVetoableChangeListener and test class.  The ReadOnlyVetoableChangeListener class is used to enforce certain class properties are immutable.  The RequiredFieldVetoableChangeListener class is used to require certain properties of a class to have a value, to be not null!
+----------------------------
+revision 1.48
+date: 2004/12/27 04:38:23;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the com.cp.common.util.event API for Multhreaded classes.  Modified the EventSource class to tracker listeners with a Set object; Changed the default threshold in the EventQueue class to 512.
+----------------------------
+revision 1.47
+date: 2004/12/27 04:25:25;  author: jblum;  state: Exp;  lines: +1 -1
+Modified the com.cp.common.beans.AbstractBean class to implement the Cloneable interface to compliment the Copyable interface.
+----------------------------
+revision 1.46
+date: 2004/12/27 04:01:30;  author: jblum;  state: Exp;  lines: +1 -1
+Refactored the AbstractBean.PropertyChangeTracker inner-class in the AbstractBean class, responsible for tracking which properties have been modified.  Removed the overhead of keeping the changed properties in a Set.
+----------------------------
+revision 1.45
+date: 2004/12/11 09:37:57;  author: jblum;  state: Exp;  lines: +1 -2
+Moved the com.cp.common.enum package to the com.cp.common.util.enumx package.
+----------------------------
+revision 1.44
+date: 2004/11/23 11:25:21;  author: jblum;  state: Exp;  lines: +1 -6
+Refactored the JSplashWindow Swing component class to try and figure out how to code true transaparency behind the splash image.
+----------------------------
+revision 1.43
+date: 2004/11/22 04:05:00;  author: jblum;  state: Exp;  lines: +4 -3
+Finished the JSplashWindow Swing component and corresponding ManualJSplashWindowTest class.
+Finished the JAboutDialog Swing comoponent and corresponding ManualJAboutDialogTest class.
+
+Refactored the CAboutDialog class code, renaming the gBuffer instance variable to graphicsBuffer.
+
+Reformatted the ManualCAboutDialogTest source code.
+----------------------------
+revision 1.42
+date: 2004/11/16 09:25:06;  author: jblum;  state: Exp;  lines: +3 -9
+Added the com.cp.common.swing.table package to the cp-common API and Framework.
+
+Added the RecordTableModel used to adapt the RecordTable interface to the TableModel interface in order to view the contents of a RecordTable object in a JTable Swing UI component.
+
+Created the ManualRecordTableModelTest class to test the RecordTableModel class.
+----------------------------
+revision 1.41
+date: 2004/11/07 23:32:50;  author: jblum;  state: Exp;  lines: +11 -1
+Created the AccessType enumerated-type class to represent various access privileges permitted in code.  This enumerated-type is meant to compliment and eventually repace the MutableConstants constants interface.
+
+Created the com.cp.common.util.WriteOnlyException ChainedException class to compliment the ReadOnlyException class.  This Exception is thrown when an Object is write-only access.
+
+Modified the ReadOnlyException class to reference the WriteOnlyException class.
+
+Added the com.cp.common.util.event package.
+
+Created the EventHandler interface, EventQueue Thread-safe class, and EventSource class.  These classes can be used for implementing the Staged Event-Driven Architecture (SEDA).  The EventQueue is a Thread-safe data structure, behaving like a Stack, that allows Threads to communicate and move work along in stages (similar to a pipeline in a processor) and throttles workload.
+
+Refactored the MultithreadedQuickSortPerformanceTest class moving assertions to the end of the test (testPerformance method).
+----------------------------
+revision 1.40
+date: 2004/10/30 03:30:22;  author: jblum;  state: Exp;  lines: +1 -4
+Added a comparison to the Collections.sort method and the MultithreadedQuickSort in the MultithreadedQuickSortPerformanceTest class.
+----------------------------
+revision 1.39
+date: 2004/10/28 09:22:00;  author: jblum;  state: Exp;  lines: +3 -2
+Modified the threshold value to 25 from 500 in the MultithreadedQuickSort class implementing a multithreaded quick sort algorithm.
+
+Added assertion methods for a sorted Lists and print methods for debugging and output messages in the MultithreadedQuickSortPerformanceTest class.
+----------------------------
+revision 1.38
+date: 2004/10/28 08:20:48;  author: jblum;  state: Exp;  lines: +2 -4
+Implemented the CPSortFactory.getMultithreadedQuickSort method.
+
+Created the MultithreadedQuickSortPerformanceTest class to compare the performance of quick sort and the quick sort multithreaded style.
+----------------------------
+revision 1.37
+date: 2004/10/28 07:23:20;  author: jblum;  state: Exp;  lines: +5 -1
+Finished the MultithreadedQuickSort algorithm class.
+
+Completed the MultithreadedQuickSortTest class to test the multithreaded quick sort algorith implemented by the MultithreadedQuickSort class.
+
+Added the test suite for the MultithreadedQuickSort class to the CPSortFactory.testSuite method.
+----------------------------
+revision 1.36
+date: 2004/10/27 07:02:51;  author: jblum;  state: Exp;  lines: +1 -5
+Modified the SearchType and SortType enumerated-type classes to include a getSearchType(:int) and getSortType(:int) respectively, allowing the client of the class to lookup enumerated-types by ID.
+----------------------------
+revision 1.35
+date: 2004/10/27 06:52:49;  author: jblum;  state: Exp;  lines: +3 -10
+Removed the MultithreadedBinarySearch class as a threaded binary search algorithm does not make much since.
+
+Researched on the Internet and came up with IndexedSearch algorithm, thus, created the IndexedSearch searching algorithm.
+
+Refactored the AbstractSearchFactory, CPSearchFactory and SearchType classes appropriately.
+----------------------------
+revision 1.34
+date: 2004/10/25 03:11:03;  author: jblum;  state: Exp;  lines: +7 -6
+Created the com.cp.common.util.AbstractSearchFactory to get Searcher instances implemented various seraching algorithms.  Created the com.codeprimate.util.CPSearchFactory to return instances of the Binary Search, Linear Search and Multithreaded Binary Search algorithm classes.
+
+Created the DistributedQuickSort and MultithreadedQuickSort algorithm classes.  Currently, theses classes throw UnsupportedOperationExceptions.
+
+Created the MultithreadedBinarySearch algorithm class.  Currently, this class throws an UnsupportedOpertionException.
+
+Added the servive provider factory implementing class to the cp-common.properties file for the Search API and Framework.
+
+Fixed a comment in the AbstractSortFactory class.
+
+Added the MULTITHREADED_BINARY_SEARCH enumerated-type to the SearchType enum class.
+----------------------------
+revision 1.33
+date: 2004/10/25 02:28:39;  author: jblum;  state: Exp;  lines: +9 -3
+Implemented the AbstractSortTest with two test methods, testNumberSort and testTextSort that tests the Bubble Sort, Heap Sort, Merge Sort, Selection Sort and Shell Sort sorting algorithms.
+
+Created the BubbleSortTest, HeapSortTest, MergeSortTest, SelectionSortTest, and ShellSortTest to test the respective sorting algorithms.  All tests extend the AbstractSortTest class.
+
+Fixed indexing bug in the HeapSort algorithm.
+
+Created the com.cp.common.util.AbstractSortFactory and associated implementing class, com.codeprimtae.util.CPSortFactory, to constructs instance of various sorting algorithms using the factory methods and SortType enumerated-type class.
+
+Added the Distributed Quick Sort enumerated-type to the SortType enumerated-type class.
+
+Refactored the logging in the AbstractCacheFactory and AbstractRecordFactory classes.
+----------------------------
+revision 1.32
+date: 2004/10/24 10:45:47;  author: jblum;  state: Exp;  lines: +3 -15
+Refactored the AbstractEnumCodeGenerator class.  Removed the forward slash from the filesystem path where the source file will be written.
+
+Finishd the Country enum class.
+
+Added the factory properties for the enum classes to the cp-common.properties file.
+----------------------------
+revision 1.31
+date: 2004/10/24 10:15:43;  author: jblum;  state: Exp;  lines: +16 -2
+Enhanced the build system (hence, the cp-common-build.xml file) to be able to run reference implementation test classes.  Added a target to copy templates into the build directory and deploy them with the Jar file.
+
+Created an com.codeprimate.util.AllUnitTests test suite for the Code Primate reference implementation classes.
+
+Renamed the com.cp.common.util.AllUnitTest class to ...AllUnitTests.
+
+Added log configuration logic to the GetNetFile class of the com.codeprimate.tools package.
+
+Finished the AbstractEnumCodeGenerator class.  Implemented the AbstractEnumCodeGeneratorTest class using the MockEnumCodeFile.txt and the etc/templates/AbstractEnum.java.tmpl file resulting in the MockEnum class in the test/com/cp/common/enum package.
+
+Created the AbstractEnum.java.tmpl template file for generating enums extends the AbstractEnum class.
+
+Created the com.cp.common.enum.MockEnum test class file.
+
+Created the MockEnumCodeFile.txt for use in the AbstractEnumCodeGeneratorTest class.
+
+Generated the Country enum class.
+----------------------------
+revision 1.30
+date: 2004/10/22 09:15:15;  author: jblum;  state: Exp;  lines: +2 -5
+Created the com.cp.common.log4j package.
+
+Added the AbstractObjectRenderer, CollectionRenderer, and MapRenderer classes, that implement the ObjectRenderer interface, and renderer Collection and Map object respectively.
+----------------------------
+revision 1.29
+date: 2004/10/21 09:41:44;  author: jblum;  state: Exp;  lines: +4 -7
+Created the Primate and Relationship enumerated-types.
+
+Created the AbstactEnumCodeGenerator class to generate enumerated-types from a template file.
+
+Added the configuration property keys to the cp-common.properties files.
+
+Updated Country to reflect the refactoring of AbstractEnum.
+----------------------------
+revision 1.28
+date: 2004/10/21 04:57:57;  author: jblum;  state: Exp;  lines: +7 -3
+
+Refactored the AbstractEnum enumerated-type class.  Added the getInstance method taking a Set object containing all enumerated-types for a particular classification and a LookupStrategy determining which lookup operation (id, code) to perform.
+
+Added the LookupStrategy interface and CodeLookupStrategy and IdLookupStrategy inner classes to the AbstractEnum class.
+
+Retrofitted the Gender, MaritalStatus, Race, Language, State and Continent enumerated-type class based on the new AbstractEnum class.
+
+Added the getTime and setTime methods to the TimeModel class.
+----------------------------
+revision 1.27
+date: 2004/10/18 08:53:12;  author: jblum;  state: Exp;  lines: +3 -6
+Created the enum package of classes.
+
+Added the AbstractEnum, Gender, MaritalStatus and Race enumerated types.
+
+Added properties for the factories of these enumerated types to the cp-common.properties file.
+----------------------------
+revision 1.26
+date: 2004/10/18 06:32:51;  author: jblum;  state: Exp;  lines: +4 -10
+Modified the cp-common-build.xml configuration file to copy the commons-logging.lcf on deployment of the cp-common classes.
+
+Added additional loggers for the AbstractBean and AbstractBeanTest classes.
+
+Added comments to the AbstractBean class.  Worked with the logging in the AbstractBeanTest class; used both log4j and commons-logging API.  Trying to resolve an ExceptionInInitializerError caused by JUnit and BeanUtils class.
+
+Refactored the UnitTestLogConfigurator class to be called by more than one unit test, but only configure itself once.  Made the class thread-safe.
+----------------------------
+revision 1.25
+date: 2004/10/17 10:19:31;  author: jblum;  state: Exp;  lines: +13 -11
+Added the isNew and isModified methods to the Auditable interface.
+
+Added the equals(:Object, :Object) and hashCode(:Object) methods to the ObjectUtil utility class.  Added test methods for these new methods in the ObjectUtilTest class.
+
+Added the repalce(:String, :J, :J, :String) method to the StringUtil utility class.  Added a corresponding test method in the StringUtilTest class.
+
+Added the getUserId method to the User interface.
+
+Added rollback support to the AbstractBean.  Created the AbstractBean test to test the features and functioality of the AbstractBean including visitation by a Visitor, adding and removing PropertyChange and VetoableChangeListeners, testing the PropertyChangeTracker and testing vetoable Exceptions.
+
+Added the AuditableVisitor class to the com.cp.common.util package.
+Created an AuditableVisitorTest class to test the features and functionality of the AuditableVisitor.
+
+Added the new tests to the AllUnitTest test suite.
+----------------------------
+revision 1.24
+date: 2004/10/13 06:36:39;  author: jblum;  state: Exp;  lines: +11 -3
+Finished the JFormattedTextField class.  Created the ManualJFormattedTextField class to test the JFormattedTextField component with the following TextFormats...
+
+BoundedLengthTextFormat
+CurrencyTextFormat
+DateTextFormat
+DigitsOnlyTextFormat
+LettersOnlyTextFormat
+PercentTextFormat
+PhoneNumberTextFormat
+SsnTextFormat
+TimeTextFormat
+TextFormatComposition
+----------------------------
+revision 1.23
+date: 2004/10/13 04:53:58;  author: jblum;  state: Exp;  lines: +3 -5
+Finished the CurrencyTextFormatTest and PercentTextFormatTest classes.  Fixed bugs in the CurrencyTextFormat and PercentTextFormat classes.
+
+Added these tests to the AllUnitTest test suite.
+
+Set a default font (monospaced) on the JFormattedTextField component class.
+----------------------------
+revision 1.22
+date: 2004/10/13 03:04:30;  author: jblum;  state: Exp;  lines: +3 -4
+Added the isNegative, isPositive, and isZero methods to the NumberUtil utility class.  Added tests for these new methods in the NumberUtilTest class.
+
+Finished the PhoneNumberTextFormatTest class.  Added the PhoneNumberTextFormatTest suite to the AllUnitTests test suite.
+
+Added the assertNullEquals to the TestUtil class.
+----------------------------
+revision 1.21
+date: 2004/10/10 10:17:35;  author: jblum;  state: Exp;  lines: +7 -3
+Fixed bug in the mutate methods of the DateTextFormat, TimeTextFormat, PhoneNumberTextFormat and SsnTextFormat classes.  Specifically, assigned the digits only value from the value to it's own variable.  The original value should not be mutated unless there are digits.
+
+Finished the DateTextFormatTest, TimeTextFormatText and SsnTextFormatTest classes.
+
+Added the new tests to to the AllUnitTests test suite.
+
+Added the isReplacing method to the JFormattedTextField.SchemaDocument class.
+----------------------------
+revision 1.20
+date: 2004/10/10 08:06:58;  author: jblum;  state: Exp;  lines: +3 -16
+Fixed bug with the DigitsOnlyTextFormat and LettersOnlyTextFormat class that attempted to replace text with an empty String.  Technically, a user cannot insert empty String into a text component.  Programmatically, a programmer could insert an empty String text value, however, this would constitute an invalid value for either the DigitsOnlyTextFormat or the LettersOnlyTextFormat.
+
+Updated the TextFormatCompositionTest class resulting from the bug fix in the DigitsOnly and LettersOnly TextFormat classes.
+----------------------------
+revision 1.19
+date: 2004/10/09 23:11:28;  author: jblum;  state: Exp;  lines: +14 -3
+Created the MockDocument class implementing the javax.swing.text.Document interface to be used by tests in the com.cp.common.swing.text package.
+
+Refactored the JFormattedTextField component to handle text replacement and exceptions with the format.
+
+Implemented the BoundedLengthTextFormatTest class.
+
+Refactored the DigitsOnlyTextFormat class to handle empty insert values.
+Refacotred the LettersOnlyTextFormat class to handle empty insert values.
+
+Implemented the DigitsOnlyTextFormatTest and LettersOnlyTextFormatTest classes.
+
+Added mutate methods to the DateTextFormat, TimeTextFormat, PhoneNumberTextFormat and SsnTextFormat classes.
+
+Created the PercentTextFormat and CurrencyTextFormat classes.
+
+Added the new tests and test suites to the AllUnitTest test suite class.
+----------------------------
+revision 1.18
+date: 2004/10/07 08:57:01;  author: jblum;  state: Exp;  lines: +3 -8
+Refactored the ObjectUtil class.  Added the equals method for comparing two Objects for equality and handling the null case.
+
+Added the testEquals method to the ObjectUtilTest class.
+
+Added more comments to the TODO.txt file.
+----------------------------
+revision 1.17
+date: 2004/10/06 07:38:37;  author: jblum;  state: Exp;  lines: +8 -3
+Added the JFormattedTextField component class to the swing package.  Created the text package under the swing package.  Added the TextFormat and implement TextFormat classes to the package.
+
+Additionally, added the DateTextFormat, TimeTextFormat, PhoneNumberFieldTextFormat and SsnTextFormat formats.
+
+Added the TextMultiFormatter and renamed it to the TextFormatComposition class.
+
+Added the InvalidTextFormatException class extending com.cp.common.util.ChainedException.
+
+Added the insert method to the StringUtil class.  Added a test for the insert method in the StringUtilTest class.
+----------------------------
+revision 1.16
+date: 2004/10/06 04:59:09;  author: jblum;  state: Exp;  lines: +4 -1
+Finished work on the JSsnField component class.  Created the ManualJSsnFieldTest class to test the component.
+
+Corrected spelling errors and comments in the JPhoneNumberField class.  Remove unused code, and performed other minor refactorings.
+
+Updated the cp-common-build.sh build file compile order.  I thought that I could compile the test package before the reference implementation, however, due to dependencies, I cannot.
+----------------------------
+revision 1.15
+date: 2004/10/03 10:47:43;  author: jblum;  state: Exp;  lines: +3 -1
+Added additional feature to the JPhoneNumberField component class to allow pasting of phone numbers in the following format: (###)###-####.
+----------------------------
+revision 1.14
+date: 2004/10/03 10:32:41;  author: jblum;  state: Exp;  lines: +1 -3
+Fixed bug handling multi-mouse clicks in the JPhoneNumberField component class.
+----------------------------
+revision 1.13
+date: 2004/10/03 10:20:35;  author: jblum;  state: Exp;  lines: +2 -1
+Fixed bugs associated with using the mouse in the JPhoneNumberField component class.
+Sara Blum, as a user, broke the component when clicking and dragging the mouse over the content of the JPhoneNumberField component class.
+----------------------------
+revision 1.12
+date: 2004/10/03 09:41:22;  author: jblum;  state: Exp;  lines: +2 -1
+Performed minor code clean-up of the JPhoneNumberField component class.
+----------------------------
+revision 1.11
+date: 2004/10/03 09:38:25;  author: jblum;  state: Exp;  lines: +1 -2
+Finished the JPhoneNumberField component class with major refactoring, redesign, rewriting, clean-up, etc.
+----------------------------
+revision 1.10
+date: 2004/10/03 02:14:32;  author: jblum;  state: Exp;  lines: +1 -14
+Committing prematurely, the JPhoneNumberField compoment class and corresponding ManualJPhoneNumberFieldTest test class.  This component is used to represent phone numbers in a text field.
+----------------------------
+revision 1.9
+date: 2004/10/03 02:12:44;  author: jblum;  state: Exp;  lines: +9 -7
+Modified the cp-common-build.xml file switching the order of the compile.  Also added the lcf.filesystem.path System property to the run target.
+
+Updated the TODO.txt file with more work to do.
+
+Modified the log4j.lcf adding a logger to the JPhoneNumberField class.
+
+Modified JAR file and FileSystem path information in the UnitTestLogConfigurator class.
+
+Corrected the date format used in the testFile.txt of the LastModifiedDateFilterTest class.
+
+Refacted the StringUtil utility class.
+
+Created the JPercentField component class representing percentages in a text field along with it's corresponding test class, ManualJPercentFieldTest class.
+----------------------------
+revision 1.8
+date: 2004/09/20 06:08:53;  author: jblum;  state: Exp;  lines: +12 -1
+Added the JCurrencyField and JDateField components to the com.cp.common.swing package.
+Created the ManualJCurrencyFieldTest and ManualJDateFieldTest classes to test the JCurrencyField and JDateField classes respectively.
+
+Created the AbstractDataModel class to be base class for data models used by the various components of the Swing package.
+
+Created the DateModel class extending the AbstractDataModel class to model dates for the JDateField and JCalendar classes of the Swing package.
+
+Created the TimeModel class extending the DateModel class to model time for the JTimeField and JClock classes of the Swing package.
+
+Added the isLeapYear, getNextMonth, getPreviousMonth methods to the DateUtil class; added test methods in the DateUtilTest class.
+
+Modified the KeyEventUtil class.
+----------------------------
+revision 1.7
+date: 2004/08/12 09:30:09;  author: jblum;  state: Exp;  lines: +1 -3
+Added comments to the com.cp.common.beans.AboutInfo class.
+----------------------------
+revision 1.6
+date: 2004/08/12 09:21:16;  author: jblum;  state: Exp;  lines: +4 -1
+Added the com.cp.common.swing.GridCanvas and com.cp.common.swing.Matte UI components to the cp-common API and framework.
+
+Created the ManualGridCanvasTest and ManualMatteTest classes in the com.cp.common.swing pacakge to test each UI component respectively.
+----------------------------
+revision 1.5
+date: 2004/08/09 09:42:13;  author: jblum;  state: Exp;  lines: +1 -10
+Alphabatized the methods in the ImageUtil class.
+----------------------------
+revision 1.4
+date: 2004/08/09 09:39:19;  author: jblum;  state: Exp;  lines: +9 -2
+Completed the com.cp.common.awt.CButton class, UI component and the complimentary ManualCButtonTest class.
+
+Completed the com.cp.common.awt.CAboutDialog class, UI component and the complimentary ManualCAboutDialogTest class.
+
+Created the AboutInfo interface.  Created the AbstractAboutInfo class implementing the AboutInfo interface providing common functionality for derived classes.
+
+Added the getImage(:File, mediaTracker:Component) and getImage(:URL, mediaTracker:Component) methods to the ImageUtil class.
+
+Modified the ManualBoundedAreaGrayFilterTest and ManualCAboutDialogTest classes to use the ImageUtil class to load and track images.
+----------------------------
+revision 1.3
+date: 2004/08/07 10:36:24;  author: jblum;  state: Exp;  lines: +2 -2
+Fixed bug in the com.cp.common.awt.CStatusBar getTextSegment method.
+The bug pertained to cutting off the first character of the text for the status bar.
+----------------------------
+revision 1.2
+date: 2004/08/07 10:18:54;  author: jblum;  state: Exp;  lines: +2 -2
+Implemented the CStatusBar class in the com.cp.common.awt package.
+Wrote the com.cp.common.awt.ManualCStatusBarTest class to test the functionality of the CStatusBar class.
+----------------------------
+revision 1.1
+date: 2004/08/07 00:11:28;  author: jblum;  state: Exp;
+Starting the cvs.log file, replacing the cvslog.message.
+Ran successfule cp-common project build after migrating the CVS repository over to the new server, CP0, from CP.
+=============================================================================

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.codeprimate</groupId>
+  <artifactId>cp-common</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <name>cp-common</name>
+  <description>
+    Codeprimate Commons is a Java library and micro-framework for building software applications written in Java.
+  </description>
+  <url>http://www.codeprimate.org/products/cp-common</url>
+
+  <licenses>
+    <license>
+  			<name>Codeprimate License, Version 1.0</name>
+  			<url>http://www.codeprimate.org/licenses/LICENSE-1.0</url>
+  			<comments>
+         Copyright (c) 2002-Present. Codeprimate, LLC and Authors.  All Rights Reserved.
+
+         This software is licensed under the Codeprimate End User License Agreement (EULA).
+         This software is proprietary and confidential in addition to an intellectual asset
+         of the aforementioned authors.
+
+         By using the software, the end-user implicitly consents to and agrees to be in compliance
+         with all terms and conditions of the EULA.  Failure to comply with the EULA will result in
+         the maximum penalties permissible by law.
+
+         In short, this software may not be reverse engineered, reproduced, copied, modified
+         or distributed without prior authorization of the aforementioned authors, permissible
+         and expressed only in writing.  The authors grant the end-user non-exclusive, non-negotiable
+         and non-transferable use of the software "as is" without expressed or implied WARRANTIES,
+         EXTENSIONS or CONDITIONS of any kind.
+
+         For further information on the software license, the end user is encouraged to read
+         the EULA @ ...
+  			</comments>
+  		</license>
+ 	</licenses>
+
+  <organization>
+    <name>Codeprimate, LLC</name>
+    <url>http://www.codeprimate.org/</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>jblum</id>
+      <name>John J. Blum</name>
+      <email>john dot blum at codeprimate dot org</email>
+      <organization>Codeprimate, LLC.</organization>
+      <organizationUrl>http://www.codeprimate.org</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:codeprimate-software/cp-common.git</connection>
+    <developerConnection>scm:git:git@github.com:codeprimate-software/cp-common.git</developerConnection>
+    <url>https://github.com/codeprimate-software/cp-common</url>
+  </scm>
+
+  <properties>
+    <java-module-name>codeprimate.common</java-module-name>
+    <commons-beanutils.version>1.9.3</commons-beanutils.version>
+    <commons-logging.version>1.2</commons-logging.version>
+    <dom4j.version>1.6.1</dom4j.version>
+    <easymock.version>3.4</easymock.version>
+    <java.version>1.8</java.version>
+    <jmock.version>2.8.2</jmock.version>
+    <junit.version>4.13.2</junit.version>
+    <log4j.version>1.2.17</log4j.version>
+    <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <servlet-api.version>2.5</servlet-api.version>
+    <spring.version>3.2.18.RELEASE</spring.version>
+    <struts.version>1.3.10</struts.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>${commons-beanutils.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>${commons-logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>${dom4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts-core</artifactId>
+      <version>${struts.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock</artifactId>
+      <version>${jmock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-junit4</artifactId>
+      <version>${jmock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jmock</groupId>
+      <artifactId>jmock-legacy</artifactId>
+      <version>${jmock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>${easymock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-Xlint:unchecked</arg>
+            <!-- <classpath>${java.home}/lib/tools.jar</classpath> -->
+          </compilerArgs>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

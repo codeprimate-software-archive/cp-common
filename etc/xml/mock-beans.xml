@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<beans>
+
+  <bean id="householdBean" class="com.cp.common.test.mock.MockHousehold" init-method="init" destroy-method="destroy" scope="singleton">
+    <constructor-arg type="java.lang.Integer" value="1"/>
+    <listener class="com.cp.common.beans.event.RequiredFieldVetoableChangeListener" scope="singleton">
+      <property name="number"/>
+    </listener>
+    <property name="number" value="0123456789"/>
+    <property name="address" refid="addressBean"/>
+    <property name="phoneNumber" refid="phoneNumberBean"/>
+  </bean>
+
+  <bean id="addressBean" class="com.cp.common.test.mock.MockAddress" init-method="init" scope="singleton">
+    <listener class="com.cp.common.beans.event.RequiredFieldVetoableChangeListener" scope="singleton">
+      <property name="street1"/>
+      <property name="city"/>
+      <property name="state"/>
+      <property name="zip"/>
+    </listener>
+    <property name="street1" value="100 Main St."/>
+    <property name="street2" value="Apt. 22A"/>
+    <property name="city" value="Portland"/>
+    <property name="county" value="Multnomah"/>
+    <property name="state" value="Oregon"/>
+    <property name="zip" value="12345"/>
+    <property name="zipExt" value="4444"/>
+  </bean>
+
+  <bean id="phoneNumberBean" class="com.cp.common.test.mock.MockPhoneNumber" init-method="init" scope="singleton">
+    <listener class="com.cp.common.beans.event.RequiredFieldVetoableChangeListener" scope="singleton">
+      <property name="areaCode"/>
+      <property name="prefix"/>
+      <property name="suffix"/>
+    </listener>
+    <property name="areaCode" value="503"/>
+    <property name="prefix" value="555"/>
+    <property name="suffix" value="1234"/>
+    <property name="ext" value="4444"/>
+  </bean>
+
+  <bean id="consumerBean" class="com.cp.common.test.mock.MockConsumer" lazy-init="true" scope="prototype">
+    <listener class="com.cp.common.beans.event.RequiredFieldVetoableChangeListener" scope="singleton">
+      <property name="firstName"/>
+      <property name="lastName"/>
+    </listener>
+    <property name="dateOfBirth" value="05/27/1974" format-pattern="MM/dd/yyyy"/>
+    <property name="firstName" value="Jon"/>
+    <property name="household" refid="householdBean"/>
+    <property name="lastName" value="Bloom"/>
+  </bean>
+
+</beans>

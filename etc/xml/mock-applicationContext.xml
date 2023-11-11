@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <bean id="beanFactory" class="com.cp.common.beans.factory.SpringBeanFactory" singleton="true"/>
+
+  <bean id="myBean" name="mockBean,testBean,theBean" class="com.cp.common.test.mock.MockBeanImpl" singleton="false">
+    <property name="value" value="test"/>
+  </bean>
+
+</beans>

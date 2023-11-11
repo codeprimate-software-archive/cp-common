@@ -1,0 +1,77 @@
+1.  Design and implement a framework for sorting, an extension of the Sort API.
+Create a abstract factory for which service provider implementations can be provided.
+Implement differenct sorting algorithms such as Heap Sort.
+Create a SortType enumerated type to be used by the factory.
+Provide a multi-threaded implementation of the Quick Sort algorithm.
+Explore possible extensions to the Search API. - DONE
+
+2.  Create more tests for Cache API & Framework, comparable to the Record API and Framework.
+
+3.  Design and implement a Chart/Diagram/Graph API & Framework - v2.0 - ?
+
+-> may defer, see the JFreeChart API & Jide Software
+
+4.  Design and implement a Print API & Framework - v3.0
+
+5.  Design and implement a Look & Feel for Codeprimate - v4.0 - ?
+
+6.  Create more tests for the Record class and Record API & Framework in general. - DONE
+
+7.  Provide a System property that the SPI Factories (such as CacheFactory and RecordFactory) check to determine if the
+reference provider implementation should be overridden. - DONE
+
+-> Implemented the com.cp.common.util.PropertyManager class
+
+8.  Provide case-sensitive comparison functionality for the FileComparatorFactory Comparators.
+
+9.  Add layer functionality to the com.cp.common.swing.Matte and com.cp.common.swing.GridCanvas classes.
+
+10.  Add an enumerated-type package with default enumerations.  Design as an API & Framework so extensions can determine
+the source of information for each enumeration. - DONE
+
+-> Added the com.cp.common.util.enumx package of classes.
+
+11.  Create the log4j package with custom renderers for the Collection classes. - DONE
+
+-> Added com.cp.common.log4j package of classes.
+
+12.  Add tests for the swing AbstractDataModel, DateModel and TimeModel classes. - DONE
+
+-> Even implemented the CalendarModel class.
+
+13. Provided automated tests for classes in the awt and swing package. - DONE
+
+14.  Figure out how to get the ALT-LEFT and ALT-RIGHT arrows working on the XDesktopPane Swing UI component class.
+
+15.  Finish the com.cp.common.beans.AbstractBeanTest. - DONE
+
+16.  Re-implement the MultithreadedQuickSort algorithm; use the HPROF tool to analyze the algorithm for performance.
+
+17.  Remove the DistributedQuickSort algorithm and associated type from the SortType enumerated-type class. - DONE
+
+18.  Implement the com.codeprimate.util.search.IndexedSearch class.
+
+19.  Undeprecate methods in the com.cp.common.awt.WindowUtil class. - DONE
+
+20.  Rename some of the XXXMultiAcceptor classes (such as FileFilterMultiAcceptor) to XXXComposite after the
+Composite Design Pattern. - DONE
+
+21.  Switch all logging through-out the cp-common API & Framework to use commons-logging API.
+
+22.  Move the cp-common API & Framework over to the Java SE 5 platform. - DONE
+
+23.  Remove all calls in the code to deprecated methods of the Java SE 5 platform. - DONE
+
+24.  Remove all warnings in the code during compilation. - DONE
+
+25.  Re-implement the different caching data structures and algorithms of the Cache API & Framework to use the
+SoftReference class.
+
+TODOs as of March 17th, 2010...
+
+
+N - 2  Add Wiki pages for the cp-common API and Framework, Java Class Library
+
+N - 1.  Add more comments and documenation to the cp-common API & Framework, Java Class Library.
+
+N.  Implement more tests!  Tests, tests and more tests!

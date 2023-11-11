@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+
+<project name="cp-common" default="help" basedir=".">
+
+  <!-- Define all optional tasks for project -->
+  <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+  <!-- Environment Variable Property -->
+  <property environment="env"/>
+
+  <!-- Filesystem Path Properties -->
+  <property name="build.dir" location="${basedir}/build"/>
+  <property name="deploy.etc.config.dir" location="${build.dir}/etc/config"/>
+  <property name="deploy.etc.content.icons.dir" location="${build.dir}/etc/content/icons"/>
+  <property name="deploy.etc.content.logo.dir" location="${build.dir}/etc/content/logo"/>
+  <property name="deploy.etc.templates.dir" location="${build.dir}/etc/templates"/>
+  <property name="deploy.etc.xml.dir" location="${build.dir}/etc/xml"/>
+  <property name="dist.dir" location="${basedir}/dist"/>
+  <property name="etc.config.dir" location="${basedir}/etc/config"/>
+  <property name="etc.content.icons.dir" location="${basedir}/etc/content/icons"/>
+  <property name="etc.content.logo.dir" location="${basedir}/etc/content/logo"/>
+  <property name="etc.docs.dir" location="${basedir}/etc/docs"/>
+  <property name="etc.templates.dir" location="${basedir}/etc/templates"/>
+  <property name="etc.xml.dir" location="${basedir}/etc/xml"/>
+  <property name="lib.dir" location="${basedir}/lib"/>
+  <property name="src.dir" location="${basedir}/src"/>
+  <property name="tmp.dir" location="${basedir}/tmp"/>
+
+  <!-- Compiler (Javac) Options -->
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.debuglevel" value="source,lines"/>
+  <property name="compiler.deprecation" value="on"/>
+  <property name="compiler.fork" value="yes"/>
+  <property name="compiler.optimize" value="true"/>
+  <property name="compiler.source" value="1.5"/>
+  <property name="compiler.verbose" value="off"/>
+
+  <!-- Distribution JAR File -->
+  <property name="jar.file" value="cp-common.jar"/>
+
+  <!-- Documentation (Javadoc) Options -->
+  <property name="doc.author" value="true"/>
+  <property name="doc.excludepackagenames" value="com.codeprimate"/>
+  <property name="doc.use" value="true"/>
+  <property name="doc.version" value="true"/>
+  <property name="doc.windowtitle" value="cp-common API and Framework (Java class library)"/>
+
+  <!-- Resource Configuration (Commons-Logging & Log4j Configuration Files) -->
+  <property name="commons-logging.log.config.file" value="commons-logging.properties"/>
+  <property name="deployed.commons-logging.log.config.file" value="commons-logging.properties"/>
+  <property name="jdk.logging.log.config.file" value="logging.properties"/>
+  <property name="deployed.jdk.logging.log.config.file" value="logging.properties"/>
+  <property name="log4j.log.config.file" value="log4j.properties"/>
+  <property name="deployed.log4j.log.config.file" value="log4j.properties"/>
+  <property name="abstractenum.java.tmpl.file" value="AbstractEnum.java.tmpl"/>
+
+  <!-- Run Java class name -->
+  <property name="run.class.name" value="${env.RUN_CLASS_NAME}"/>
+  <property name="command.line.args" value="${env.COMMAND_LINE_ARGS}"/>
+
+  <!-- Test (JUnit) Options -->
+  <property name="junit.fork" value="yes"/>
+  <property name="junit.haltonerror" value="off"/>
+  <property name="junit.haltonfailure" value="off"/>
+  <property name="junit.printsummary" value="off"/>
+  <property name="junit.formatter.type" value="brief"/>
+  <property name="junit.formatter.usefile" value="false"/>
+  <property name="cp-common.test.suite" value="com.cp.common.test.AllUnitTests"/>
+  <property name="codeprimate.test.suite" value="com.codeprimate.test.AllUnitTests"/>
+  <!--property name="test.class.name" value="${env.TEST_CLASS_NAME}"/-->
+  <propertycopy name="test.class.name" from="env.TEST_CLASS_NAME" silent="false"/>
+
+  <!-- Path information for classpath and sourcepaths. -->
+  <path id="build.classpath">
+    <pathelement path="${build.dir}"/>
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+      <include name="**/*.zip"/>
+    </fileset>
+  </path>
+
+  <path id="src.path">
+    <pathelement path="${src.dir}"/>
+  </path>
+
+  <path id="build.src.path">
+    <path refid="build.classpath"/>
+    <path refid="src.path"/>
+  </path>
+
+  <!-- Preset Definition for Compiler (Javac) -->
+  <presetdef name="default.javac">
+    <javac classpathref="build.classpath"
+      destdir="${build.dir}"
+      debug="${compiler.debug}"
+      debuglevel="${compiler.debuglevel}"
+      deprecation="${compiler.deprecation}"
+      fork="${compiler.fork}"
+      optimize="${compiler.optimize}"
+      source="${compiler.source}"
+      verbose="${compiler.verbose}">
+        <!--compilerarg file="javac.options"/-->
+        <!--compilerarg value="-Xlint:unchecked"/-->
+    </javac>
+  </presetdef>
+
+  <!-- Compiles all Java source and test files in the JAF project. -->
+  <target name="build" depends="compile, copy.resources, jar" description="Compiles all project source (src/ directory) and test (test/ directory) files and packages the contents into a JAR file."/>
+
+  <!-- Cleans all binary directories. (Root Node) -->
+  <target name="clean" description="Removes the build and dist directories and their contents.">
+    <echo level="info"> Removing build directory... </echo>
+    <delete dir="${build.dir}" failonerror="false"/>
+    <echo level="info"> Removing dist directory... </echo>
+    <delete dir="${dist.dir}" failonerror="false"/>
+  </target>
+
+  <!-- Compile all Java files in the JAF project. -->
+  <target name="compile" depends="compile.ref.impl.src" description="Synonym for the compile.ref.impl.src target; sets condition to build JAR.">
+    <condition property="build.jar.file">
+      <and>
+        <equals arg1="${test.class.name}" arg2="" trim="true"/>
+        <or>
+          <not>
+            <available file="${dist.dir}/${jar.file}"/>
+          </not>
+          <not>
+            <uptodate targetfile="${dist.dir}/${jar.file}">
+              <srcfiles dir="${build.dir}" includes="**/*.class"/>
+            </uptodate>
+          </not>
+        </or>
+      </and>
+    </condition>
+  </target>
+
+  <!-- Compiles all Java source files in the CP project. -->
+  <target name="compile.src" depends="init" description="Compiles all Java source classes in the src directory.">
+    <default.javac>
+      <src refid="src.path"/>
+      <exclude name="${src.dir}/com/codeprimate/**"/>
+    </default.javac>
+			<!--<excludesFile name="${basedir}/base-excludes"/>-->
+  </target>
+
+  <!-- Compiles all Java reference implemenation classes in the CP project. -->
+  <target name="compile.ref.impl.src" depends="compile.src" description="Compiles all Java reference implementation classes in the src directory.">
+    <default.javac>
+      <src refid="src.path"/>
+      <exclude name="${src.dir}/com/cp/**"/>
+    </default.javac>
+  </target>
+
+  <!-- Deploys the contents of the etc directory to the build directory. -->
+  <target name="copy.resources" depends="copy.config, copy.icons, copy.logo, copy.templates, copy.xml" description="Copies the needed resources to the build directory."/>
+
+  <!-- Deploys the configuration files to the build directory. -->
+  <target name="copy.config" depends="init" description="Copies the contents of the etc/config directory to the build directory.">
+    <mkdir dir="${deploy.etc.config.dir}"/>
+    <copy file="${etc.config.dir}/${commons-logging.log.config.file}" tofile="${deploy.etc.config.dir}/${deployed.commons-logging.log.config.file}"/>
+    <copy file="${etc.config.dir}/${jdk.logging.log.config.file}" tofile="${deploy.etc.config.dir}/${deployed.jdk.logging.log.config.file}"/>
+    <copy file="${etc.config.dir}/${log4j.log.config.file}" tofile="${deploy.etc.config.dir}/${deployed.log4j.log.config.file}"/>
+    <copy todir="${deploy.etc.config.dir}">
+      <fileset dir="${etc.config.dir}">
+        <exclude name="${log4j.log.config.file}"/>
+        <exclude name="${commons-logging.log.config.file}"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <!-- Deploys the icons to the build directory. -->
+  <target name="copy.icons" depends="init" description="Copies the icons to the deployment directory!">
+    <mkdir dir="${deploy.etc.content.icons.dir}"/>
+    <copy todir="${deploy.etc.content.icons.dir}">
+      <fileset dir="${etc.content.icons.dir}"/>
+    </copy>
+  </target>
+
+  <!-- Deploys the logo to the build directory. -->
+  <target name="copy.logo" depends="init" description="Copies the Code Primate logo to the deployment directory!">
+    <mkdir dir="${deploy.etc.content.logo.dir}"/>
+    <copy todir="${deploy.etc.content.logo.dir}">
+      <fileset dir="${etc.content.logo.dir}"/>
+    </copy>
+  </target>
+
+  <!-- Deploys the template files to the build directory. -->
+  <target name="copy.templates" depends="init" description="Copies the contents of the etc/templates directory to the build directory.">
+    <mkdir dir="${deploy.etc.templates.dir}"/>
+    <copy file="${etc.templates.dir}/${abstractenum.java.tmpl.file}" tofile="${deploy.etc.templates.dir}/${abstractenum.java.tmpl.file}"/>
+  </target>
+
+  <!-- Deploys the xml files to the build directory. -->
+  <target name="copy.xml" depends="init" description="Copies the content of the etc/xml directory to the build directory.">
+    <mkdir dir="${deploy.etc.xml.dir}"/>
+    <copy todir="${deploy.etc.xml.dir}">
+      <fileset dir="${etc.xml.dir}"/>
+    </copy>
+  </target>
+
+  <!-- Generate Javadoc for the cp-common API and Framework! -->
+  <target name="generate.docs" description="Generates Javadoc for the cp-common API and Framework!">
+    <javadoc sourcepathref="src.path"
+             destdir="${etc.docs.dir}"
+             excludepackagenames="${doc.excludepackagenames}"
+             author="${doc.author}"
+             use="${doc.use}"
+             version="${doc.version}"
+             windowtitle="${doc.windowtitle}">
+      <doctitle><![CDATA[<h1>cp-common API and Framework</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2003-present Code Primate All Rights Reserved.</i>]]></bottom>
+    </javadoc>
+  </target>
+
+  <!-- Information about this Ant build file. -->
+  <target name="info" description="Information">
+    <echo level="info" message="See help."/>
+  </target>
+
+  <!-- Makes the build and dist directories under the proejct base directory. (Root Node) -->
+  <target name="init" description="Creates the build and distribution directories.">
+    <echo level="info"> Creating build directory... </echo>
+    <mkdir dir="${build.dir}"/>
+    <echo level="info"> Creating dist directory... </echo>
+    <mkdir dir="${dist.dir}"/>
+  </target>
+
+  <!-- Packages all class files in the build directory into a JAR file in the dist directory. -->
+  <target name="jar" if="build.jar.file" description="Packages all the class files in the build directory into a JAR file placed in the dist directory.">
+    <delete file="${dist.dir}/${jar.file}"/>
+    <jar jarfile="${dist.dir}/${jar.file}" basedir="${build.dir}"/>
+  </target>
+
+  <!-- Runs the necessary targets to deploy the cp-common project. -->
+  <target name="make" depends="clean, build, test" description="Clean, build, and test project files."/>
+
+  <!-- Run a Java class from the command-line. -->
+  <target name="run" depends="compile" description="Runs a single Java class from the command-line.">
+    <java classname="${run.class.name}" classpathref="build.classpath" fork="yes">
+      <sysproperty key="project.dir" value="${basedir}"/>
+      <sysproperty key="lcf.filesystem.path" value="${build.dir}"/>
+      <arg value="${command.line.args}"/>
+    </java>
+  </target>
+
+  <!-- Runs the entire test suite (all JUnit tests) for the project. -->
+  <target name="test" depends="build" description="Runs all junit tests on classes in the JAR file.">
+    <condition property="test.suite" value="${test.class.name}">
+      <not>
+        <equals arg1="${test.class.name}" arg2="" trim="true"/>
+      </not>
+    </condition>
+    <antcall target="run.testsuite"/>
+    <antcall target="run.cp-common.tests"/>
+    <antcall target="run.codeprimate.tests"/>
+  </target>
+
+  <target name="run.testsuite" description="Runs a single junit test in the JAR file." if="test.suite">
+    <echo level="info" message="Running test ${test.suite}..."/>
+    <junit fork="${junit.fork}" haltonerror="${junit.haltonerror}" haltonfailure="${junit.haltonfailure}" printsummary="${junit.printsummary}">
+      <sysproperty key="project.dir" value="${basedir}"/>
+      <classpath refid="build.src.path"/>
+      <formatter type="${junit.formatter.type}" usefile="${junit.formatter.usefile}"/>
+      <test name="${test.suite}"/>
+    </junit>
+  </target>
+
+  <target name="run.cp-common.tests" description="Runs all cp-common junit tests in the JAR file." unless="test.suite">
+    <echo level="info" message="Running test ${cp-common.test.suite}..."/>
+    <java classname="junit.textui.TestRunner" classpathref="build.classpath" dir="${build.dir}" fork="yes">
+      <sysproperty key="project.dir" value="${basedir}"/>
+      <arg value="${cp-common.test.suite}"/>
+    </java>
+  </target>
+
+  <target name="run.codeprimate.tests" description="Rusn all codeprimate junit tests in the JAR file." unless="test.suite">
+    <echo level="info" message="Running test ${codeprimate.test.suite}..."/>
+    <java classname="junit.textui.TestRunner" classpathref="build.classpath" dir="${build.dir}" fork="yes">
+      <sysproperty key="project.dir" value="${basedir}"/>
+      <arg value="${codeprimate.test.suite}"/>
+    </java>
+  </target>
+
+  <target name="test.old" depends="build, copy.resources" description="Test the old fashion way!">
+    <condition property="test.suite" value="${test.class.name}">
+      <not>
+        <equals arg1="${test.class.name}" arg2=""/>
+      </not>
+    </condition>
+    <property name="test.suite" value="${cp-common.test.suite}"/>
+    <echo level="info" message="Running test ${test.suite}..."/>
+    <java classname="junit.textui.TestRunner" classpathref="build.classpath" dir="${build.dir}" fork="yes">
+      <sysproperty key="project.dir" value="${basedir}"/>
+      <arg value="${test.suite}"/>
+    </java>
+  </target>
+
+  <!-- Displays projet help information to the user. (default target) -->
+  <target name="help" description="Displays context-sensitive help for this build file.">
+    <echo level="info">
+      ANT build.xml (cp-common-build.xml) file for the cp-common Java class library, API and Framework.
+      The following targets are available to execute:
+    </echo>
+    <echo level="info"> build                 runs the compile, copy.resources and jar targets. </echo>
+    <echo level="info"> clean                 removes the contents of the build and dist directories. </echo>
+    <echo level="info"> compile               alias to execute the compile.ref.impl.src target and sets a condition if the project JAR file should be built. </echo>
+    <echo level="info"> compile.ref.impl.src  compiles all Java reference implementation classes in the src/com/codeprimate directory. </echo>
+    <echo level="info"> compile.src           compiles Java source files in the src directory. </echo>
+    <echo level="info"> copy.config           copies common-logging.properties and log4.properties files to the build directory to configure logging for the cp-common library. </echo>
+    <echo level="info"> copy.icons            copies icons to the build directory. </echo>
+    <echo level="info"> copy.logo             copies the cp logo to the build directory. </echo>
+    <echo level="info"> copy.templates        copies templates files to the build directory. </echo>
+    <echo level="info"> copy.xml              copies xml files to the build directory. </echo>
+    <echo level="info"> help                  displays help information. </echo>
+    <echo level="info"> info                  see help.</echo>
+    <echo level="info"> init                  creates build and dist directories. </echo>
+    <echo level="info"> jar                   packages all classes in the build directory compiled from the src and test directories into the project JAR file </echo>
+    <echo level="info">                       and places the JAR file in the dist directory. </echo>
+    <echo level="info"> make                  runs the necessary targets to deploy the cp-common library. </echo>
+    <echo level="info"> run                   runs a Java class from the command-line. </echo>
+    <echo level="info"> test                  runs the entire test suite (all JUnit tests) for classes in the cp-common API and Framework. </echo>
+    <echo level="info"> test.old              Test the old fashion way!</echo>
+  </target>
+
+</project>

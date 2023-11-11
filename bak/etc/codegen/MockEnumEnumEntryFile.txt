@@ -1,0 +1,3 @@
+Mock Enumerated Type Zero,MET0
+Mock Enumerated Type One,MET1
+Mock Enumerated Type Two,MET2

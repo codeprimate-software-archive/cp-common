@@ -1,0 +1,378 @@
+
+RCS file: /src-ctrl/cvsroot/cp-common/cvslog.message,v
+Working file: cvslog.message
+head: 1.46
+branch:
+locks: strict
+access list:
+symbolic names:
+keyword substitution: kv
+total revisions: 46;	selected revisions: 46
+description:
+----------------------------
+revision 1.46
+date: 2004/08/07 00:06:24;  author: jblum;  state: Exp;  lines: +1 -9
+Final entry for the cvslog.message file
+----------------------------
+revision 1.45
+date: 2004/06/25 09:42:47;  author: jjbad;  state: Exp;  lines: +7 -2
+Finished the FileComparatorFactoryTest, FileSizeFilterFactoryTest and LastModifiedFileFilterTest classes.
+
+Modified the LastModifiedFileFilter class's OnTimeFrame inner class by adding a transformFileDate method to match a File object's lastModified Calendar fields to the onDate Calendar object's fields passed into the getOnInstance method by the caller.
+
+Changed the FileComparatorFactory.FilePathComparator class's compare method to used the File.getParent method instead of the File.getAbsolutePath method.
+
+Updated the TODO.txt file adding more work todo!
+
+Added the new IO test classes to the AllUnitTest class.
+----------------------------
+revision 1.44
+date: 2004/06/22 08:23:53;  author: jjbad;  state: Exp;  lines: +2 -5
+
+Modified the contents of the etc/content/doc directory from testFiles and subdirs to different types of primates (ape, monkey, chimpanzee, etc) with various extensions to subdirs without special characters (., -, etc).
+
+Modified the FileComparatorFactoryTest class to use the new directory structure with primate test files.
+----------------------------
+revision 1.43
+date: 2004/06/14 08:53:13;  author: jjbad;  state: Exp;  lines: +7 -1
+Added the assertNegative(message:String, :int), assertPositive(message:String, :int) and assertZero(message:String, :int) methods to the TestUtil class.
+
+Added toString methods to the Comparator implementations in the FileComparatorFactory class.
+
+Modified cp-common-build.xml adding the gendoc target to generate javadoc for the cp-common API and Framework.
+
+Created the FileComparatorFactoryTest, FileSizeFactoryTest and LastModifiedFileFilterTest classes.
+----------------------------
+revision 1.42
+date: 2004/06/12 19:16:22;  author: jjbad;  state: Exp;  lines: +1 -11
+Modified the comments of the LastModifiedFileFilter class.
+----------------------------
+revision 1.41
+date: 2004/05/31 23:32:09;  author: jjbad;  state: Exp;  lines: +9 -5
+Removed all references and uses of the TestUtil.getCalendar method in tests and other classes and replaced with DateUtil.getCalendar method instead.  Removed the deprecation of getCalendar in TestUtil and instead restricted the metod to package access and added a comment to see the DateUtil.getCalendar method.
+
+Modified the following classes that were using the TestUtil.getCalendar method:
+DefaultRecordTableTest
+RecordComparatorTest
+DefaaultRecordTest
+AbstractRecordTest
+AbstractRecordTableTest
+RecordUtilTest
+DateUtilTest
+----------------------------
+revision 1.40
+date: 2004/05/31 23:04:42;  author: jjbad;  state: Exp;  lines: +4 -5
+Refactored the FileComparatorFactory, FileSizeFilterFactory and LastModifiedFileFilter classes.
+
+Added the getRangeSizeFileFilter method to the FileSizeFilterFactory class.
+
+Refactored sublcasses of the FileComparatorFactory class to include tighter integration with the cp-common package by using the DateUtil utility and FileUtil utility classes.
+
+Added additional comments and logging to classes.
+----------------------------
+revision 1.39
+date: 2004/05/30 23:55:20;  author: jjbad;  state: Exp;  lines: +5 -5
+Added the copy, getCalendar, getCalendar(millis:J) methods to the DateUtil class.
+
+Added test methods for these DateUtil methods in the DateUtilTest class.
+
+Deprecated the getCalendar methods in the TestUtil class.
+
+Added the FileComparatorFactory, FileSizeFilterFactory and LastModifiedFileFilter classes to the com.cp.common.io package.
+----------------------------
+revision 1.38
+date: 2004/05/29 20:40:33;  author: jjbad;  state: Exp;  lines: +5 -8
+Adding the RMIServlet to the com.cp.common.servlet package of components.  The RMIServlet will be used for invoking methods on the target Servlet in much the same way that RMI works.
+
+Added the WebServerProxy Servlet to the Servlets package.  The WebServerProxy acts as a tunnel using the HTTP protocol to work through firewalls and other proxies.
+
+Added the RequestResponse object to the com.cp.common.net package to represent a client's request and a server's response.  The class encapsulates information necessary for both the requst and the response.
+
+Refactored the logic and logging of the ObjectUtil class utilizing some of the other package components such as ArrayUtil.  Exposed the getArgumentTypes method as a class member and remove the final keyword from all static methods.
+
+Made the StringUtil and ObjectUtil classes final.
+----------------------------
+revision 1.37
+date: 2004/05/27 09:17:13;  author: jjbad;  state: Exp;  lines: +11 -1
+Finished the cp-common Struts API and Framework.
+
+Refactored methods: getSessionKeyPropertyValue, getSessionObject, setSessionObject methods as class members (static) of the CPAction class.
+
+Added the removeObjectFromSession(:CPActionMapping, :HttpServletRequest) method to the RemoveSessionObjectAction class.
+
+Created the CPActionTest class to test the getSessionKeyPropertyValue(:Class) and getSessionKeyPropertyValue(:Object) methods of the CPAction class.
+
+Added the test to the AllUnitTest class.
+
+Modified the log4j.lcf (log config file) to log only fatal conditions.
+----------------------------
+revision 1.36
+date: 2004/05/25 08:26:41;  author: jjbad;  state: Exp;  lines: +1 -1
+Worked on the base Struts Action classes in the com.cp.common.struts package.  Specifically, refactored the getSessionKeyPropertyValue methods making them statis, corrected spelling error in method name, created the CPActionTest class, added comments and logging to RemoveObjectFromSessionAction class, renamed RemoveObjectFromSessionAction to RemoveSessionObjectAction class, etc.
+----------------------------
+revision 1.35
+date: 2004/05/24 00:19:58;  author: jjbad;  state: Exp;  lines: +1 -5
+Refactored and documents the Struts API Security Action classes.  Integrated other package componennts such as ObjectUtil in implementing the logic for the Security Action classes.
+----------------------------
+revision 1.34
+date: 2004/05/22 22:57:31;  author: jjbad;  state: Exp;  lines: +3 -4
+
+Documented and logged the Struts API paging classes: PagingAction, PagingActionForm, PagingActionMapping and PagingDirection.
+
+Refactored small bits of code.
+
+Eliminated the PageViewAction class from the API.
+----------------------------
+revision 1.33
+date: 2004/05/19 08:50:59;  author: jjbad;  state: Exp;  lines: +6 -2
+Added comments to the Struts sort action classes.
+
+Added a reverse property to the SortActionForm and SortActionComparator classes in order to perform a reverse, or descending, sort.
+
+Created the BeanPropertySortActionComparator class to order Objects of a SortableCollection based on a common property specified by the sortKey proeprty.
+----------------------------
+revision 1.32
+date: 2004/05/04 07:53:17;  author: jjbad;  state: Exp;  lines: +3 -2
+Modified the SortActionForm class to expect a collection of type Sotable.
+Modified the SortAction class to sort the Sortable collection using an implementation of the Sorter interface.
+----------------------------
+revision 1.31
+date: 2004/05/04 07:28:28;  author: jjbad;  state: Exp;  lines: +2 -3
+Added the struts package of classes encompassing the API and Framework.  Specifically, added struts extensions for paging, security and sorting.
+----------------------------
+revision 1.30
+date: 2004/05/02 07:01:30;  author: jjbad;  state: Exp;  lines: +1 -5
+
+Modified the SearchType type-safe enum class to add the Threaded Binary Search enumerated type to it's Set.
+----------------------------
+revision 1.29
+date: 2004/05/02 06:58:37;  author: jjbad;  state: Exp;  lines: +4 -4
+Finished the implementation of the Merge Sort Algorithm.  Implemented the Selection Sort algorithm.
+
+Added Web URL references and big O notation to the Bubble Sort, Shell Sort, Heap Sort and Merge Sort classes.
+
+Modified the SortType class to declare a class member enumerated type for the Selection Sort class.  Added the various SortType enums to the Set.
+----------------------------
+revision 1.28
+date: 2004/04/30 08:48:01;  author: jjbad;  state: Exp;  lines: +6 -2
+Added the swap method used by various sorting algorithms to the AbstractSorter class.
+
+Removed the QuickSort.swap method from the QuickSort class in favor of the AbstractSorter.swap method.
+
+Removed the BubbleSort.swap method from the BubbleSort class in favor of the AbstractSorter.swap method.
+
+Implemented the HeapSort sorting algorithm.
+----------------------------
+revision 1.27
+date: 2004/04/27 05:36:12;  author: jjbad;  state: Exp;  lines: +2 -2
+Commented the SearchType and SortType type-safe enum classes.
+
+Created shell classes for the HeapSort and MergeSort classes.
+----------------------------
+revision 1.26
+date: 2004/04/26 08:47:40;  author: jjbad;  state: Exp;  lines: +3 -2
+Created the com.codeprimate service provider reference implementation sorting classes BubbleSort and ShellSort.
+
+Added new constants to the SearchType and SortType type-safe enumerations.
+----------------------------
+revision 1.25
+date: 2004/04/25 08:55:34;  author: jjbad;  state: Exp;  lines: +2 -6
+Added comments to the RecordUtil class.
+Fixed the version date on the SortableListView and SortableListViewTest classes.
+----------------------------
+revision 1.24
+date: 2004/04/25 03:53:53;  author: jjbad;  state: Exp;  lines: +3 -3
+Refactored the synchronizedRecordTest method in the RecordUtilTest class.
+
+Added the DefaultRecordTableTest suite to the CPRecordFactory class.
+
+Fixed logger statement by turing down the logging to warn from error in the AbstractRecordTable.toTabular method.
+----------------------------
+revision 1.23
+date: 2004/04/24 19:52:48;  author: jjbad;  state: Exp;  lines: +6 -1
+Fixed bug in the getRowIndex method of the AbstractRecordTable class.
+
+Added methods synchronizedRecordTable and unmodifiableRecordTable to the RecordUtil class.  Added test for these methods in the RecordUtilTest class.
+
+Modified my lcf.
+----------------------------
+revision 1.22
+date: 2004/04/24 05:41:05;  author: jjbad;  state: Exp;  lines: +1 -8
+Modified the DefaultRecordTableTest.testCopy method to test that RecordTable Columns (TableColumns) are distinctly created and that modifications to the copy do not affect the original.
+----------------------------
+revision 1.21
+date: 2004/04/23 08:43:28;  author: jjbad;  state: Exp;  lines: +4 -3
+Added synchronizedRecordTable and unmodifiableRecordTable methods to the RecordUtil class.
+
+Added the getRecordTableInstance(:RecordTable) method to the AbstractRecordFactory abstract class and to the implementing class, CPRecordFactory class.
+
+Modified the RecordTable interface to extend the Cloneable and Copyable interface.  Implemented the clone method interms of the copy method in the AbstractRecordTable class.  Implemented the copy method in the DefaultRecordTable class.
+
+Created the testCopy method in the DefaultRecordTable class to test the functionality of the DefaultRecordTable.copy method.
+----------------------------
+revision 1.20
+date: 2004/04/23 06:29:15;  author: jjbad;  state: Exp;  lines: +3 -2
+Finished implementing and integrating the TableColumn class implementing the Column interface into the DefaultRecordTable class.
+
+Modified the validateColumn method to remove the constraint that a non-nullable Column has to have a default value.
+
+Fixed the testInsertColumn2 method in the DeafaultRecordTableTest class associated with the Column constraint!
+----------------------------
+revision 1.19
+date: 2004/04/22 08:41:16;  author: jjbad;  state: Exp;  lines: +6 -1
+Finished the Record API and Framework testing.  Finished testing of the com.codeprimate.util.DefaultRecordTable class.  Implemented the testInsertColumn2 and testInsertRow2 methods of the DefaultRecordTableTest class.
+
+Create a TableColumn class implementing the Column interface in the DefaultRecordTable class.  Instance of this class will be used to represent columns of the RecordTable and make defensive copies of the Column inserted into the table.  This will serve to ensure the integrity of the RecordTable implementation in cases such as mutability.
+----------------------------
+revision 1.18
+date: 2004/04/21 07:59:11;  author: jjbad;  state: Exp;  lines: +1 -4
+Remove the NestedException and NestedRuntimeException from the Repository.
+----------------------------
+revision 1.17
+date: 2004/04/21 07:51:10;  author: jjbad;  state: Exp;  lines: +2 -2
+Renamed the NestedException and NestedRuntimeException classes to ChainedException and ChainedRuntimeException respectively.  Modified all subclasses of these Exception classes appropriately.
+----------------------------
+revision 1.16
+date: 2004/04/21 07:40:38;  author: jjbad;  state: Exp;  lines: +2 -4
+Implemented the testMutability, testRecordCompatability, testSearchRecordTable, testSortRecordTable methods in the DefaultRecordTableTest class.
+
+Fixed bug with sorting in the set method of the DefaultRecordTable class.
+----------------------------
+revision 1.15
+date: 2004/04/20 09:16:56;  author: jjbad;  state: Exp;  lines: +4 -2
+Fixed bugs in the AbstractRecordTable.validateColumnValue method pertaining to nullability of column values.
+
+Added the DefaultRecordTable.TableRecord.getColumnValue to handle initializing non-null columns to the default value when the specified value is null.
+
+Implemented the testColumnValueNullability and testColumnValueUniqueness methods of the DefaultRecordTableTest class.
+----------------------------
+revision 1.14
+date: 2004/04/14 06:48:16;  author: jjbad;  state: Exp;  lines: +2 -2
+Fixed bug in the AbstractRecordTable.validateColumnValueSize method.
+
+Added test for the validateColumnValueSize method in the AbstractRecordTableTest class.
+----------------------------
+revision 1.13
+date: 2004/04/09 09:37:59;  author: jjbad;  state: Exp;  lines: +2 -8
+Fixed bug in the ColumnImpl class when setting the nullable property with respect to setting the unique property.
+
+Finished the testSetCellValue and testValidateColumnValue methods of the AbstractRecordTableTest class.
+----------------------------
+revision 1.12
+date: 2004/04/08 09:23:28;  author: jjbad;  state: Exp;  lines: +6 -4
+Added the testRowIterator, testToTabular, and testToTabularForColumns methods to the AbstractRecordTableTest class.  Also added skeleton implementations of the testSetCellValue and testValidColumnValue methods to the test class.
+
+Modified the suite static method of the DefaultRecordTableTest class.
+
+Changed the List implementation from SortableListView to ArrayList in the DefaultRecordTable class.
+
+Noted in the SortableListView class that the AbstractList.iterator method implementation eats the ConcurrentModificationException (need to investigate more; maybe bug in Java 2 SDK).
+
+Update log4j log config file.
+----------------------------
+revision 1.11
+date: 2004/04/07 10:20:33;  author: jjbad;  state: Exp;  lines: +4 -4
+Fixed bugs in the insertColumn method and columnIterator method of the DefaultRecordTable class.
+
+Added the testRemoveColumn, testRemoveRow and testRowCount methods in the AbstrctRecordTableTest class.  Modified the testContainsColumn method.
+
+Fixed bug in the AbstractRecordTable.removeColumn method removing the call to Record.removeField for all rows in the table and instead delegating the behavior to the implementing subclass.
+
+Modified the suite method of the DefaultRecordTableTest class.
+----------------------------
+revision 1.10
+date: 2004/04/05 09:34:01;  author: jjbad;  state: Exp;  lines: +4 -6
+Fixed indexing bug in the SortableListView class.  Refactored the class (reimplemented) to extend the AbstractList class, overridding the necessary methods to implement a concrete implementation of the List interface.
+
+Added several tests in the AbstractRecordTableTest class to test the AbstractRecordTable class.
+
+Added a null check to the validateColumn method, fixed other bugs relating to setting up the columnValueHashMap and columnValueHashSet objects when inserting a row in the RecordTable by cloning a Record object with TableRecord's copy constructor.  Fixed other issues.
+
+Added shell methods for the test in the DefaultRecordTableTest class.
+----------------------------
+revision 1.9
+date: 2004/04/03 21:04:37;  author: jjbad;  state: Exp;  lines: +6 -7
+Modified the toString method of the AbstractRecord class.  Specifically, uncommented lines in the toString method that were writing to the StringBuffer.
+
+Modified the toString method in AbstractRecord to include a String concatenation implementation block.
+
+Fixed StackOverflowError, due to infinite recursion, by implementing the size method in the DefaultRecordTable.TableRecord Record implementation.  The DefaultRecordTable.TableRecord violated the AbstractRecord class's contract by not implementing the size method.
+
+Removed System.out.println statements in the AbstractRecordTableTest class.
+
+Renamed instance variables in the SortableListView class.
+----------------------------
+revision 1.8
+date: 2004/04/03 09:25:53;  author: jjbad;  state: Exp;  lines: +6 -4
+Modified the accept method of the AbstractRecordTable to call the accept method on the Records in the table.
+
+Added 5 tests to the AbstractRecordTableTest class.
+
+Fixed a security bug in the DefaultRecordTable class by calling validateMutble method to check the RecordTable for mutability before performing modifying operations on the table.
+
+Added log entries to the log4j.lcf file.
+
+Fixed scripting errors in the cp-common-build.sh shell script.
+----------------------------
+revision 1.7
+date: 2004/04/01 10:35:25;  author: jjbad;  state: Exp;  lines: +8 -2
+Modified the Column interface to support a custom Comparator object for the values of the column.
+
+Implemented the getComparator and setComparator methods in the ColumnImpl class.
+
+Added the registerComparator, unregisterComparator and getComparator methods to the Record interface.  Provided method implementations in the AbstractRecordTable class.  Modified the DefaultRecordTable.TableRecord class's implementation of the registerComparator, unregisterComparator and getComparator methods to delegate to the RecordTable's implementation.
+
+Fixed syntax in the cp-common-build.sh shell script.
+----------------------------
+revision 1.6
+date: 2004/04/01 09:44:11;  author: jjbad;  state: Exp;  lines: +3 -3
+Fixed bug in the AbstractRecord.getComparator method with getting the value's type when looking up a Comparator.
+
+Refactored the logging statements in the compareTo method.
+----------------------------
+revision 1.5
+date: 2004/03/31 09:35:28;  author: jjbad;  state: Exp;  lines: +3 -4
+Modified the CacheType enumerated type class to contain String contantss for
+acronym and description.  Created the SortType and SearchType enumerated type
+classes to be used by a factor to return a sort and search algorithm respectively.
+----------------------------
+revision 1.4
+date: 2004/03/31 08:59:45;  author: jjbad;  state: Exp;  lines: +3 -4
+Finished implementation of the Record API and Framework.  Specifically, completed the implementation of the DefaultRecordTable class in the com.codeprimate.util package (reference implemenation of the RecordTable interface in the com.cp.common.util package).
+
+Wrote skeleton classes for the AbstractRecordTableTest and DefaultRecordTableTest classes.
+----------------------------
+revision 1.3
+date: 2004/03/28 20:10:52;  author: jjbad;  state: Exp;  lines: +3 -4
+Modified the AbstractRecordFactory class to include a method for initializing a service provider implementation of the RecordTable interface with a Column array, defining it's structure.
+
+Finalized the contract of the RecordTable interface.
+
+Completed the AbstractRecordTable class.  Fixed all compiler problems with the DefaultRecordTable class.
+----------------------------
+revision 1.2
+date: 2004/03/21 08:04:41;  author: jjbad;  state: Exp;  lines: +3 -12
+Added new tests to the AbstractRecordTest class, specifically added the testContainsField and testEntrySetSize methods.
+
+Added new tests to the DefaultRecordTest class, specifically added the testGetFieldAndGetFieldIndex, testGetValueAndSetValue methods.
+
+Reimplemented the containsField method of the AbstractRecord class to use the keySet method of the AbstractMap class.
+----------------------------
+revision 1.1
+date: 2004/03/20 22:09:15;  author: jjbad;  state: Exp;
+Added the testCompareTo method in the AbstractRecordTest class.
+Modified the testAddField method to try and add a field of type Integer.
+
+Modified the Record interface and added support for registering Comparator for different types of Objects when calling the Comparator method.  Added the registerCompartor and unregisterComparator methods.
+
+
+Implemented the registerComparator and unregisterComparator method in the AbstracRecord class.  Modified the compareTo method to find a Comparator based on the field's Object value type using the protected getComparator method.
+
+Added assertNegative, assertPositive and assertZero methods to the TestUtil class, implemented using JUnit's Assert class.
+
+Implemented synchronized versions of the registerComparator and unregisterComparator methods in the RecordUtil.synchronizedRecord method of the RecordUtil class.
+
+Added a toString method to the Comparator object returned by getCalendarComparator method of the DateUtil class.
+
+Added logger statements to my log4j.properties file.
+=============================================================================

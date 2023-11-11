@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<project name="cp-common-resources">
+
+  <!-- directory properties -->
+  <property name="build.etc.content.dir" location="${build.dir}/etc/content"/>
+  <property name="build.etc.xml.dir" location="${build.dir}/etc/xml"/>
+  <property name="etc.content.dir" location="${etc.dir}/content"/>
+  <property name="etc.xml.dir" location="${etc.dir}/xml"/>
+
+  <target name="resources" description="Copies the resources needed by cp-common to the build directory.">
+    <echo level="info">Compiling cp-common resources...</echo>
+    <runtarget target="copy.content"/>
+    <runtarget target="copy.xml"/>
+  </target>
+
+  <!-- Deploys the icons to the build directory. -->
+  <target name="copy.content" description="Copies the etc/content/ directory to the build/content/ directory!">
+    <echo level="debug">Copying the contents of the etc/content/ directory...</echo>
+    <mkdir dir="${build.etc.content.dir}"/>
+    <copy todir="${build.etc.content.dir}">
+      <fileset dir="${etc.content.dir}"/>
+    </copy>
+  </target>
+
+  <!-- Deploys the xml files to the build directory. -->
+  <target name="copy.xml" description="Copies the content of the etc/xml directory to the build directory.">
+    <echo level="debug">Copying the contents of the etc/xml/ directory...</echo>
+    <mkdir dir="${build.etc.xml.dir}"/>
+    <copy todir="${build.etc.xml.dir}">
+      <fileset dir="${etc.xml.dir}"/>
+    </copy>
+  </target>
+
+</project>

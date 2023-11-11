@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<classpaths>
+  <classpath pathid="runtime.classpath">
+    <pathelement path="${lib.dir}/commons-beanutils-1.8.0.jar"/>
+    <pathelement path="${lib.dir}/commons-collections-3.2.1.jar"/>
+    <pathelement path="${lib.dir}/commons-lang-2.4.jar"/>
+    <pathelement path="${lib.dir}/commons-logging-1.1.1.jar"/>
+    <pathelement path="${lib.dir}/dom4j-1.6.1.jar"/>
+    <pathelement path="${lib.dir}/log4j-1.2.15.jar"/>
+    <pathelement path="${lib.dir}/servlet-api.jar"/>
+    <pathelement path="${lib.dir}/spring.jar"/>
+    <pathelement path="${lib.dir}/spring-webmvc-struts.jar"/>
+    <pathelement path="${lib.dir}/struts-core-1.3.10.jar"/>
+  </classpath>
+</classpaths>
